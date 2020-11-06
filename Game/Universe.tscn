@@ -9,10 +9,14 @@ radius = 30.0
 [node name="Universe" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
 [node name="Bullets" type="Node" parent="."]
 
 [node name="CenterOfMass" type="StaticBody2D" parent="."]
-position = Vector2( 400, 300 )
+position = Vector2( 512, 384 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CenterOfMass"]
 shape = SubResource( 1 )

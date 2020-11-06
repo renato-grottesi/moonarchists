@@ -4,16 +4,19 @@
 [ext_resource path="res://Game/NeutralMoon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Moon.tscn" type="PackedScene" id=3]
 
-[node name="Level01" instance=ExtResource( 1 )]
-current_level = 1
-next_level = 2
+[node name="Level02" instance=ExtResource( 1 )]
+current_level = 2
 
 [node name="Moon" parent="." index="3" instance=ExtResource( 3 )]
-position = Vector2( 698, 327 )
-impulse0 = Vector2( 100, -500 )
+position = Vector2( 742, 315 )
+impulse0 = Vector2( 100, -700 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 100, 100 )
+position = Vector2( 242, 284 )
 impulse0 = Vector2( 0, 500 )
+
+[node name="Titan" parent="Bodies" index="1" instance=ExtResource( 2 )]
+position = Vector2( 959.223, 216.092 )
+impulse0 = Vector2( -500, -100 )
 [connection signal="destroyed" from="Moon" to="." method="_on_Moon_destroyed"]
 [connection signal="shoot" from="Moon" to="." method="_on_Moon_shoot"]
