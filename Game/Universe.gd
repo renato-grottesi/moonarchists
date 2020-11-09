@@ -11,7 +11,6 @@ func _ready():
 	pass
 
 func _process(delta):
-	$Camera.make_current()
 	for B in $Bodies.get_children():
 		var c = $CenterOfMass.position
 		var b = B.position

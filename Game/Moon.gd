@@ -5,6 +5,10 @@ signal destroyed()
 
 export (Vector2) var impulse0 : Vector2 = Vector2(0, 0)
 
+const MassBullet = preload("res://Game/MassBullet.gd")
+
+var health = 100;
+
 func _ready():
 	apply_impulse(Vector2(0, 0), impulse0);
 	pass
@@ -33,5 +37,10 @@ func _unhandled_input(event):
 			emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
 
 func _on_Moon_body_entered(body):
-	emit_signal("destroyed")
+	if body is MassBullet:
+		health -= 25;
+		if health < 1:
+			emit_signal("destroyed")
+	else:
+		emit_signal("destroyed")
 	pass
