@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends "res://Game/CelestialBody.gd"
 
 signal shoot(moon_speed)
 signal destroyed()
@@ -17,11 +17,6 @@ func _ready():
 
 func _physics_process(delta):
 	rotation = 0
-
-func attract_to(center, scale):
-	var offset = Vector2(0, 0);
-	var force = (center - position) * scale;
-	apply_impulse(offset, force);
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:

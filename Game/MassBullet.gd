@@ -1,12 +1,7 @@
-extends RigidBody2D
+extends "res://Game/CelestialBody.gd"
 
 func _ready():
 	pass
-
-func attract_to(center, scale):
-	var offset = Vector2(0, 0);
-	var force = (center - position) * scale;
-	apply_impulse(offset, force);
 
 func _on_Timer_timeout():
 	queue_free()

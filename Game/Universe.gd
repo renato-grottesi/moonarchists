@@ -8,6 +8,7 @@ var mass_bullet_scene = preload("res://Game/MassBullet.tscn");
 var levels = [ "res://Scenes/MainMenu.tscn", "res://Game/Level01.tscn", "res://Game/Level02.tscn" ];
 
 var shoots = 0;
+var game_over = false;
 
 func _ready():
 	pass
@@ -20,7 +21,9 @@ func _process(delta):
 		if l < 60.0:
 			B.queue_free();
 	if $Bodies.get_child_count() < 1 :
-		$HUD/Victory.popup()
+		if !game_over:
+			game_over = true
+			$HUD/Victory.popup()
 	pass
 
 func _physics_process(delta):
@@ -36,20 +39,24 @@ func _unhandled_input(event):
 			Global.goto_scene(levels[0])
 
 func _on_Moon_shoot(moon_speed):
-	var mass_bullet_instance = mass_bullet_scene.instance();
-	mass_bullet_instance.position = $Moon.position + moon_speed
-	mass_bullet_instance.linear_velocity = moon_speed * 10
-	$Bullets.add_child(mass_bullet_instance);
-	shoots += 1;
-	$HUD/Score.text = "Shoots: " + String(shoots)
+	if !game_over:
+		var mass_bullet_instance = mass_bullet_scene.instance();
+		mass_bullet_instance.position = $Moon.position + moon_speed
+		mass_bullet_instance.linear_velocity = moon_speed * 10
+		$Bullets.add_child(mass_bullet_instance);
+		shoots += 1;
+		$HUD/Score.text = "Shoots: " + String(shoots)
 	pass
 
 func _on_Moon_destroyed():
-	$HUD/Lost.popup()
+	if !game_over:
+		game_over = true
+		$HUD/Lost.popup()
 	pass
 
 func _on_Moon_heath(health):
-	$HUD/Health.value = health;
+	if !game_over:
+		$HUD/Health.value = health;
 	pass
 
 func _on_CloseVictory_pressed():

@@ -62,6 +62,7 @@ margin_top = 192.0
 margin_right = 768.0
 margin_bottom = 704.0
 custom_styles/panel = ExtResource( 3 )
+popup_exclusive = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -93,6 +94,7 @@ margin_top = 192.0
 margin_right = 768.0
 margin_bottom = 704.0
 custom_styles/panel = ExtResource( 3 )
+popup_exclusive = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

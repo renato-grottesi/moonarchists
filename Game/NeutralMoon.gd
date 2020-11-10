@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends "res://Game/CelestialBody.gd"
 
 export (Vector2) var impulse0 : Vector2 = Vector2(0, 0)
 export (Resource) var texture
@@ -9,7 +9,3 @@ func _ready():
 	$Sprite.set_texture(texture)
 	pass
 
-func attract_to(center, scale):
-	var offset = Vector2(0, 0);
-	var force = (center - position) * scale;
-	apply_impulse(offset, force);
