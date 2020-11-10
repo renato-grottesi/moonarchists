@@ -3,8 +3,8 @@
 [ext_resource path="res://Game/Universe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/NeutralMoon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Moon.tscn" type="PackedScene" id=3]
-[ext_resource path="res://sprites/earth.png" type="Texture" id=4]
-[ext_resource path="res://sprites/mars.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/earth.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/mars.png" type="Texture" id=5]
 
 [node name="Level02" instance=ExtResource( 1 )]
 current_level = 2
@@ -23,4 +23,5 @@ position = Vector2( 9.95728, -133.136 )
 impulse0 = Vector2( -500, -100 )
 texture = ExtResource( 5 )
 [connection signal="destroyed" from="Moon" to="." method="_on_Moon_destroyed"]
+[connection signal="heath" from="Moon" to="." method="_on_Moon_heath"]
 [connection signal="shoot" from="Moon" to="." method="_on_Moon_shoot"]

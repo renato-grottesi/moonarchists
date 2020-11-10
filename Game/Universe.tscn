@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game/Universe.gd" type="Script" id=1]
-[ext_resource path="res://sprites/blackhole.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/blackhole.png" type="Texture" id=2]
+[ext_resource path="res://UI/stretchable_button.tres" type="StyleBox" id=3]
+[ext_resource path="res://Fonts/24_no_outline.tres" type="DynamicFont" id=4]
+[ext_resource path="res://UI/stretchable_button_hover.tres" type="StyleBox" id=5]
+[ext_resource path="res://UI/stretchable_button_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://Fonts/96_no_outline.tres" type="DynamicFont" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.0
@@ -25,3 +30,92 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="Bodies" type="Node" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="HUD"]
+margin_left = 800.0
+margin_top = 32.0
+margin_right = 1056.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 4 )
+text = "Shoots: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="HSlider" parent="HUD"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 288.0
+margin_bottom = 64.0
+custom_styles/slider = ExtResource( 3 )
+rounded = true
+tick_count = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Victory" type="PopupDialog" parent="HUD"]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 768.0
+margin_bottom = 704.0
+custom_styles/panel = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Victory"]
+margin_right = 512.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 7 )
+text = "You won!"
+align = 1
+valign = 1
+
+[node name="CloseVictory" type="Button" parent="HUD/Victory"]
+margin_left = 192.0
+margin_top = 384.0
+margin_right = 320.0
+margin_bottom = 448.0
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "Close"
+
+[node name="Lost" type="PopupDialog" parent="HUD"]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 768.0
+margin_bottom = 704.0
+custom_styles/panel = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Lost"]
+margin_right = 512.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 7 )
+text = "You lost"
+align = 1
+valign = 1
+
+[node name="LostRetry" type="Button" parent="HUD/Lost"]
+margin_left = 192.0
+margin_top = 384.0
+margin_right = 320.0
+margin_bottom = 448.0
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "Retry"
+[connection signal="pressed" from="HUD/Victory/CloseVictory" to="." method="_on_CloseVictory_pressed"]
+[connection signal="pressed" from="HUD/Lost/LostRetry" to="." method="_on_LostRetry_pressed"]

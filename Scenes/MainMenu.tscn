@@ -1,15 +1,24 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/24_no_outline.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/stretchable_button.tres" type="StyleBox" id=3]
+[ext_resource path="res://UI/stretchable_button_hover.tres" type="StyleBox" id=4]
+[ext_resource path="res://UI/stretchable_button_pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://Fonts/96_no_outline.tres" type="DynamicFont" id=6]
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Title" type="Label" parent="."]
-margin_left = 370.0
-margin_top = 160.0
-margin_right = 456.0
-margin_bottom = 174.0
+margin_left = 120.0
+margin_top = 64.0
+margin_right = 903.0
+margin_bottom = 198.0
+custom_fonts/font = ExtResource( 6 )
 text = "Moonarchists"
 align = 1
 valign = 1
@@ -18,43 +27,134 @@ __meta__ = {
 }
 
 [node name="Play" type="Button" parent="."]
-margin_left = 391.0
-margin_top = 254.0
-margin_right = 429.0
-margin_bottom = 274.0
+margin_left = 384.0
+margin_top = 256.0
+margin_right = 640.0
+margin_bottom = 320.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Exit")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Options")
+focus_next = NodePath("../Options")
+focus_previous = NodePath("../Exit")
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Credits" type="Button" parent="."]
-margin_left = 383.0
-margin_top = 385.0
-margin_right = 440.0
-margin_bottom = 405.0
-text = "Credits"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Options" type="Button" parent="."]
-margin_left = 378.0
-margin_top = 314.0
-margin_right = 441.0
-margin_bottom = 334.0
+margin_left = 384.0
+margin_top = 384.0
+margin_right = 640.0
+margin_bottom = 448.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Play")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Credits")
+focus_next = NodePath("../Credits")
+focus_previous = NodePath("../Play")
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Credits" type="Button" parent="."]
+margin_left = 384.0
+margin_top = 512.0
+margin_right = 640.0
+margin_bottom = 576.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Options")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../Options")
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Exit" type="Button" parent="."]
-margin_left = 380.0
-margin_top = 456.0
-margin_right = 443.0
-margin_bottom = 476.0
+margin_left = 384.0
+margin_top = 640.0
+margin_right = 640.0
+margin_bottom = 704.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Credits")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Play")
+focus_next = NodePath("../Play")
+focus_previous = NodePath("../Credits")
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
 text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CreditsDialog" type="PopupDialog" parent="."]
+margin_left = 64.0
+margin_top = 192.0
+margin_right = 960.0
+margin_bottom = 768.0
+custom_styles/panel = ExtResource( 3 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CreditsDialog"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 517.0
+margin_bottom = 251.0
+custom_fonts/font = ExtResource( 2 )
+text = "Moonarchist 1.0
+
+A game by Renato Grottesi
+Engine: Godot 3.2 (Permissive MIT License)
+Graphics Editor: Aseprite 1.2.25
+Font: 8bitOperatorPlus (SIL Open Font License)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseCreditsDialog" type="Button" parent="CreditsDialog"]
+margin_left = 384.0
+margin_top = 448.0
+margin_right = 512.0
+margin_bottom = 512.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+text = "Close"
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CreditsDialog/CloseCreditsDialog" to="." method="_on_CloseCreditsDialog_pressed"]

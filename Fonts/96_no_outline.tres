@@ -1,0 +1,10 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[sub_resource type="DynamicFontData" id=1]
+antialiased = false
+font_path = "res://Fonts/8bitOperatorPlusSC-Bold.ttf"
+
+[resource]
+size = 96
+outline_color = Color( 0.12549, 0.14902, 1, 1 )
+font_data = SubResource( 1 )

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Moon.gd" type="Script" id=1]
-[ext_resource path="res://sprites/nozzle.png" type="Texture" id=2]
-[ext_resource path="res://sprites/moon.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/nozzle.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/moon.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 custom_solver_bias = 1.0

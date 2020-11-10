@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var click_start;
 
@@ -19,4 +19,15 @@ func _on_exit_pressed():
 
 func _on_play_pressed():
 	Global.goto_scene("res://Game/Level01.tscn")
+	pass
+
+func _on_Options_pressed():
+	pass
+
+func _on_CloseCreditsDialog_pressed():
+	$CreditsDialog.hide()
+	pass
+
+func _on_Credits_pressed():
+	$CreditsDialog.popup()
 	pass
