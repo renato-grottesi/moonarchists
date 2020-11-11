@@ -5,7 +5,12 @@ export (int) var next_level : int = 0
 
 var mass_bullet_scene = preload("res://Game/MassBullet.tscn");
 
-var levels = [ "res://Scenes/MainMenu.tscn", "res://Game/Level01.tscn", "res://Game/Level02.tscn" ];
+var levels = [
+	"res://Scenes/MainMenu.tscn",
+	"res://Game/Level01.tscn",
+	"res://Game/Level02.tscn",
+	"res://Game/Level03.tscn"
+	];
 
 var shoots = 0;
 var game_over = false;
@@ -60,9 +65,16 @@ func _on_Moon_heath(health):
 	pass
 
 func _on_CloseVictory_pressed():
-	Global.goto_scene(levels[next_level])
+	if next_level != 0 :
+		Global.goto_scene(levels[next_level])
+	else:
+			$HUD/LastLevel.popup()
 	pass
 
 func _on_LostRetry_pressed():
 	Global.goto_scene(levels[current_level])
+	pass
+
+func _on_LastLevelVictory_pressed():
+	Global.goto_scene(levels[next_level])
 	pass
