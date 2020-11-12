@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Game/Universe.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/blackhole.png" type="Texture" id=2]
@@ -8,6 +8,11 @@
 [ext_resource path="res://UI/stretchable_button_pressed.tres" type="StyleBox" id=6]
 [ext_resource path="res://Fonts/96_no_outline.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Sprites/star.png" type="Texture" id=8]
+[ext_resource path="res://Sounds/explosion.wav" type="AudioStream" id=9]
+[ext_resource path="res://Game/Moon.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.00446841, 0, 0, Vector2( 0.494253, 1 ), -2.88089e-07, -2.88089e-07, 0, 0, Vector2( 1, 0 ), 0.0109342, 0.0, 0, 0 ]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.0
@@ -19,6 +24,7 @@ script = ExtResource( 1 )
 amount = 256
 lifetime = 5.0
 preprocess = 10.0
+speed_scale = 0.2
 randomness = 1.0
 lifetime_randomness = 1.0
 fract_delta = false
@@ -28,7 +34,10 @@ emission_rect_extents = Vector2( 600, 400 )
 direction = Vector2( 0, 0 )
 spread = 180.0
 gravity = Vector2( 0, 0 )
+angle_random = 0.58
 scale_amount = 0.1
+scale_amount_random = 0.25
+scale_amount_curve = SubResource( 2 )
 
 [node name="Bullets" type="Node" parent="."]
 
@@ -36,6 +45,8 @@ scale_amount = 0.1
 position = Vector2( -512, -384 )
 anchor_mode = 0
 current = true
+
+[node name="Moon" parent="." instance=ExtResource( 10 )]
 
 [node name="CenterOfMass" type="StaticBody2D" parent="."]
 
@@ -169,6 +180,14 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "Retry"
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -12.0
+pitch_scale = 0.75
+[connection signal="destroyed" from="Moon" to="." method="_on_Moon_destroyed"]
+[connection signal="heath" from="Moon" to="." method="_on_Moon_heath"]
+[connection signal="shoot" from="Moon" to="." method="_on_Moon_shoot"]
 [connection signal="pressed" from="HUD/Victory/CloseVictory" to="." method="_on_CloseVictory_pressed"]
 [connection signal="pressed" from="HUD/LastLevel/LastLevelVictory" to="." method="_on_LastLevelVictory_pressed"]
 [connection signal="pressed" from="HUD/Lost/LostRetry" to="." method="_on_LostRetry_pressed"]

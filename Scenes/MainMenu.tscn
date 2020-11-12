@@ -14,10 +14,8 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
-margin_left = 120.0
-margin_top = 64.0
-margin_right = 903.0
-margin_bottom = 198.0
+margin_right = 1024.0
+margin_bottom = 192.0
 custom_fonts/font = ExtResource( 6 )
 text = "Moonarchists"
 align = 1
@@ -133,10 +131,13 @@ margin_bottom = 251.0
 custom_fonts/font = ExtResource( 2 )
 text = "Moonarchist 1.0
 
-A game by Renato Grottesi
+An open source game by Renato Grottesi
+https://github.com/renato-grottesi/moonarchists
+
 Engine: Godot 3.2 (Permissive MIT License)
-Graphics Editor: Aseprite 1.2.25
-Font: 8bitOperatorPlus (SIL Open Font License)"
+Graphics: Aseprite 1.2.25 (EULA + Steam Sub. Agreement)
+Font: 8bitOperatorPlus (SIL Open Font License)
+Sound effect: sfxr (MIT License)"
 __meta__ = {
 "_edit_use_anchors_": false
 }

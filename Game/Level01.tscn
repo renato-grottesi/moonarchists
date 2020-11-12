@@ -1,22 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game/Universe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/NeutralMoon.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Game/Moon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/saturn.png" type="Texture" id=4]
 
 [node name="Level01" instance=ExtResource( 1 )]
 current_level = 1
 next_level = 2
 
-[node name="Moon" parent="." index="3" instance=ExtResource( 3 )]
-position = Vector2( 437.589, -77.0863 )
-impulse0 = Vector2( 100, -500 )
+[node name="Moon" parent="." index="3"]
+position = Vector2( 278.275, -2.37842 )
+impulse0 = Vector2( 0, -500 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
 position = Vector2( -259.188, 5.71323 )
 impulse0 = Vector2( 0, 500 )
 texture = ExtResource( 4 )
-[connection signal="destroyed" from="Moon" to="." method="_on_Moon_destroyed"]
-[connection signal="heath" from="Moon" to="." method="_on_Moon_heath"]
-[connection signal="shoot" from="Moon" to="." method="_on_Moon_shoot"]

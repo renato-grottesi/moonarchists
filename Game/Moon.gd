@@ -45,8 +45,12 @@ func _on_Moon_body_entered(body):
 	if body is MassBullet:
 		health -= 25;
 		emit_signal("heath", health)
-		if health < 1:
-			emit_signal("destroyed")
 	else:
+		health = 0;
+	if health < 1:
+		$SpriteMoon.visible = false;
+		$SpriteNozzle.visible = false;
+		collision_layer = 0
+		collision_mask = 0
 		emit_signal("destroyed")
 	pass

@@ -24,6 +24,7 @@ func _process(delta):
 		var b = B.position
 		var l = b.distance_to(c)
 		if l < 60.0:
+			$ExplosionSound.play()
 			B.queue_free();
 	if $Bodies.get_child_count() < 1 :
 		if !game_over:
@@ -36,6 +37,9 @@ func _physics_process(delta):
 		B.attract_to($CenterOfMass.position, 0.1)
 	for B in $Bullets.get_children():
 		B.attract_to($CenterOfMass.position, 0.1)
+		# Bullets feel planets' gragity to make it easier to hit them
+		for P in $Bodies.get_children():
+			B.attract_to(P.position, 0.01)
 	$Moon.attract_to($CenterOfMass.position, 0.1)
 
 func _unhandled_input(event):
@@ -56,6 +60,7 @@ func _on_Moon_shoot(moon_speed):
 func _on_Moon_destroyed():
 	if !game_over:
 		game_over = true
+		$ExplosionSound.play()
 		$HUD/Lost.popup()
 	pass
 
@@ -68,7 +73,7 @@ func _on_CloseVictory_pressed():
 	if next_level != 0 :
 		Global.goto_scene(levels[next_level])
 	else:
-			$HUD/LastLevel.popup()
+		$HUD/LastLevel.popup()
 	pass
 
 func _on_LostRetry_pressed():
