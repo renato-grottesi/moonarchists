@@ -16,3 +16,14 @@ impulse0 = Vector2( 0, -500 )
 position = Vector2( -259.188, 5.71323 )
 impulse0 = Vector2( 0, 500 )
 texture = ExtResource( 4 )
+
+[node name="Label" parent="HUD/Opening" index="0"]
+text = "
+We installed a mini-moon
+generator on your moon.
+Use it to shoot at enemy planets
+and push them to their doom!
+
+Move the mouse or use the
+arrow keys to aim.
+Click or press space to shoot."

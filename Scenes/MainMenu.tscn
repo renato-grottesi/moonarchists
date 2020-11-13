@@ -59,7 +59,7 @@ focus_next = NodePath("../Credits")
 focus_previous = NodePath("../Play")
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 3 )
+custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 2 )
@@ -154,8 +154,44 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 text = "Close"
+
+[node name="OptionsDialog" type="PopupDialog" parent="."]
+margin_left = 64.0
+margin_top = 192.0
+margin_right = 960.0
+margin_bottom = 768.0
+custom_styles/panel = ExtResource( 3 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="OptionsDialog"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 517.0
+margin_bottom = 251.0
+custom_fonts/font = ExtResource( 2 )
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseOptionsDialog" type="Button" parent="OptionsDialog"]
+margin_left = 384.0
+margin_top = 448.0
+margin_right = 512.0
+margin_bottom = 512.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+text = "Close"
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="CreditsDialog/CloseCreditsDialog" to="." method="_on_CloseCreditsDialog_pressed"]
+[connection signal="pressed" from="OptionsDialog/CloseOptionsDialog" to="." method="_on_CloseOptionsDialog_pressed"]

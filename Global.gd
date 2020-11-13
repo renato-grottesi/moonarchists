@@ -2,9 +2,37 @@ extends Node
 
 var current_scene = null
 
+# Score for each level
+# 0-3 means played with zero to three stars
+# 5 means played but never completed
+# 6 means never played and ready to play
+# 7 means never played and disabled
+var level_status = [
+	6,
+	7,
+	7,
+	7,
+]
+
 func _ready():
+	load_game()
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
+
+func save_game() :
+	var save_file = File.new()
+	save_file.open("user://savegame.save", File.WRITE)
+	for E in level_status:
+		save_file.store_8(E);
+	save_file.close()
+	pass
+
+func load_game() :
+	var load_file = File.new()
+	load_file.open("user://savegame.save", File.READ)
+	for n in range(level_status.size()) :
+		level_status[n] = load_file.get_8()
+	pass
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,
@@ -18,10 +46,10 @@ func goto_scene(path):
 
 	call_deferred("_deferred_goto_scene", path)
 
-
 func _deferred_goto_scene(path):
 	# It is now safe to remove the current scene
 	current_scene.free()
+	save_game()
 
 	# Load the new scene.
 	var s = ResourceLoader.load(path)

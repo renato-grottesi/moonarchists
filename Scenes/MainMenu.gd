@@ -3,6 +3,7 @@ extends Control
 var click_start;
 
 func _ready():
+	$Play.grab_focus()
 	pass
 
 func _process(delta):
@@ -22,6 +23,7 @@ func _on_play_pressed():
 	pass
 
 func _on_Options_pressed():
+	$OptionsDialog.popup()
 	pass
 
 func _on_CloseCreditsDialog_pressed():
@@ -30,4 +32,8 @@ func _on_CloseCreditsDialog_pressed():
 
 func _on_Credits_pressed():
 	$CreditsDialog.popup()
+	pass
+
+func _on_CloseOptionsDialog_pressed():
+	$OptionsDialog.hide()
 	pass

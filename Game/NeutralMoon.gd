@@ -2,6 +2,7 @@ extends "res://Game/CelestialBody.gd"
 
 export (Vector2) var impulse0 : Vector2 = Vector2(0, 0)
 export (Resource) var texture
+export (bool) var friendly : bool = false
 
 var rng = RandomNumberGenerator.new()
 

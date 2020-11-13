@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Game/Universe.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/blackhole.png" type="Texture" id=2]
@@ -10,11 +10,12 @@
 [ext_resource path="res://Sprites/star.png" type="Texture" id=8]
 [ext_resource path="res://Sounds/explosion.wav" type="AudioStream" id=9]
 [ext_resource path="res://Game/Moon.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sprites/star_empty.png" type="Texture" id=11]
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 0.00446841, 0, 0, Vector2( 0.494253, 1 ), -2.88089e-07, -2.88089e-07, 0, 0, Vector2( 1, 0 ), 0.0109342, 0.0, 0, 0 ]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 30.0
 
 [node name="Universe" type="Node2D"]
@@ -37,7 +38,7 @@ gravity = Vector2( 0, 0 )
 angle_random = 0.58
 scale_amount = 0.1
 scale_amount_random = 0.25
-scale_amount_curve = SubResource( 2 )
+scale_amount_curve = SubResource( 1 )
 
 [node name="Bullets" type="Node" parent="."]
 
@@ -51,7 +52,7 @@ current = true
 [node name="CenterOfMass" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CenterOfMass"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="CenterOfMass"]
 texture = ExtResource( 2 )
@@ -116,6 +117,52 @@ custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "Close"
 
+[node name="Star1" type="Sprite" parent="HUD/Victory"]
+position = Vector2( 160, 288 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 11 )
+
+[node name="Star2" type="Sprite" parent="HUD/Victory"]
+position = Vector2( 256, 264 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 11 )
+
+[node name="Star3" type="Sprite" parent="HUD/Victory"]
+position = Vector2( 352, 288 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 11 )
+
+[node name="Opening" type="PopupDialog" parent="HUD"]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 768.0
+margin_bottom = 704.0
+custom_styles/panel = ExtResource( 3 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Opening"]
+margin_right = 512.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 4 )
+align = 1
+valign = 1
+
+[node name="CloseOpening" type="Button" parent="HUD/Opening"]
+margin_left = 192.0
+margin_top = 384.0
+margin_right = 320.0
+margin_bottom = 448.0
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "Close"
+
 [node name="LastLevel" type="PopupDialog" parent="HUD"]
 margin_left = 256.0
 margin_top = 192.0
@@ -150,6 +197,7 @@ custom_fonts/font = ExtResource( 4 )
 text = "Close"
 
 [node name="Lost" type="PopupDialog" parent="HUD"]
+visible = true
 margin_left = 256.0
 margin_top = 192.0
 margin_right = 768.0
@@ -169,10 +217,16 @@ align = 1
 valign = 1
 
 [node name="LostRetry" type="Button" parent="HUD/Lost"]
-margin_left = 192.0
+margin_left = 288.0
 margin_top = 384.0
-margin_right = 320.0
+margin_right = 416.0
 margin_bottom = 448.0
+focus_neighbour_left = NodePath("../LostQuit")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../LostQuit")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../LostQuit")
+focus_previous = NodePath("../LostQuit")
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/focus = ExtResource( 5 )
@@ -181,6 +235,28 @@ custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "Retry"
 
+[node name="LostQuit" type="Button" parent="HUD/Lost"]
+margin_left = 96.0
+margin_top = 384.0
+margin_right = 224.0
+margin_bottom = 448.0
+focus_neighbour_left = NodePath("../LostRetry")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../LostRetry")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../LostRetry")
+focus_previous = NodePath("../LostRetry")
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -12.0
@@ -188,6 +264,10 @@ pitch_scale = 0.75
 [connection signal="destroyed" from="Moon" to="." method="_on_Moon_destroyed"]
 [connection signal="heath" from="Moon" to="." method="_on_Moon_heath"]
 [connection signal="shoot" from="Moon" to="." method="_on_Moon_shoot"]
+[connection signal="about_to_show" from="HUD/Victory" to="." method="_on_Victory_about_to_show"]
 [connection signal="pressed" from="HUD/Victory/CloseVictory" to="." method="_on_CloseVictory_pressed"]
+[connection signal="pressed" from="HUD/Opening/CloseOpening" to="." method="_on_CloseOpening_pressed"]
 [connection signal="pressed" from="HUD/LastLevel/LastLevelVictory" to="." method="_on_LastLevelVictory_pressed"]
+[connection signal="about_to_show" from="HUD/Lost" to="." method="_on_Lost_about_to_show"]
 [connection signal="pressed" from="HUD/Lost/LostRetry" to="." method="_on_LostRetry_pressed"]
+[connection signal="pressed" from="HUD/Lost/LostQuit" to="." method="_on_LostQuit_pressed"]
