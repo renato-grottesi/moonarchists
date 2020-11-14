@@ -7,8 +7,7 @@
 [ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
 
 [node name="Level04" instance=ExtResource( 1 )]
-current_level = 4
-next_level = 5
+current_level = 8
 
 [node name="Moon" parent="." index="3"]
 position = Vector2( 351.121, 9.43872 )

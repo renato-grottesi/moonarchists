@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/24_no_outline.tres" type="DynamicFont" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://UI/stretchable_button_hover.tres" type="StyleBox" id=4]
 [ext_resource path="res://UI/stretchable_button_pressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://Fonts/96_no_outline.tres" type="DynamicFont" id=6]
+[ext_resource path="res://UI/LevelButton.tscn" type="PackedScene" id=7]
 
 [node name="MainMenu" type="Control"]
 script = ExtResource( 1 )
@@ -189,9 +190,100 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 text = "Close"
+
+[node name="Levels" type="PopupDialog" parent="."]
+visible = true
+margin_left = 64.0
+margin_top = 192.0
+margin_right = 960.0
+margin_bottom = 768.0
+custom_styles/panel = ExtResource( 3 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseLevelsDialog" type="Button" parent="Levels"]
+margin_left = 384.0
+margin_top = 448.0
+margin_right = 512.0
+margin_bottom = 512.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+text = "Close"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level1" parent="Levels" instance=ExtResource( 7 )]
+margin_left = 96.0
+margin_top = 64.0
+margin_right = 224.0
+margin_bottom = 192.0
+
+[node name="Level2" parent="Levels" instance=ExtResource( 7 )]
+margin_left = 288.0
+margin_top = 64.0
+margin_right = 416.0
+margin_bottom = 192.0
+level_number = 2
+level_name = "02"
+
+[node name="Level3" parent="Levels" instance=ExtResource( 7 )]
+margin_left = 480.0
+margin_top = 64.0
+margin_right = 608.0
+margin_bottom = 192.0
+level_number = 3
+level_name = "03"
+
+[node name="Level4" parent="Levels" instance=ExtResource( 7 )]
+margin_left = 672.0
+margin_top = 64.0
+margin_right = 800.0
+margin_bottom = 192.0
+level_number = 4
+level_name = "04"
+
+[node name="Level5" parent="Levels" instance=ExtResource( 7 )]
+margin_left = 96.0
+margin_top = 256.0
+margin_right = 224.0
+margin_bottom = 384.0
+level_number = 5
+level_name = "05"
+
+[node name="Level6" parent="Levels" instance=ExtResource( 7 )]
+margin_left = 288.0
+margin_top = 256.0
+margin_right = 416.0
+margin_bottom = 384.0
+level_number = 6
+level_name = "06"
+
+[node name="Level7" parent="Levels" instance=ExtResource( 7 )]
+margin_left = 480.0
+margin_top = 256.0
+margin_right = 608.0
+margin_bottom = 384.0
+level_number = 7
+level_name = "07"
+
+[node name="Level8" parent="Levels" instance=ExtResource( 7 )]
+margin_left = 672.0
+margin_top = 256.0
+margin_right = 800.0
+margin_bottom = 384.0
+level_number = 8
+level_name = "08"
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="CreditsDialog/CloseCreditsDialog" to="." method="_on_CloseCreditsDialog_pressed"]
 [connection signal="pressed" from="OptionsDialog/CloseOptionsDialog" to="." method="_on_CloseOptionsDialog_pressed"]
+[connection signal="pressed" from="Levels/CloseLevelsDialog" to="." method="_on_CloseLevelsDialog_pressed"]

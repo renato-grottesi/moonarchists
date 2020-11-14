@@ -19,7 +19,7 @@ func _on_exit_pressed():
 	pass
 
 func _on_play_pressed():
-	Global.goto_scene("res://Game/Level01.tscn")
+	$Levels.popup()
 	pass
 
 func _on_Options_pressed():
@@ -36,4 +36,8 @@ func _on_Credits_pressed():
 
 func _on_CloseOptionsDialog_pressed():
 	$OptionsDialog.hide()
+	pass
+
+func _on_CloseLevelsDialog_pressed():
+	$Levels.hide()
 	pass

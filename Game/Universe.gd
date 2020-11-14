@@ -6,14 +6,6 @@ export (int) var next_level : int = 0
 var mass_bullet_scene = preload("res://Game/MassBullet.tscn")
 var star_texture = preload("res://Sprites/star_full.png")
 
-var levels = [
-	"res://Scenes/MainMenu.tscn",
-	"res://Game/Level01.tscn",
-	"res://Game/Level02.tscn",
-	"res://Game/Level03.tscn",
-	"res://Game/Level04.tscn",
-	];
-
 var shoots = 0;
 var game_over = false;
 
@@ -58,7 +50,7 @@ func _physics_process(delta):
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_ESCAPE:
-			Global.goto_scene(levels[0])
+			Global.goto_scene(Global.levels[0])
 
 func _on_Moon_shoot(moon_speed):
 	if !game_over:
@@ -84,7 +76,7 @@ func _on_Moon_heath(health):
 
 func _on_CloseVictory_pressed():
 	if next_level != 0 :
-		Global.goto_scene(levels[next_level])
+		Global.goto_scene(Global.levels[next_level])
 	else:
 		$HUD/LastLevel.popup()
 	pass
@@ -93,11 +85,11 @@ func _on_LostRetry_pressed():
 	var stars = Global.level_status[current_level-1]
 	if stars > 3 :
 		Global.level_status[current_level-1] = 5
-	Global.goto_scene(levels[current_level])
+	Global.goto_scene(Global.levels[current_level])
 	pass
 
 func _on_LastLevelVictory_pressed():
-	Global.goto_scene(levels[next_level])
+	Global.goto_scene(Global.levels[next_level])
 	pass
 
 func _on_CloseOpening_pressed():
@@ -105,7 +97,7 @@ func _on_CloseOpening_pressed():
 	pass
 
 func _on_LostQuit_pressed():
-	Global.goto_scene(levels[0])
+	Global.goto_scene(Global.levels[0])
 	pass
 
 func _on_Victory_about_to_show():

@@ -2,6 +2,18 @@ extends Node
 
 var current_scene = null
 
+var levels = [
+	"res://Scenes/MainMenu.tscn",
+	"res://Game/Level01.tscn",
+	"res://Game/Level02.tscn",
+	"res://Game/Level03.tscn",
+	"res://Game/Level04.tscn",
+	"res://Game/Level05.tscn",
+	"res://Game/Level06.tscn",
+	"res://Game/Level07.tscn",
+	"res://Game/Level08.tscn",
+	];
+
 # Score for each level
 # 0-3 means played with zero to three stars
 # 5 means played but never completed
@@ -9,6 +21,10 @@ var current_scene = null
 # 7 means never played and disabled
 var level_status = [
 	6,
+	7,
+	7,
+	7,
+	7,
 	7,
 	7,
 	7,
