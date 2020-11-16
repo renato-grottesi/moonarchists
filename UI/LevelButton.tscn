@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Fonts/24_no_outline.tres" type="DynamicFont" id=1]
 [ext_resource path="res://UI/stretchable_button_hover.tres" type="StyleBox" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://UI/stretchable_button_pressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://Sprites/star_empty.png" type="Texture" id=5]
 [ext_resource path="res://UI/LevelButton.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/lock.png" type="Texture" id=7]
 
 [node name="LevelButton" type="Button"]
 margin_right = 128.0
@@ -26,6 +27,7 @@ margin_top = -16.0
 margin_right = 128.0
 margin_bottom = 80.0
 custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "01"
 align = 1
 valign = 1
@@ -44,4 +46,8 @@ texture = ExtResource( 5 )
 [node name="Star3" type="Sprite" parent="."]
 position = Vector2( 104, 96 )
 texture = ExtResource( 5 )
+
+[node name="Lock" type="Sprite" parent="."]
+position = Vector2( 64, 80 )
+texture = ExtResource( 7 )
 [connection signal="pressed" from="." to="." method="_on_Level_pressed"]

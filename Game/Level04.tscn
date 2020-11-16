@@ -10,7 +10,7 @@
 current_level = 4
 next_level = 5
 
-[node name="Moon" parent="." index="3"]
+[node name="Moon" parent="." index="4"]
 position = Vector2( 351.121, 9.43872 )
 impulse0 = Vector2( 200, -600 )
 
@@ -20,18 +20,16 @@ impulse0 = Vector2( 0, 500 )
 texture = ExtResource( 3 )
 friendly = true
 
-[node name="Saturn" parent="Bodies" index="1" instance=ExtResource( 2 )]
+[node name="Efisto" parent="Bodies" index="1" instance=ExtResource( 2 )]
 position = Vector2( 9.95728, -133.136 )
 impulse0 = Vector2( -500, -100 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
+asteroids_count = 2
 
-[node name="Efisto" parent="Bodies" index="2" instance=ExtResource( 2 )]
+[node name="Saturn" parent="Bodies" index="2" instance=ExtResource( 2 )]
 position = Vector2( -282.646, 55.8435 )
 impulse0 = Vector2( -500, -800 )
-texture = ExtResource( 6 )
-
-[node name="Opening" parent="HUD" index="3"]
-visible = true
+texture = ExtResource( 4 )
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "

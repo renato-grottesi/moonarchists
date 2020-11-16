@@ -15,6 +15,14 @@ func _ready():
 			$Star2.set_texture(star_texture)
 		if stars > 2 :
 			$Star3.set_texture(star_texture)
+	if stars < 7:
+		$Name.set("custom_colors/font_color", Color(1.0, 1.0, 1.0, 1.0))
+		$Lock.hide()
+	else:
+		$Name.set("custom_colors/font_color", Color(0.3, 0.3, 0.3, 1.0))
+		$Star1.hide()
+		$Star2.hide()
+		$Star3.hide()
 	pass
 
 func _on_Level_pressed():

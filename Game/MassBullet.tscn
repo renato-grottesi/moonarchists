@@ -34,7 +34,7 @@ amount = 128
 one_shot = true
 explosiveness = 1.0
 direction = Vector2( 0, 0 )
-spread = 166.94
+spread = 180.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 64.0
 initial_velocity_random = 0.75
@@ -51,6 +51,5 @@ pitch_scale = 0.85
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-autoplay = true
 [connection signal="body_entered" from="." to="." method="_on_MassBullet_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

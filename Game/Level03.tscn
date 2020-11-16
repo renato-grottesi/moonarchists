@@ -10,7 +10,7 @@
 current_level = 3
 next_level = 4
 
-[node name="Moon" parent="." index="3"]
+[node name="Moon" parent="." index="4"]
 position = Vector2( 351.121, 9.43872 )
 impulse0 = Vector2( 200, -600 )
 
@@ -18,11 +18,13 @@ impulse0 = Vector2( 200, -600 )
 position = Vector2( -218.346, -169.997 )
 impulse0 = Vector2( 0, 500 )
 texture = ExtResource( 4 )
+asteroids_count = 1
 
 [node name="Mars" parent="Bodies" index="1" instance=ExtResource( 2 )]
 position = Vector2( 9.95728, -133.136 )
 impulse0 = Vector2( -500, -100 )
 texture = ExtResource( 5 )
+asteroids_count = 2
 
 [node name="Efisto" parent="Bodies" index="2" instance=ExtResource( 2 )]
 position = Vector2( -467.643, -34.9733 )

@@ -2,18 +2,33 @@ extends Node2D
 
 export (int) var current_level : int = 0
 export (int) var next_level : int = 0
+export (int) var asteroids_count : int = 0
+export (int) var asteroids_offset : int = 200
 
 var mass_bullet_scene = preload("res://Game/MassBullet.tscn")
 var star_texture = preload("res://Sprites/star_full.png")
+var asteroid_scene = preload("res://Game/Asteroid.tscn")
+const Asteroid = preload("res://Game/Asteroid.gd")
 
 var shoots = 0;
 var game_over = false;
 
+var rng = RandomNumberGenerator.new()
+
 func _ready():
+	rng.randomize()
 	var stars = Global.level_status[current_level-1]
 	if stars > 5 :
 		if $HUD/Opening/Label.text.length() > 1:
 			$HUD/Opening.popup()
+	for i in range(0, asteroids_count):
+		var asteroid = asteroid_scene.instance();
+		asteroid.speed = rng.randf_range(0, 2) + 1
+		var rad = i*(2*PI/asteroids_count)
+		var offset = asteroids_offset + rng.randf_range(0, 64)
+		var pos = Vector2( offset*sin(rad), offset*cos(rad))
+		asteroid.position = pos
+		$Asteroids.add_child(asteroid);
 	pass
 
 func _process(delta):
@@ -40,6 +55,8 @@ func _process(delta):
 func _physics_process(delta):
 	for B in $Bodies.get_children():
 		B.attract_to($CenterOfMass.position, 0.1)
+	for A in $Asteroids.get_children():
+		A.position = A.position.rotated(delta*A.speed)
 	for B in $Bullets.get_children():
 		B.attract_to($CenterOfMass.position, 0.1)
 		# Bullets feel planets' gragity to make it easier to hit them
@@ -81,13 +98,6 @@ func _on_CloseVictory_pressed():
 		$HUD/LastLevel.popup()
 	pass
 
-func _on_LostRetry_pressed():
-	var stars = Global.level_status[current_level-1]
-	if stars > 3 :
-		Global.level_status[current_level-1] = 5
-	Global.goto_scene(Global.levels[current_level])
-	pass
-
 func _on_LastLevelVictory_pressed():
 	Global.goto_scene(Global.levels[next_level])
 	pass
@@ -122,7 +132,13 @@ func _on_Victory_about_to_show():
 			Global.level_status[next_level-1] = 6
 	pass # Replace with function body.
 
-
 func _on_Lost_about_to_show():
 	$HUD/Lost/LostRetry.grab_focus()
+	pass
+
+func _on_Retry_pressed():
+	var stars = Global.level_status[current_level-1]
+	if stars > 3 :
+		Global.level_status[current_level-1] = 5
+	Global.goto_scene(Global.levels[current_level])
 	pass

@@ -7,6 +7,8 @@
 radius = 30.0
 
 [node name="NeutralMoon" type="RigidBody2D"]
+contacts_reported = 1000
+contact_monitor = true
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -14,3 +16,6 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+
+[node name="Satellites" type="Node" parent="."]
+[connection signal="body_entered" from="." to="." method="_on_NeutralMoon_body_entered"]

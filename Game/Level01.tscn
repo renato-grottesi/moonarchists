@@ -7,12 +7,13 @@
 [node name="Level01" instance=ExtResource( 1 )]
 current_level = 1
 next_level = 2
+asteroids_offset = 120
 
-[node name="Moon" parent="." index="3"]
+[node name="Moon" parent="." index="4"]
 position = Vector2( 278.275, -2.37842 )
 impulse0 = Vector2( 0, -500 )
 
-[node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
+[node name="Saturn" parent="Bodies" index="0" instance=ExtResource( 2 )]
 position = Vector2( -259.188, 5.71323 )
 impulse0 = Vector2( 0, 500 )
 texture = ExtResource( 4 )
