@@ -4,6 +4,7 @@ var explosion_pos = Vector2(0, 0)
 var asteroid_texture = preload("res://Sprites/asteroid.png")
 const Asteroid = preload("res://Game/Asteroid.gd")
 export (bool) var is_asteroid : bool = false
+signal damage()
 
 func _ready():
 	if !is_asteroid:
@@ -34,4 +35,5 @@ func _on_MassBullet_body_entered(body):
 	collision_mask = 0
 	$Timer.start()
 	$Explosion.restart()
+	emit_signal("damage")
 	pass

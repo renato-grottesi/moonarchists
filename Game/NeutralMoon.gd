@@ -5,6 +5,8 @@ export (Resource) var texture
 export (bool) var friendly : bool = false
 export (int) var asteroids_count : int = 0
 
+signal damage()
+
 var asteroid_scene = preload("res://Game/Asteroid.tscn")
 const Asteroid = preload("res://Game/Asteroid.gd")
 var time = 0.0
@@ -25,8 +27,12 @@ func _ready():
 		var pos = Vector2( offset*sin(rad), offset*cos(rad))
 		asteroid.position = pos + global_position
 		asteroid.speed = rng.randf_range(0, 2) + 1
+		asteroid.connect("damage", self, "on_asteroid_damage")
 		$Satellites.add_child(asteroid);
 	pass
+
+func on_asteroid_damage():
+	emit_signal("damage")
 
 func _physics_process(delta):
 	for S in $Satellites.get_children():
@@ -36,6 +42,7 @@ func _physics_process(delta):
 	last_pos = global_position
 
 func _on_NeutralMoon_body_entered(body):
+	emit_signal("damage")
 	if body is Asteroid:
 		body.hit()
 	pass

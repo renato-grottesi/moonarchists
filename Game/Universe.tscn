@@ -49,6 +49,9 @@ position = Vector2( -512, -384 )
 anchor_mode = 0
 current = true
 
+[node name="Shake" type="Timer" parent="Camera"]
+one_shot = true
+
 [node name="Moon" parent="." instance=ExtResource( 10 )]
 
 [node name="CenterOfMass" type="StaticBody2D" parent="."]
@@ -275,6 +278,7 @@ __meta__ = {
 stream = ExtResource( 9 )
 volume_db = -12.0
 pitch_scale = 0.75
+[connection signal="damage" from="Moon" to="." method="shake_it"]
 [connection signal="destroyed" from="Moon" to="." method="_on_Moon_destroyed"]
 [connection signal="heath" from="Moon" to="." method="_on_Moon_heath"]
 [connection signal="shoot" from="Moon" to="." method="_on_Moon_shoot"]

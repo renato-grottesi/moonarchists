@@ -29,6 +29,8 @@ func _ready():
 		var pos = Vector2( offset*sin(rad), offset*cos(rad))
 		asteroid.position = pos
 		$Asteroids.add_child(asteroid);
+	for B in $Bodies.get_children():
+		B.connect("damage", self, "shake_it")
 	pass
 
 func _process(delta):
@@ -42,6 +44,7 @@ func _process(delta):
 		if l < 60.0:
 			$ExplosionSound.play()
 			B.queue_free();
+			shake_it()
 			if B.friendly :
 				game_over = true
 				$HUD/Lost.popup()
@@ -50,6 +53,13 @@ func _process(delta):
 			game_over = true
 			$HUD/Victory/Star1.set_texture(star_texture)
 			$HUD/Victory.popup()
+
+	var shake_amount = 10 * $Camera/Shake.time_left
+	$Camera.set_offset(Vector2( \
+		rand_range(-1.0, 1.0) * shake_amount, \
+		rand_range(-1.0, 1.0) * shake_amount \
+	))
+
 	pass
 
 func _physics_process(delta):
@@ -74,6 +84,7 @@ func _on_Moon_shoot(moon_speed):
 		var mass_bullet_instance = mass_bullet_scene.instance();
 		mass_bullet_instance.position = $Moon.position + moon_speed
 		mass_bullet_instance.linear_velocity = moon_speed * 10
+		mass_bullet_instance.connect("damage", self, "shake_it")
 		$Bullets.add_child(mass_bullet_instance);
 		shoots += 1;
 		$HUD/Score.text = "Shoots: " + String(shoots)
@@ -141,4 +152,8 @@ func _on_Retry_pressed():
 	if stars > 3 :
 		Global.level_status[current_level-1] = 5
 	Global.goto_scene(Global.levels[current_level])
+	pass
+
+func shake_it():
+	$Camera/Shake.start()
 	pass

@@ -3,6 +3,7 @@ extends "res://Game/CelestialBody.gd"
 signal shoot(moon_speed)
 signal destroyed()
 signal heath(health)
+signal damage()
 
 export (Vector2) var impulse0 : Vector2 = Vector2(0, 0)
 
@@ -45,6 +46,7 @@ func _on_Moon_body_entered(body):
 	if body is MassBullet:
 		health -= 25;
 		emit_signal("heath", health)
+		emit_signal("damage")
 	else:
 		health = 0;
 	if health < 1:

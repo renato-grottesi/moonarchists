@@ -10,17 +10,17 @@ current_level = 2
 next_level = 3
 
 [node name="Moon" parent="." index="4"]
-position = Vector2( -7.55096, 245.407 )
+position = Vector2( 0, 260 )
 impulse0 = Vector2( 400, -100 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -218.346, -169.997 )
-impulse0 = Vector2( 0, 500 )
+position = Vector2( -150, -150 )
+impulse0 = Vector2( -250, 500 )
 texture = ExtResource( 4 )
 asteroids_count = 1
 
 [node name="Mars" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 9.95728, -133.136 )
-impulse0 = Vector2( -500, -100 )
+position = Vector2( 200, -200 )
+impulse0 = Vector2( -500, -500 )
 texture = ExtResource( 5 )
 asteroids_count = 2

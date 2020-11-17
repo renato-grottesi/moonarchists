@@ -1,41 +1,35 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Universe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/NeutralMoon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/moon.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/saturn.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
 
 [node name="Level06" instance=ExtResource( 1 )]
 current_level = 6
 next_level = 7
+asteroids_count = 7
 
 [node name="Moon" parent="." index="4"]
-position = Vector2( 351.121, 9.43872 )
-impulse0 = Vector2( 200, -600 )
+position = Vector2( -150, 0 )
+impulse0 = Vector2( 20, 200 )
 
 [node name="Moon" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -218.346, -169.997 )
-impulse0 = Vector2( 0, 500 )
+position = Vector2( -350, -350 )
+impulse0 = Vector2( 1000, -250 )
 texture = ExtResource( 3 )
 friendly = true
 
-[node name="Saturn" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 9.95728, -133.136 )
-impulse0 = Vector2( -500, -100 )
-texture = ExtResource( 4 )
-
-[node name="Efisto" parent="Bodies" index="2" instance=ExtResource( 2 )]
-position = Vector2( -282.646, 55.8435 )
-impulse0 = Vector2( -500, -800 )
+[node name="Efisto" parent="Bodies" index="1" instance=ExtResource( 2 )]
+position = Vector2( -350, 0 )
+impulse0 = Vector2( -300, -900 )
 texture = ExtResource( 6 )
-
-[node name="Opening" parent="HUD" index="3"]
-visible = true
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
-There is another rougue moon
-in this planetary system.
+You are trapped inside
+an asteroids belt!
 
-Be carefull and do not break it!"
+I only see two ways out of here:
+hit yourself to gain speed,
+or slingshot your shoots."
