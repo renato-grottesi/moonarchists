@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Game/Universe.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/blackhole.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Sounds/explosion.wav" type="AudioStream" id=9]
 [ext_resource path="res://Game/Moon.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Sprites/star_empty.png" type="Texture" id=11]
+[ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 0.00446841, 0, 0, Vector2( 0.494253, 1 ), -2.88089e-07, -2.88089e-07, 0, 0, Vector2( 1, 0 ), 0.0109342, 0.0, 0, 0 ]
@@ -77,18 +78,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Health" type="HSlider" parent="HUD"]
+[node name="HealthBar" parent="HUD" instance=ExtResource( 12 )]
 margin_left = 32.0
 margin_top = 32.0
-margin_right = 288.0
-margin_bottom = 64.0
-custom_styles/slider = ExtResource( 3 )
-rounded = true
-editable = false
-scrollable = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = -736.0
+margin_bottom = -704.0
 
 [node name="Victory" type="PopupDialog" parent="HUD"]
 margin_left = 256.0

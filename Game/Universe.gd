@@ -99,7 +99,7 @@ func _on_Moon_destroyed():
 
 func _on_Moon_heath(health):
 	if !game_over:
-		$HUD/Health.value = health;
+		$HUD/HealthBar.health = health;
 	pass
 
 func _on_CloseVictory_pressed():

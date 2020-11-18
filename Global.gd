@@ -30,10 +30,23 @@ var level_status = [
 	7,
 ]
 
+var music
+
 func _ready():
 	load_game()
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
+	
+	music = AudioStreamPlayer.new()
+	var stream = load("res://Sounds/moonarchists.ogg")
+	music.set_stream(stream)
+	music.volume_db = 1
+	music.pitch_scale = 1
+	play_music()
+
+func _process(delta):
+	play_music()
+	pass
 
 func save_game() :
 	var save_file = File.new()
@@ -79,4 +92,8 @@ func _deferred_goto_scene(path):
 	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
 
-
+func play_music() :
+	if get_tree().get_root() != music.get_parent() :
+		get_tree().get_root().add_child(music)
+	if !music.playing:
+		music.play()

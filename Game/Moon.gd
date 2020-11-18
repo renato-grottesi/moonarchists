@@ -45,10 +45,10 @@ func _unhandled_input(event):
 func _on_Moon_body_entered(body):
 	if body is MassBullet:
 		health -= 25;
-		emit_signal("heath", health)
 		emit_signal("damage")
 	else:
 		health = 0;
+	emit_signal("heath", health)
 	if health < 1:
 		$SpriteMoon.visible = false;
 		$SpriteNozzle.visible = false;
