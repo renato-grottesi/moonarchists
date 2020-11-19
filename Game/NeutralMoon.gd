@@ -42,7 +42,8 @@ func _physics_process(delta):
 	last_pos = global_position
 
 func _on_NeutralMoon_body_entered(body):
-	emit_signal("damage")
+	if ! body is get_script():
+		emit_signal("damage")
 	if body is Asteroid:
 		body.hit()
 	pass

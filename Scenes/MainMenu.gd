@@ -4,6 +4,7 @@ var click_start;
 
 func _ready():
 	$Play.grab_focus()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	pass
 
 func _process(delta):

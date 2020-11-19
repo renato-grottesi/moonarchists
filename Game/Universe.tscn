@@ -279,6 +279,7 @@ pitch_scale = 0.75
 [connection signal="about_to_show" from="HUD/Victory" to="." method="_on_Victory_about_to_show"]
 [connection signal="pressed" from="HUD/Victory/CloseVictory" to="." method="_on_CloseVictory_pressed"]
 [connection signal="pressed" from="HUD/Victory/RetryVictory" to="." method="_on_Retry_pressed"]
+[connection signal="about_to_show" from="HUD/Opening" to="." method="_on_Opening_about_to_show"]
 [connection signal="pressed" from="HUD/Opening/CloseOpening" to="." method="_on_CloseOpening_pressed"]
 [connection signal="pressed" from="HUD/LastLevel/LastLevelVictory" to="." method="_on_LastLevelVictory_pressed"]
 [connection signal="about_to_show" from="HUD/Lost" to="." method="_on_Lost_about_to_show"]

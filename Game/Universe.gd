@@ -16,6 +16,7 @@ var game_over = false;
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	rng.randomize()
 	var stars = Global.level_status[current_level-1]
 	if stars > 5 :
@@ -77,6 +78,7 @@ func _physics_process(delta):
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_ESCAPE:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			Global.goto_scene(Global.levels[0])
 
 func _on_Moon_shoot(moon_speed):
@@ -114,6 +116,7 @@ func _on_LastLevelVictory_pressed():
 	pass
 
 func _on_CloseOpening_pressed():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$HUD/Opening.hide()
 	pass
 
@@ -122,6 +125,7 @@ func _on_LostQuit_pressed():
 	pass
 
 func _on_Victory_about_to_show():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var stars = Global.level_status[current_level-1]
 	var new_stars = 1
 	if shoots < 3:
@@ -141,9 +145,10 @@ func _on_Victory_about_to_show():
 	if next_level > 0:
 		if Global.level_status[next_level-1] > 6:
 			Global.level_status[next_level-1] = 6
-	pass # Replace with function body.
+	pass
 
 func _on_Lost_about_to_show():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$HUD/Lost/LostRetry.grab_focus()
 	pass
 
@@ -156,4 +161,8 @@ func _on_Retry_pressed():
 
 func shake_it():
 	$Camera/Shake.start()
+	pass
+
+func _on_Opening_about_to_show():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	pass

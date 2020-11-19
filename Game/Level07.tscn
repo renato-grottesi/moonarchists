@@ -29,13 +29,3 @@ texture = ExtResource( 4 )
 position = Vector2( -282.646, 55.8435 )
 impulse0 = Vector2( -500, -800 )
 texture = ExtResource( 6 )
-
-[node name="Opening" parent="HUD" index="3"]
-visible = true
-
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
-There is another rougue moon
-in this planetary system.
-
-Be carefull and do not break it!"
