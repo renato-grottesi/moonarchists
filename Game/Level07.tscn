@@ -1,31 +1,35 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Universe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/NeutralMoon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/moon.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/saturn.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
 
 [node name="Level07" instance=ExtResource( 1 )]
 current_level = 7
 next_level = 8
+asteroids_count = 7
 
 [node name="Moon" parent="." index="4"]
-position = Vector2( 351.121, 9.43872 )
-impulse0 = Vector2( 200, -600 )
+position = Vector2( -150, 0 )
+impulse0 = Vector2( 20, 200 )
 
 [node name="Moon" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -218.346, -169.997 )
-impulse0 = Vector2( 0, 500 )
+position = Vector2( -350, -350 )
+impulse0 = Vector2( 1000, -250 )
 texture = ExtResource( 3 )
 friendly = true
 
-[node name="Saturn" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 9.95728, -133.136 )
-impulse0 = Vector2( -500, -100 )
-texture = ExtResource( 4 )
-
-[node name="Efisto" parent="Bodies" index="2" instance=ExtResource( 2 )]
-position = Vector2( -282.646, 55.8435 )
-impulse0 = Vector2( -500, -800 )
+[node name="Efisto" parent="Bodies" index="1" instance=ExtResource( 2 )]
+position = Vector2( -350, 0 )
+impulse0 = Vector2( -300, -900 )
 texture = ExtResource( 6 )
+
+[node name="Label" parent="HUD/Opening" index="0"]
+text = "
+You are trapped inside
+an asteroids belt!
+
+I only see two ways out of here:
+hit yourself to gain speed,
+or slingshot your shoots."

@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=2]
+
+[ext_resource path="res://Sprites/transparent.png" type="Texture" id=1]
+
+[resource]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 32, 32 )
+margin_left = 12.443
+margin_right = 12.1025
+margin_top = 11.9077
+margin_bottom = 12.2299

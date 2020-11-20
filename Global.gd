@@ -1,6 +1,8 @@
 extends Node
 
 var current_scene = null
+var music_volume = 75
+var sound_volume = 90
 
 var levels = [
 	"res://Scenes/MainMenu.tscn",
@@ -33,6 +35,7 @@ var level_status = [
 var music
 
 func _ready():
+	#save_game()
 	load_game()
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
@@ -53,6 +56,8 @@ func save_game() :
 	save_file.open("user://savegame.save", File.WRITE)
 	for E in level_status:
 		save_file.store_8(E);
+	save_file.store_8(sound_volume)
+	save_file.store_8(music_volume)
 	save_file.close()
 	pass
 
@@ -61,6 +66,8 @@ func load_game() :
 	load_file.open("user://savegame.save", File.READ)
 	for n in range(level_status.size()) :
 		level_status[n] = load_file.get_8()
+	sound_volume = load_file.get_8()
+	music_volume = load_file.get_8()
 	pass
 
 func goto_scene(path):
@@ -97,3 +104,19 @@ func play_music() :
 		get_tree().get_root().add_child(music)
 	if !music.playing:
 		music.play()
+	music.set_volume_db(-50 + music_volume/2)
+
+func get_sound_volume_db():
+	return (-50 + sound_volume/2)
+
+func set_sound_volume(volume):
+	sound_volume = volume
+
+func set_music_volume(volume):
+	music_volume = volume
+
+func get_sound_volume():
+	return sound_volume
+
+func get_music_volume():
+	return music_volume

@@ -1,34 +1,37 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/Universe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/NeutralMoon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/moon.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
 
 [node name="Level05" instance=ExtResource( 1 )]
 current_level = 5
 next_level = 6
-asteroids_count = 7
-asteroids_offset = 60
 
 [node name="Moon" parent="." index="4"]
-position = Vector2( 475, 0 )
-impulse0 = Vector2( 200, -600 )
+position = Vector2( 50, 50 )
+impulse0 = Vector2( -200, 200 )
 
 [node name="Moon" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 200, 0 )
+position = Vector2( -260, 260 )
 impulse0 = Vector2( 0, 500 )
 texture = ExtResource( 3 )
 friendly = true
 
-[node name="Terra" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 0, 300 )
-impulse0 = Vector2( -1000, -100 )
+[node name="Luna" parent="Bodies" index="1" instance=ExtResource( 2 )]
+position = Vector2( 260, 260 )
+impulse0 = Vector2( 200, -500 )
+texture = ExtResource( 3 )
+friendly = true
+
+[node name="Efisto" parent="Bodies" index="2" instance=ExtResource( 2 )]
+position = Vector2( -300, -200 )
+impulse0 = Vector2( -500, -800 )
+texture = ExtResource( 6 )
+
+[node name="Terra" parent="Bodies" index="3" instance=ExtResource( 2 )]
+position = Vector2( 300, -200 )
+impulse0 = Vector2( 500, -1000 )
 texture = ExtResource( 4 )
-
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
-That asteroids belt
-looks annoying.
-
-Try to don't waste shots on it."

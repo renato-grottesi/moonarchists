@@ -42,3 +42,21 @@ func _on_CloseOptionsDialog_pressed():
 func _on_CloseLevelsDialog_pressed():
 	$Levels.hide()
 	pass
+
+func _on_SoundSlider_value_changed(value):
+	Global.set_sound_volume(value)
+	pass
+
+func _on_MusicSlider_value_changed(value):
+	Global.set_music_volume(value)
+	pass
+
+func _on_OptionsDialog_about_to_show():
+	$OptionsDialog/SoundSlider.value = Global.get_sound_volume()
+	$OptionsDialog/MusicSlider.value = Global.get_music_volume()
+	pass
+
+func _on_OptionsDialog_popup_hide():
+	# Save the sound and music volumes
+	Global.save_game()
+	pass

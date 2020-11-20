@@ -9,6 +9,7 @@ signal damage()
 func _ready():
 	if !is_asteroid:
 		$ShootSound.play()
+		$ShootSound.set_volume_db(Global.get_sound_volume_db())
 	else:
 		$Sprite.set_texture(asteroid_texture)
 	pass
@@ -29,6 +30,7 @@ func _on_MassBullet_body_entered(body):
 		body.hit()
 	done = true
 	$ExplosionSound.play()
+	$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
 	explosion_pos = position
 	$Sprite.visible = false
 	collision_layer = 0

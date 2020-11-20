@@ -18,13 +18,13 @@ impulse0 = Vector2( 200, -600 )
 position = Vector2( -240, -200 )
 impulse0 = Vector2( -200, 500 )
 texture = ExtResource( 4 )
-asteroids_count = 1
+moons_count = 1
 
 [node name="Mars" parent="Bodies" index="1" instance=ExtResource( 2 )]
 position = Vector2( 0, -200 )
 impulse0 = Vector2( -500, -100 )
 texture = ExtResource( 5 )
-asteroids_count = 2
+moons_count = 3
 
 [node name="Efisto" parent="Bodies" index="2" instance=ExtResource( 2 )]
 position = Vector2( -470, 0 )

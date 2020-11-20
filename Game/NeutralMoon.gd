@@ -3,7 +3,7 @@ extends "res://Game/CelestialBody.gd"
 export (Vector2) var impulse0 : Vector2 = Vector2(0, 0)
 export (Resource) var texture
 export (bool) var friendly : bool = false
-export (int) var asteroids_count : int = 0
+export (int) var moons_count : int = 0
 
 signal damage()
 
@@ -20,9 +20,9 @@ func _ready():
 	angular_velocity = (1 + rng.randf_range(0, 1)) * sign(rng.randf_range(-1, 1));
 	$Sprite.set_texture(texture)
 	last_pos = global_position
-	for i in range(0, asteroids_count):
+	for i in range(0, moons_count):
 		var asteroid = asteroid_scene.instance();
-		var rad = i*(2*PI/asteroids_count)
+		var rad = i*(2*PI/moons_count)
 		var offset = rng.randf_range(0, 40) + 60
 		var pos = Vector2( offset*sin(rad), offset*cos(rad))
 		asteroid.position = pos + global_position

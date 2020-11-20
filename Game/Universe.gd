@@ -44,16 +44,18 @@ func _process(delta):
 		var l = b.distance_to(c)
 		if l < 60.0:
 			$ExplosionSound.play()
+			$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
 			B.queue_free();
 			shake_it()
 			if B.friendly :
 				game_over = true
-				$HUD/Lost.popup()
+				if ! $HUD/Victory.visible:
+					$HUD/Lost.popup()
 	if enemies_left < 1 :
 		if !game_over:
 			game_over = true
-			$HUD/Victory/Star1.set_texture(star_texture)
-			$HUD/Victory.popup()
+			if ! $HUD/Lost.visible:
+				$HUD/Victory.popup()
 
 	var shake_amount = 10 * $Camera/Shake.time_left
 	$Camera.set_offset(Vector2( \
@@ -96,7 +98,9 @@ func _on_Moon_destroyed():
 	if !game_over:
 		game_over = true
 		$ExplosionSound.play()
-		$HUD/Lost.popup()
+		$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
+		if ! $HUD/Victory.visible:
+			$HUD/Lost.popup()
 	pass
 
 func _on_Moon_heath(health):

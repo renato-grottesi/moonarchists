@@ -17,10 +17,10 @@ impulse0 = Vector2( 400, -100 )
 position = Vector2( -150, -150 )
 impulse0 = Vector2( -250, 500 )
 texture = ExtResource( 4 )
-asteroids_count = 1
+moons_count = 2
 
 [node name="Mars" parent="Bodies" index="1" instance=ExtResource( 2 )]
 position = Vector2( 200, -200 )
 impulse0 = Vector2( -500, -500 )
 texture = ExtResource( 5 )
-asteroids_count = 2
+moons_count = 3

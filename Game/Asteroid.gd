@@ -8,6 +8,7 @@ func hit():
 	if !done:
 		done = true
 		$Boom.play()
+		$Boom.set_volume_db(Global.get_sound_volume_db())
 		explosion_pos = global_position
 		$Sprite.visible = false
 		collision_layer = 0

@@ -24,7 +24,7 @@ friendly = true
 position = Vector2( 0, -180 )
 impulse0 = Vector2( -500, -100 )
 texture = ExtResource( 6 )
-asteroids_count = 2
+moons_count = 2
 
 [node name="Saturn" parent="Bodies" index="2" instance=ExtResource( 2 )]
 position = Vector2( -280, 60 )
