@@ -14,6 +14,7 @@ var shoots = 0;
 var game_over = false;
 
 var rng = RandomNumberGenerator.new()
+var com_rotation = 0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -35,6 +36,9 @@ func _ready():
 	pass
 
 func _process(delta):
+	com_rotation += delta * 8
+	var com_transform = Transform2D(com_rotation, Vector2(0, 0))
+	$CenterOfMass/SpriteBack.transform = com_transform.scaled(Vector2(3, 0.20))
 	var enemies_left = 0
 	for B in $Bodies.get_children():
 		if ! B.friendly:

@@ -8,6 +8,7 @@ signal damage()
 export (Vector2) var impulse0 : Vector2 = Vector2(0, 0)
 
 const MassBullet = preload("res://Game/MassBullet.gd")
+const NeutralMoon = preload("res://Game/NeutralMoon.gd")
 
 var health = 100;
 
@@ -44,7 +45,10 @@ func _unhandled_input(event):
 
 func _on_Moon_body_entered(body):
 	if body is MassBullet:
-		health -= 25;
+		health -= 20;
+		emit_signal("damage")
+	elif body is NeutralMoon:
+		health -= 30;
 		emit_signal("damage")
 	else:
 		health = 0;

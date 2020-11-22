@@ -7,7 +7,7 @@
 [ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
 
 [node name="Level08" instance=ExtResource( 1 )]
-current_level = 9
+current_level = 8
 asteroids_count = 16
 asteroids_offset = 150
 

@@ -8,7 +8,7 @@
 [node name="Level07" instance=ExtResource( 1 )]
 current_level = 7
 next_level = 8
-asteroids_count = 7
+asteroids_count = 8
 
 [node name="Moon" parent="." index="4"]
 position = Vector2( -150, 0 )
