@@ -1,8 +1,11 @@
 extends Node
 
+const game_version = 12
+
 var current_scene = null
 var music_volume = 75
 var sound_volume = 90
+var music
 
 var levels = [
 	"res://Scenes/MainMenu.tscn",
@@ -32,8 +35,6 @@ var level_status = [
 	7,
 ]
 
-var music
-
 func _ready():
 	#save_game()
 	load_game()
@@ -49,26 +50,27 @@ func _ready():
 
 func _process(delta):
 	play_music()
-	pass
 
 func save_game() :
 	var save_file = File.new()
 	save_file.open("user://savegame.save", File.WRITE)
+	save_file.store_8(game_version)
 	for E in level_status:
 		save_file.store_8(E);
 	save_file.store_8(sound_volume)
 	save_file.store_8(music_volume)
 	save_file.close()
-	pass
 
 func load_game() :
 	var load_file = File.new()
-	load_file.open("user://savegame.save", File.READ)
-	for n in range(level_status.size()) :
-		level_status[n] = load_file.get_8()
-	sound_volume = load_file.get_8()
-	music_volume = load_file.get_8()
-	pass
+	if load_file.file_exists("user://savegame.save"):
+		load_file.open("user://savegame.save", File.READ)
+		var version = load_file.get_8()
+		if version == game_version:
+			for n in range(level_status.size()) :
+				level_status[n] = load_file.get_8()
+			sound_volume = load_file.get_8()
+			music_volume = load_file.get_8()
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,
@@ -76,27 +78,16 @@ func goto_scene(path):
 	# Deleting the current scene at this point is
 	# a bad idea, because it may still be executing code.
 	# This will result in a crash or unexpected behavior.
-
 	# The solution is to defer the load to a later time, when
 	# we can be sure that no code from the current scene is running:
-
 	call_deferred("_deferred_goto_scene", path)
 
 func _deferred_goto_scene(path):
-	# It is now safe to remove the current scene
 	current_scene.free()
 	save_game()
-
-	# Load the new scene.
 	var s = ResourceLoader.load(path)
-
-	# Instance the new scene.
 	current_scene = s.instance()
-
-	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
-
-	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
 
 func play_music() :

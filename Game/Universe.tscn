@@ -202,6 +202,10 @@ custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "Close"
 
+[node name="Timer" type="Timer" parent="HUD/Opening"]
+wait_time = 2.0
+one_shot = true
+
 [node name="LastLevel" type="PopupDialog" parent="HUD"]
 margin_left = 256.0
 margin_top = 192.0

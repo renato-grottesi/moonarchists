@@ -24,3 +24,13 @@ position = Vector2( 200, -200 )
 impulse0 = Vector2( -500, -500 )
 texture = ExtResource( 5 )
 moons_count = 3
+
+[node name="Label" parent="HUD/Opening" index="0"]
+text = "
+Those planets are surrounded
+by asteroids.
+
+Feel free to destroy
+them if you need to,
+but try to not waste
+shots on them if you can."

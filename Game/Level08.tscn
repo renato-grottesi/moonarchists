@@ -4,7 +4,7 @@
 [ext_resource path="res://Game/NeutralMoon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/moon.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/saturn.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/earth.png" type="Texture" id=5]
 
 [node name="Level08" instance=ExtResource( 1 )]
 current_level = 8
@@ -26,8 +26,17 @@ position = Vector2( -185, -185 )
 impulse0 = Vector2( -600, 600 )
 texture = ExtResource( 4 )
 
-[node name="Efisto" parent="Bodies" index="2" instance=ExtResource( 2 )]
+[node name="Terra" parent="Bodies" index="2" instance=ExtResource( 2 )]
 position = Vector2( -250, 75 )
 impulse0 = Vector2( 500, 1000 )
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 moons_count = 2
+
+[node name="Label" parent="HUD/Opening" index="0"]
+text = "
+That Earth-like planet is where
+the planets federation
+head quarters reside.
+
+Get rid of them and we'll
+finally be free!"

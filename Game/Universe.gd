@@ -5,16 +5,18 @@ export (int) var next_level : int = 0
 export (int) var asteroids_count : int = 0
 export (int) var asteroids_offset : int = 200
 
-var mass_bullet_scene = preload("res://Game/MassBullet.tscn")
-var star_texture = preload("res://Sprites/star_full.png")
-var asteroid_scene = preload("res://Game/Asteroid.tscn")
+const mass_bullet_scene = preload("res://Game/MassBullet.tscn")
+const star_texture = preload("res://Sprites/star_full.png")
+const asteroid_scene = preload("res://Game/Asteroid.tscn")
 const Asteroid = preload("res://Game/Asteroid.gd")
+const opening_duration = 4
+const gravity_k = 0.1
+const bullet_speed_k = 12
 
+var com_rotation = 0
 var shoots = 0;
 var game_over = false;
-
 var rng = RandomNumberGenerator.new()
-var com_rotation = 0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -33,9 +35,10 @@ func _ready():
 		$Asteroids.add_child(asteroid);
 	for B in $Bodies.get_children():
 		B.connect("damage", self, "shake_it")
-	pass
 
 func _process(delta):
+	if $HUD/Opening.visible:
+		$HUD/Opening/Label.percent_visible = 1 - $HUD/Opening/Timer.time_left/opening_duration
 	com_rotation += delta * 8
 	var com_transform = Transform2D(com_rotation, Vector2(0, 0))
 	$CenterOfMass/SpriteBack.transform = com_transform.scaled(Vector2(3, 0.20))
@@ -67,19 +70,22 @@ func _process(delta):
 		rand_range(-1.0, 1.0) * shake_amount \
 	))
 
-	pass
-
 func _physics_process(delta):
 	for B in $Bodies.get_children():
-		B.attract_to($CenterOfMass.position, 0.1)
+		B.attract_to($CenterOfMass.position, gravity_k)
 	for A in $Asteroids.get_children():
 		A.position = A.position.rotated(delta*A.speed)
 	for B in $Bullets.get_children():
-		B.attract_to($CenterOfMass.position, 0.1)
+		B.attract_to($CenterOfMass.position, gravity_k)
 		# Bullets feel planets' gragity to make it easier to hit them
 		for P in $Bodies.get_children():
-			B.attract_to(P.position, 0.01)
-	$Moon.attract_to($CenterOfMass.position, 0.1)
+			B.attract_to(P.position, gravity_k/10)
+	$Moon.attract_to($CenterOfMass.position, gravity_k)
+
+func _input(event):
+	if $HUD/Opening.visible:
+		if (event is InputEventMouseButton) or (event is InputEventKey):
+			$HUD/Opening/Timer.start(0.001)
 
 func _unhandled_input(event):
 	if event is InputEventKey:
@@ -91,12 +97,11 @@ func _on_Moon_shoot(moon_speed):
 	if !game_over:
 		var mass_bullet_instance = mass_bullet_scene.instance();
 		mass_bullet_instance.position = $Moon.position + moon_speed
-		mass_bullet_instance.linear_velocity = moon_speed * 10
+		mass_bullet_instance.linear_velocity = moon_speed * bullet_speed_k
 		mass_bullet_instance.connect("damage", self, "shake_it")
 		$Bullets.add_child(mass_bullet_instance);
 		shoots += 1;
 		$HUD/Score.text = "Shoots: " + String(shoots)
-	pass
 
 func _on_Moon_destroyed():
 	if !game_over:
@@ -105,32 +110,26 @@ func _on_Moon_destroyed():
 		$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
 		if ! $HUD/Victory.visible:
 			$HUD/Lost.popup()
-	pass
 
 func _on_Moon_heath(health):
 	if !game_over:
 		$HUD/HealthBar.health = health;
-	pass
 
 func _on_CloseVictory_pressed():
 	if next_level != 0 :
 		Global.goto_scene(Global.levels[next_level])
 	else:
 		$HUD/LastLevel.popup()
-	pass
 
 func _on_LastLevelVictory_pressed():
 	Global.goto_scene(Global.levels[next_level])
-	pass
 
 func _on_CloseOpening_pressed():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$HUD/Opening.hide()
-	pass
 
 func _on_LostQuit_pressed():
 	Global.goto_scene(Global.levels[0])
-	pass
 
 func _on_Victory_about_to_show():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -153,24 +152,20 @@ func _on_Victory_about_to_show():
 	if next_level > 0:
 		if Global.level_status[next_level-1] > 6:
 			Global.level_status[next_level-1] = 6
-	pass
 
 func _on_Lost_about_to_show():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$HUD/Lost/LostRetry.grab_focus()
-	pass
 
 func _on_Retry_pressed():
 	var stars = Global.level_status[current_level-1]
 	if stars > 3 :
 		Global.level_status[current_level-1] = 5
 	Global.goto_scene(Global.levels[current_level])
-	pass
 
 func shake_it():
 	$Camera/Shake.start()
-	pass
 
 func _on_Opening_about_to_show():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	pass
+	$HUD/Opening/Timer.start(opening_duration)

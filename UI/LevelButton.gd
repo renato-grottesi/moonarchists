@@ -3,7 +3,7 @@ extends Button
 export (int) var level_number : int = 1
 export (String) var level_name : String = "01"
 
-var star_texture = preload("res://Sprites/star_full.png")
+const star_texture = preload("res://Sprites/star_full.png")
 
 func _ready():
 	$Name.text = level_name
@@ -23,10 +23,8 @@ func _ready():
 		$Star1.hide()
 		$Star2.hide()
 		$Star3.hide()
-	pass
 
 func _on_Level_pressed():
 	var stars = Global.level_status[level_number-1]
 	if stars < 7:
 		Global.goto_scene(Global.levels[level_number])
-	pass

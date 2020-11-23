@@ -157,6 +157,54 @@ custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 text = "Close"
 
+[node name="StoryIntro" type="PopupDialog" parent="."]
+margin_left = 64.0
+margin_top = 192.0
+margin_right = 960.0
+margin_bottom = 768.0
+custom_styles/panel = ExtResource( 3 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="StoryIntro"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 832.0
+margin_bottom = 251.0
+custom_fonts/font = ExtResource( 2 )
+text = "After years of oppression and mining exploitation 
+for helium-3 from the energy-hungry planets
+federation, the natives of the moons organized
+themselves into an anarchic association called
+the moonarchists.
+Some of their best engineers worked in secret to
+create a generator capable of shooting mini-moons
+summoned from a different dimension.
+Due to your fame as the best video-game player,
+they put in charge of operating the weapon."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseStoryDialog" type="Button" parent="StoryIntro"]
+margin_left = 384.0
+margin_top = 448.0
+margin_right = 512.0
+margin_bottom = 512.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+text = "Close"
+
+[node name="Timer" type="Timer" parent="StoryIntro"]
+one_shot = true
+
 [node name="OptionsDialog" type="PopupDialog" parent="."]
 margin_left = 64.0
 margin_top = 192.0
@@ -188,7 +236,6 @@ margin_right = 448.0
 margin_bottom = 256.0
 custom_fonts/font = ExtResource( 2 )
 text = "Sound Volume"
-align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -201,13 +248,37 @@ margin_right = 448.0
 margin_bottom = 320.0
 custom_fonts/font = ExtResource( 2 )
 text = "Music Volume"
-align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CloseOptionsDialog" type="Button" parent="OptionsDialog"]
+[node name="FullScreen" type="Label" parent="OptionsDialog"]
+margin_left = 192.0
+margin_top = 320.0
+margin_right = 464.0
+margin_bottom = 384.0
+custom_fonts/font = ExtResource( 2 )
+text = "Toggle Fullscreen"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToggleFullScreen" type="Button" parent="OptionsDialog"]
+margin_left = 512.0
+margin_top = 320.0
+margin_right = 640.0
+margin_bottom = 384.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+text = "OFF"
+
+[node name="CloseOptionsDialog2" type="Button" parent="OptionsDialog"]
 margin_left = 384.0
 margin_top = 448.0
 margin_right = 512.0
@@ -333,9 +404,12 @@ level_name = "08"
 [connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="CreditsDialog/CloseCreditsDialog" to="." method="_on_CloseCreditsDialog_pressed"]
+[connection signal="about_to_show" from="StoryIntro" to="." method="_on_StoryIntro_about_to_show"]
+[connection signal="pressed" from="StoryIntro/CloseStoryDialog" to="." method="_on_CloseStoryDialog_pressed"]
 [connection signal="about_to_show" from="OptionsDialog" to="." method="_on_OptionsDialog_about_to_show"]
 [connection signal="popup_hide" from="OptionsDialog" to="." method="_on_OptionsDialog_popup_hide"]
-[connection signal="pressed" from="OptionsDialog/CloseOptionsDialog" to="." method="_on_CloseOptionsDialog_pressed"]
+[connection signal="pressed" from="OptionsDialog/ToggleFullScreen" to="." method="_on_ToggleFullScreen_pressed"]
+[connection signal="pressed" from="OptionsDialog/CloseOptionsDialog2" to="." method="_on_CloseOptionsDialog_pressed"]
 [connection signal="value_changed" from="OptionsDialog/SoundSlider" to="." method="_on_SoundSlider_value_changed"]
 [connection signal="value_changed" from="OptionsDialog/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
 [connection signal="pressed" from="Levels/CloseLevelsDialog" to="." method="_on_CloseLevelsDialog_pressed"]

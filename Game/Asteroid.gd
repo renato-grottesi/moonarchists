@@ -1,8 +1,10 @@
 extends StaticBody2D
+
 export (float) var speed : float = 1.0
+signal damage()
+
 var explosion_pos = Vector2(0, 0)
 var done = false
-signal damage()
 
 func hit():
 	if !done:
@@ -16,15 +18,12 @@ func hit():
 		$Timer.start()
 		$Explosion.restart()
 		emit_signal("damage")
-	pass
 
 func _on_Timer_timeout():
 	queue_free()
-	pass
 
 func _process(delta):
 	if done :
 		position = explosion_pos
 	if global_position.length() < 60 :
 		hit()
-	pass

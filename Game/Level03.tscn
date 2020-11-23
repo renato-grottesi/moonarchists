@@ -30,3 +30,14 @@ moons_count = 3
 position = Vector2( -470, 0 )
 impulse0 = Vector2( -500, -800 )
 texture = ExtResource( 6 )
+
+[node name="Label" parent="HUD/Opening" index="0"]
+text = "
+The planets federation is
+starting to suspect that
+the moonarchists are
+involved in the attacks.
+
+We must finish the work
+before they understand
+our technology!"

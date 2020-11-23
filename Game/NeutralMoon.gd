@@ -7,11 +7,11 @@ export (int) var moons_count : int = 0
 
 signal damage()
 
-var asteroid_scene = preload("res://Game/Asteroid.tscn")
+const asteroid_scene = preload("res://Game/Asteroid.tscn")
 const Asteroid = preload("res://Game/Asteroid.gd")
+
 var time = 0.0
 var last_pos
-
 var rng = RandomNumberGenerator.new()
 
 func _ready():
@@ -29,7 +29,6 @@ func _ready():
 		asteroid.speed = rng.randf_range(0, 2) + 1
 		asteroid.connect("damage", self, "on_asteroid_damage")
 		$Satellites.add_child(asteroid);
-	pass
 
 func on_asteroid_damage():
 	emit_signal("damage")
@@ -46,4 +45,3 @@ func _on_NeutralMoon_body_entered(body):
 		emit_signal("damage")
 	if body is Asteroid:
 		body.hit()
-	pass

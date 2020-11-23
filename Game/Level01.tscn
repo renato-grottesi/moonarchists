@@ -21,7 +21,7 @@ texture = ExtResource( 4 )
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
 We installed a mini-moon
-generator on your moon.
+generator in this moon.
 Use it to shoot at enemy planets
 and push them to their doom!
 
