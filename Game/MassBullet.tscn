@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Sprites/moon.png" type="Texture" id=1]
 [ext_resource path="res://Game/MassBullet.gd" type="Script" id=2]
-[ext_resource path="res://Sounds/explosion.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sounds/shoot.wav" type="AudioStream" id=4]
 [ext_resource path="res://Sprites/asteroid.png" type="Texture" id=5]
 
@@ -47,11 +46,6 @@ angular_velocity_random = 1.0
 linear_accel = 1.0
 scale_amount_curve = SubResource( 2 )
 color_ramp = SubResource( 3 )
-
-[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -16.0
-pitch_scale = 0.85
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

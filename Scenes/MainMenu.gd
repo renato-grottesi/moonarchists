@@ -24,6 +24,7 @@ func _unhandled_input(event):
 			get_tree().quit()
 
 func _on_exit_pressed():
+	beep()
 	get_tree().quit()
 
 func _on_play_pressed():
@@ -31,24 +32,33 @@ func _on_play_pressed():
 		$Levels.popup()
 	else:
 		$StoryIntro.popup()
+	beep()
 
 func _on_Options_pressed():
 	$OptionsDialog.popup()
+	beep()
 
 func _on_CloseCreditsDialog_pressed():
 	$CreditsDialog.hide()
+	beep()
 
 func _on_Credits_pressed():
 	$CreditsDialog.popup()
+	beep()
 
 func _on_CloseOptionsDialog_pressed():
 	$OptionsDialog.hide()
+	$Options.grab_focus()
+	beep()
 
 func _on_CloseLevelsDialog_pressed():
 	$Levels.hide()
+	$Play.grab_focus()
+	beep()
 
 func _on_SoundSlider_value_changed(value):
 	Global.set_sound_volume(value)
+	beep()
 
 func _on_MusicSlider_value_changed(value):
 	Global.set_music_volume(value)
@@ -56,14 +66,17 @@ func _on_MusicSlider_value_changed(value):
 func _on_OptionsDialog_about_to_show():
 	$OptionsDialog/SoundSlider.value = Global.get_sound_volume()
 	$OptionsDialog/MusicSlider.value = Global.get_music_volume()
+	$OptionsDialog/CloseOptionsDialog.grab_focus()
 
 func _on_OptionsDialog_popup_hide():
 	# Save the sound and music volumes
 	Global.save_game()
+	$Options.grab_focus()
 
 func _on_ToggleFullScreen_pressed():
 	OS.window_fullscreen = !OS.window_fullscreen
 	fullscreen_text()
+	beep()
 
 func fullscreen_text():
 	if OS.window_fullscreen:
@@ -74,6 +87,17 @@ func fullscreen_text():
 func _on_CloseStoryDialog_pressed():
 	$StoryIntro.hide()
 	$Levels.popup()
+	beep()
 
 func _on_StoryIntro_about_to_show():
 	$StoryIntro/Timer.start(story_duration)
+
+func beep():
+	$Beep.play()
+	$Beep.set_volume_db(Global.get_sound_volume_db())
+
+func _on_Levels_about_to_show():
+	$Levels/Level1.grab_focus()
+
+func _on_Levels_popup_hide():
+	$Play.grab_focus()

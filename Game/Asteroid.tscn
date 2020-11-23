@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/Asteroid.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/asteroid.png" type="Texture" id=2]
-[ext_resource path="res://Sounds/explosion.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -41,9 +40,4 @@ angular_velocity_random = 1.0
 linear_accel = 1.0
 scale_amount_curve = SubResource( 2 )
 color_ramp = SubResource( 3 )
-
-[node name="Boom" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -16.0
-pitch_scale = 0.9
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

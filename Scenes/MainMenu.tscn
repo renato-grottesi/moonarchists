@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/24_no_outline.tres" type="DynamicFont" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Fonts/96_no_outline.tres" type="DynamicFont" id=6]
 [ext_resource path="res://UI/LevelButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/transparent.tres" type="StyleBox" id=8]
+[ext_resource path="res://Sounds/select.wav" type="AudioStream" id=9]
 
 [node name="MainMenu" type="Control"]
 script = ExtResource( 1 )
@@ -270,6 +271,8 @@ margin_left = 512.0
 margin_top = 320.0
 margin_right = 640.0
 margin_bottom = 384.0
+focus_neighbour_top = NodePath("../MusicSlider")
+focus_neighbour_bottom = NodePath("../CloseOptionsDialog")
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
@@ -278,11 +281,13 @@ custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 text = "OFF"
 
-[node name="CloseOptionsDialog2" type="Button" parent="OptionsDialog"]
+[node name="CloseOptionsDialog" type="Button" parent="OptionsDialog"]
 margin_left = 384.0
 margin_top = 448.0
 margin_right = 512.0
 margin_bottom = 512.0
+focus_neighbour_top = NodePath("../ToggleFullScreen")
+focus_neighbour_bottom = NodePath("../SoundVolume")
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
@@ -296,6 +301,8 @@ margin_left = 512.0
 margin_top = 192.0
 margin_right = 832.0
 margin_bottom = 256.0
+focus_neighbour_top = NodePath("../CloseOptionsDialog")
+focus_neighbour_bottom = NodePath("../MusicSlider")
 custom_styles/slider = ExtResource( 3 )
 custom_styles/grabber_area_highlight = ExtResource( 8 )
 custom_styles/grabber_area = ExtResource( 8 )
@@ -306,6 +313,8 @@ margin_left = 512.0
 margin_top = 256.0
 margin_right = 832.0
 margin_bottom = 320.0
+focus_neighbour_top = NodePath("../SoundSlider")
+focus_neighbour_bottom = NodePath("../ToggleFullScreen")
 custom_styles/slider = ExtResource( 3 )
 custom_styles/grabber_area_highlight = ExtResource( 8 )
 custom_styles/grabber_area = ExtResource( 8 )
@@ -327,6 +336,12 @@ margin_left = 384.0
 margin_top = 448.0
 margin_right = 512.0
 margin_bottom = 512.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Level8")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Level1")
+focus_next = NodePath("../Level1")
+focus_previous = NodePath("../Level8")
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
@@ -343,12 +358,24 @@ margin_left = 96.0
 margin_top = 64.0
 margin_right = 224.0
 margin_bottom = 192.0
+focus_neighbour_left = NodePath("../Level4")
+focus_neighbour_top = NodePath("../CloseLevelsDialog")
+focus_neighbour_right = NodePath("../Level2")
+focus_neighbour_bottom = NodePath("../Level5")
+focus_next = NodePath("../Level2")
+focus_previous = NodePath("../Level8")
 
 [node name="Level2" parent="Levels" instance=ExtResource( 7 )]
 margin_left = 288.0
 margin_top = 64.0
 margin_right = 416.0
 margin_bottom = 192.0
+focus_neighbour_left = NodePath("../Level1")
+focus_neighbour_top = NodePath("../CloseLevelsDialog")
+focus_neighbour_right = NodePath("../Level3")
+focus_neighbour_bottom = NodePath("../Level6")
+focus_next = NodePath("../Level3")
+focus_previous = NodePath("../Level1")
 level_number = 2
 level_name = "02"
 
@@ -357,6 +384,12 @@ margin_left = 480.0
 margin_top = 64.0
 margin_right = 608.0
 margin_bottom = 192.0
+focus_neighbour_left = NodePath("../Level2")
+focus_neighbour_top = NodePath("../CloseLevelsDialog")
+focus_neighbour_right = NodePath("../Level4")
+focus_neighbour_bottom = NodePath("../Level7")
+focus_next = NodePath("../Level4")
+focus_previous = NodePath("../Level2")
 level_number = 3
 level_name = "03"
 
@@ -365,6 +398,12 @@ margin_left = 672.0
 margin_top = 64.0
 margin_right = 800.0
 margin_bottom = 192.0
+focus_neighbour_left = NodePath("../Level3")
+focus_neighbour_top = NodePath("../CloseLevelsDialog")
+focus_neighbour_right = NodePath("../Level1")
+focus_neighbour_bottom = NodePath("../Level8")
+focus_next = NodePath("../Level5")
+focus_previous = NodePath("../Level3")
 level_number = 4
 level_name = "04"
 
@@ -373,6 +412,12 @@ margin_left = 96.0
 margin_top = 256.0
 margin_right = 224.0
 margin_bottom = 384.0
+focus_neighbour_left = NodePath("../Level8")
+focus_neighbour_top = NodePath("../Level1")
+focus_neighbour_right = NodePath("../Level6")
+focus_neighbour_bottom = NodePath("../CloseLevelsDialog")
+focus_next = NodePath("../Level6")
+focus_previous = NodePath("../Level4")
 level_number = 5
 level_name = "05"
 
@@ -381,6 +426,12 @@ margin_left = 288.0
 margin_top = 256.0
 margin_right = 416.0
 margin_bottom = 384.0
+focus_neighbour_left = NodePath("../Level5")
+focus_neighbour_top = NodePath("../Level2")
+focus_neighbour_right = NodePath("../Level7")
+focus_neighbour_bottom = NodePath("../CloseLevelsDialog")
+focus_next = NodePath("../Level7")
+focus_previous = NodePath("../Level5")
 level_number = 6
 level_name = "06"
 
@@ -389,6 +440,12 @@ margin_left = 480.0
 margin_top = 256.0
 margin_right = 608.0
 margin_bottom = 384.0
+focus_neighbour_left = NodePath("../Level6")
+focus_neighbour_top = NodePath("../Level3")
+focus_neighbour_right = NodePath("../Level8")
+focus_neighbour_bottom = NodePath("../CloseLevelsDialog")
+focus_next = NodePath("../Level8")
+focus_previous = NodePath("../Level6")
 level_number = 7
 level_name = "07"
 
@@ -397,19 +454,40 @@ margin_left = 672.0
 margin_top = 256.0
 margin_right = 800.0
 margin_bottom = 384.0
+focus_neighbour_left = NodePath("../Level7")
+focus_neighbour_top = NodePath("../Level4")
+focus_neighbour_right = NodePath("../Level5")
+focus_neighbour_bottom = NodePath("../CloseLevelsDialog")
+focus_next = NodePath("../Level1")
+focus_previous = NodePath("../Level7")
 level_number = 8
 level_name = "08"
+
+[node name="Beep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+[connection signal="focus_entered" from="Play" to="." method="beep"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="focus_entered" from="Options" to="." method="beep"]
 [connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]
+[connection signal="focus_entered" from="Credits" to="." method="beep"]
 [connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
+[connection signal="focus_entered" from="Exit" to="." method="beep"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="focus_entered" from="CreditsDialog/CloseCreditsDialog" to="." method="beep"]
 [connection signal="pressed" from="CreditsDialog/CloseCreditsDialog" to="." method="_on_CloseCreditsDialog_pressed"]
 [connection signal="about_to_show" from="StoryIntro" to="." method="_on_StoryIntro_about_to_show"]
+[connection signal="focus_entered" from="StoryIntro/CloseStoryDialog" to="." method="beep"]
 [connection signal="pressed" from="StoryIntro/CloseStoryDialog" to="." method="_on_CloseStoryDialog_pressed"]
 [connection signal="about_to_show" from="OptionsDialog" to="." method="_on_OptionsDialog_about_to_show"]
 [connection signal="popup_hide" from="OptionsDialog" to="." method="_on_OptionsDialog_popup_hide"]
+[connection signal="focus_entered" from="OptionsDialog/ToggleFullScreen" to="." method="beep"]
 [connection signal="pressed" from="OptionsDialog/ToggleFullScreen" to="." method="_on_ToggleFullScreen_pressed"]
-[connection signal="pressed" from="OptionsDialog/CloseOptionsDialog2" to="." method="_on_CloseOptionsDialog_pressed"]
+[connection signal="focus_entered" from="OptionsDialog/CloseOptionsDialog" to="." method="beep"]
+[connection signal="pressed" from="OptionsDialog/CloseOptionsDialog" to="." method="_on_CloseOptionsDialog_pressed"]
+[connection signal="focus_entered" from="OptionsDialog/SoundSlider" to="." method="beep"]
 [connection signal="value_changed" from="OptionsDialog/SoundSlider" to="." method="_on_SoundSlider_value_changed"]
+[connection signal="focus_entered" from="OptionsDialog/MusicSlider" to="." method="beep"]
 [connection signal="value_changed" from="OptionsDialog/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="about_to_show" from="Levels" to="." method="_on_Levels_about_to_show"]
+[connection signal="popup_hide" from="Levels" to="." method="_on_Levels_popup_hide"]
 [connection signal="pressed" from="Levels/CloseLevelsDialog" to="." method="_on_CloseLevelsDialog_pressed"]

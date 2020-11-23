@@ -6,6 +6,7 @@ export (bool) var friendly : bool = false
 export (int) var moons_count : int = 0
 
 signal damage()
+signal swoosh()
 
 const asteroid_scene = preload("res://Game/Asteroid.tscn")
 const Asteroid = preload("res://Game/Asteroid.gd")
@@ -28,10 +29,14 @@ func _ready():
 		asteroid.position = pos + global_position
 		asteroid.speed = rng.randf_range(0, 2) + 1
 		asteroid.connect("damage", self, "on_asteroid_damage")
+		asteroid.connect("swoosh", self, "on_asteroid_swoosh")
 		$Satellites.add_child(asteroid);
 
 func on_asteroid_damage():
 	emit_signal("damage")
+
+func on_asteroid_swoosh():
+	emit_signal("swoosh")
 
 func _physics_process(delta):
 	for S in $Satellites.get_children():

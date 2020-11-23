@@ -13,7 +13,6 @@ const opening_duration = 4
 const gravity_k = 0.1
 const bullet_speed_k = 12
 
-var com_rotation = 0
 var shoots = 0;
 var game_over = false;
 var rng = RandomNumberGenerator.new()
@@ -35,25 +34,21 @@ func _ready():
 		$Asteroids.add_child(asteroid);
 	for B in $Bodies.get_children():
 		B.connect("damage", self, "shake_it")
+		B.connect("swoosh", self, "swoosh")
 
 func _process(delta):
 	if $HUD/Opening.visible:
 		$HUD/Opening/Label.percent_visible = 1 - $HUD/Opening/Timer.time_left/opening_duration
-	com_rotation += delta * 8
-	var com_transform = Transform2D(com_rotation, Vector2(0, 0))
-	$CenterOfMass/SpriteBack.transform = com_transform.scaled(Vector2(3, 0.20))
 	var enemies_left = 0
 	for B in $Bodies.get_children():
 		if ! B.friendly:
 			enemies_left += 1
-		var c = $CenterOfMass.position
+		var c = $BlackHole.position
 		var b = B.position
 		var l = b.distance_to(c)
 		if l < 60.0:
-			$ExplosionSound.play()
-			$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
 			B.queue_free();
-			shake_it()
+			swoosh()
 			if B.friendly :
 				game_over = true
 				if ! $HUD/Victory.visible:
@@ -72,15 +67,15 @@ func _process(delta):
 
 func _physics_process(delta):
 	for B in $Bodies.get_children():
-		B.attract_to($CenterOfMass.position, gravity_k)
+		B.attract_to($BlackHole.position, gravity_k)
 	for A in $Asteroids.get_children():
 		A.position = A.position.rotated(delta*A.speed)
 	for B in $Bullets.get_children():
-		B.attract_to($CenterOfMass.position, gravity_k)
+		B.attract_to($BlackHole.position, gravity_k)
 		# Bullets feel planets' gragity to make it easier to hit them
 		for P in $Bodies.get_children():
 			B.attract_to(P.position, gravity_k/10)
-	$Moon.attract_to($CenterOfMass.position, gravity_k)
+	$Moon.attract_to($BlackHole.position, gravity_k)
 
 func _input(event):
 	if $HUD/Opening.visible:
@@ -99,6 +94,7 @@ func _on_Moon_shoot(moon_speed):
 		mass_bullet_instance.position = $Moon.position + moon_speed
 		mass_bullet_instance.linear_velocity = moon_speed * bullet_speed_k
 		mass_bullet_instance.connect("damage", self, "shake_it")
+		mass_bullet_instance.connect("swoosh", self, "swoosh")
 		$Bullets.add_child(mass_bullet_instance);
 		shoots += 1;
 		$HUD/Score.text = "Shoots: " + String(shoots)
@@ -106,8 +102,7 @@ func _on_Moon_shoot(moon_speed):
 func _on_Moon_destroyed():
 	if !game_over:
 		game_over = true
-		$ExplosionSound.play()
-		$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
+		shake_it()
 		if ! $HUD/Victory.visible:
 			$HUD/Lost.popup()
 
@@ -120,25 +115,33 @@ func _on_CloseVictory_pressed():
 		Global.goto_scene(Global.levels[next_level])
 	else:
 		$HUD/LastLevel.popup()
+	beep()
 
 func _on_LastLevelVictory_pressed():
 	Global.goto_scene(Global.levels[next_level])
+	beep()
 
 func _on_CloseOpening_pressed():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$HUD/Opening.hide()
+	beep()
 
 func _on_LostQuit_pressed():
 	Global.goto_scene(Global.levels[0])
+	beep()
 
 func _on_Victory_about_to_show():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var stars = Global.level_status[current_level-1]
+	# You get 1 star simply for completing the level alive
 	var new_stars = 1
-	if shoots < 3:
+	# You get 2 stars for using less than 4 shots
+	if shoots < 4:
 		new_stars = 2
+	# You get all 3 stars only if you complete the level with 1 shot
 	if shoots < 2:
 		new_stars = 3
+	# Calculate and assign the new number of stars
 	if stars > 4 :
 		stars = 1
 	if new_stars > stars:
@@ -162,10 +165,22 @@ func _on_Retry_pressed():
 	if stars > 3 :
 		Global.level_status[current_level-1] = 5
 	Global.goto_scene(Global.levels[current_level])
+	beep()
 
 func shake_it():
+	$ExplosionSound.play()
+	$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
 	$Camera/Shake.start()
+
+func swoosh():
+	$SwooshSound.play()
+	$SwooshSound.set_volume_db(Global.get_sound_volume_db())
+	$BlackHole.eat()
 
 func _on_Opening_about_to_show():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$HUD/Opening/Timer.start(opening_duration)
+
+func beep():
+	$Beep.play()
+	$Beep.set_volume_db(Global.get_sound_volume_db())

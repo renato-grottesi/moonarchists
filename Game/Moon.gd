@@ -52,6 +52,7 @@ func _on_Moon_body_entered(body):
 		emit_signal("damage")
 	elif body is Asteroid:
 		health -= 15;
+		body.hit()
 		emit_signal("damage")
 	else:
 		health = 0;

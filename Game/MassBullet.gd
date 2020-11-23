@@ -1,20 +1,18 @@
 extends "res://Game/CelestialBody.gd"
 
-export (bool) var is_asteroid : bool = false
 signal damage()
+signal swoosh()
 
 const asteroid_texture = preload("res://Sprites/asteroid.png")
 const Asteroid = preload("res://Game/Asteroid.gd")
+const BlackHole = preload("res://Game/BlackHole.gd")
 
 var done = false
 var explosion_pos = Vector2(0, 0)
 
 func _ready():
-	if !is_asteroid:
-		$ShootSound.play()
-		$ShootSound.set_volume_db(Global.get_sound_volume_db())
-	else:
-		$Sprite.set_texture(asteroid_texture)
+	$ShootSound.play()
+	$ShootSound.set_volume_db(Global.get_sound_volume_db())
 
 func _on_Timer_timeout():
 	queue_free()
@@ -26,15 +24,17 @@ func _physics_process(delta):
 		angular_velocity = 0
 
 func _on_MassBullet_body_entered(body):
-	if body is Asteroid:
-		body.hit()
 	done = true
-	$ExplosionSound.play()
-	$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
 	explosion_pos = position
 	$Sprite.visible = false
 	collision_layer = 0
 	collision_mask = 0
-	$Timer.start()
-	$Explosion.restart()
-	emit_signal("damage")
+	if body is Asteroid:
+		body.hit()
+	if body is BlackHole:
+		queue_free()
+		emit_signal("swoosh")
+	else:
+		$Timer.start()
+		$Explosion.restart()
+		emit_signal("damage")

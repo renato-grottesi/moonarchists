@@ -1,6 +1,6 @@
 extends Node
 
-const game_version = 12
+const game_version = 14
 
 var current_scene = null
 var music_volume = 75

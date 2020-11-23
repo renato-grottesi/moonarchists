@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game/Universe.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/blackhole.png" type="Texture" id=2]
+[ext_resource path="res://Game/BlackHole.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/stretchable_button.tres" type="StyleBox" id=3]
 [ext_resource path="res://Fonts/24_no_outline.tres" type="DynamicFont" id=4]
 [ext_resource path="res://UI/stretchable_button_hover.tres" type="StyleBox" id=5]
@@ -12,19 +12,11 @@
 [ext_resource path="res://Game/Moon.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Sprites/star_empty.png" type="Texture" id=11]
 [ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Sounds/swoosh.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/select.wav" type="AudioStream" id=14]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 0.00446841, 0, 0, Vector2( 0.494253, 1 ), -2.88089e-07, -2.88089e-07, 0, 0, Vector2( 1, 0 ), 0.0109342, 0.0, 0, 0 ]
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 30.0
-
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 0.763636 ), 0.0, 0.0, 0, 0, Vector2( 0.63745, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0.583333, 0.925439, 1 )
-colors = PoolColorArray( 0.768627, 0.768627, 0, 1, 0.95332, 0.155074, 0, 1, 1, 0, 0, 1 )
 
 [node name="Universe" type="Node2D"]
 script = ExtResource( 1 )
@@ -62,33 +54,7 @@ one_shot = true
 
 [node name="Moon" parent="." instance=ExtResource( 10 )]
 
-[node name="CenterOfMass" type="StaticBody2D" parent="."]
-
-[node name="Shape" type="CollisionShape2D" parent="CenterOfMass"]
-shape = SubResource( 2 )
-
-[node name="SpriteBack" type="Sprite" parent="CenterOfMass"]
-texture = ExtResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="CenterOfMass"]
-texture = ExtResource( 2 )
-
-[node name="Radiation" type="CPUParticles2D" parent="CenterOfMass"]
-amount = 64
-lifetime = 3.0
-preprocess = 12.0
-speed_scale = 0.25
-randomness = 1.0
-direction = Vector2( 1, 1 )
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 45.8
-damping = 20.0
-damping_random = 1.0
-scale_amount = 2.0
-scale_amount_random = 1.0
-scale_amount_curve = SubResource( 3 )
-color_ramp = SubResource( 4 )
+[node name="BlackHole" parent="." instance=ExtResource( 2 )]
 
 [node name="Bodies" type="Node" parent="."]
 
@@ -303,16 +269,30 @@ __meta__ = {
 stream = ExtResource( 9 )
 volume_db = -12.0
 pitch_scale = 0.75
+
+[node name="SwooshSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -24.0
+pitch_scale = 0.75
+
+[node name="Beep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
 [connection signal="damage" from="Moon" to="." method="shake_it"]
 [connection signal="destroyed" from="Moon" to="." method="_on_Moon_destroyed"]
 [connection signal="heath" from="Moon" to="." method="_on_Moon_heath"]
 [connection signal="shoot" from="Moon" to="." method="_on_Moon_shoot"]
 [connection signal="about_to_show" from="HUD/Victory" to="." method="_on_Victory_about_to_show"]
+[connection signal="focus_entered" from="HUD/Victory/CloseVictory" to="." method="beep"]
 [connection signal="pressed" from="HUD/Victory/CloseVictory" to="." method="_on_CloseVictory_pressed"]
+[connection signal="focus_entered" from="HUD/Victory/RetryVictory" to="." method="beep"]
 [connection signal="pressed" from="HUD/Victory/RetryVictory" to="." method="_on_Retry_pressed"]
 [connection signal="about_to_show" from="HUD/Opening" to="." method="_on_Opening_about_to_show"]
+[connection signal="focus_entered" from="HUD/Opening/CloseOpening" to="." method="beep"]
 [connection signal="pressed" from="HUD/Opening/CloseOpening" to="." method="_on_CloseOpening_pressed"]
+[connection signal="focus_entered" from="HUD/LastLevel/LastLevelVictory" to="." method="beep"]
 [connection signal="pressed" from="HUD/LastLevel/LastLevelVictory" to="." method="_on_LastLevelVictory_pressed"]
 [connection signal="about_to_show" from="HUD/Lost" to="." method="_on_Lost_about_to_show"]
+[connection signal="focus_entered" from="HUD/Lost/LostRetry" to="." method="beep"]
 [connection signal="pressed" from="HUD/Lost/LostRetry" to="." method="_on_Retry_pressed"]
+[connection signal="focus_entered" from="HUD/Lost/LostQuit" to="." method="beep"]
 [connection signal="pressed" from="HUD/Lost/LostQuit" to="." method="_on_LostQuit_pressed"]
