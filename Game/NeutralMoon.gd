@@ -50,3 +50,6 @@ func _on_NeutralMoon_body_entered(body):
 		emit_signal("damage")
 	if body is Asteroid:
 		body.hit()
+
+func _process(delta):
+	update_shadow()

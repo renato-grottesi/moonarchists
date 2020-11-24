@@ -147,14 +147,23 @@ func _on_Victory_about_to_show():
 	if new_stars > stars:
 		stars = new_stars
 	Global.level_status[current_level-1] = stars
-	$HUD/Victory/Star1.set_texture(star_texture)
+	enable_star($HUD/Victory/Star1)
 	if stars > 1 :
-		$HUD/Victory/Star2.set_texture(star_texture)
+		enable_star($HUD/Victory/Star2)
 	if stars > 2 :
-		$HUD/Victory/Star3.set_texture(star_texture)
+		enable_star($HUD/Victory/Star3)
 	if next_level > 0:
 		if Global.level_status[next_level-1] > 6:
 			Global.level_status[next_level-1] = 6
+
+func enable_star(which_star):
+	which_star.set_texture(star_texture)
+	var tween = Tween.new()
+	$HUD/Victory.add_child(tween)
+	tween.interpolate_property(which_star, "scale", 
+		Vector2(0, 0), Vector2(2, 2), 1.0, 
+		Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+	tween.start()
 
 func _on_Lost_about_to_show():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

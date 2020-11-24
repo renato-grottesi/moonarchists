@@ -65,3 +65,6 @@ func _on_Moon_body_entered(body):
 		collision_layer = 0
 		collision_mask = 0
 		emit_signal("destroyed")
+
+func _process(delta):
+	update_shadow()

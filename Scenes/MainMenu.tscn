@@ -140,7 +140,8 @@ https://github.com/renato-grottesi/moonarchists
 Engine: Godot 3.2 (Permissive MIT License)
 Graphics: Aseprite 1.2.25 (EULA + Steam Sub. Agreement)
 Font: 8bitOperatorPlus (SIL Open Font License)
-Sound effect: sfxr (MIT License)"
+Sound effect: sfxr (MIT License)
+Music: LMMS (GNU GPLv2+)"
 __meta__ = {
 "_edit_use_anchors_": false
 }

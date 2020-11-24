@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/Moon.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/nozzle.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/moon.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/black.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 custom_solver_bias = 1.0
-radius = 25.0
+radius = 23.0
 
 [node name="Moon" type="RigidBody2D"]
 contacts_reported = 1000
@@ -23,4 +24,9 @@ texture = ExtResource( 3 )
 [node name="SpriteNozzle" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 offset = Vector2( 30, 0 )
+
+[node name="Shadow" type="Sprite" parent="."]
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 4 )
+centered = false
 [connection signal="body_entered" from="." to="." method="_on_Moon_body_entered"]
