@@ -1,6 +1,7 @@
 extends Control
 
 const story_duration = 8
+const lock_texture = preload("res://Sprites/lock.png")
 
 var click_start;
 
@@ -67,6 +68,8 @@ func _on_OptionsDialog_about_to_show():
 	$OptionsDialog/SoundSlider.value = Global.get_sound_volume()
 	$OptionsDialog/MusicSlider.value = Global.get_music_volume()
 	$OptionsDialog/CloseOptionsDialog.grab_focus()
+	fullscreen_text()
+	crosshair_text()
 
 func _on_OptionsDialog_popup_hide():
 	# Save the sound and music volumes
@@ -83,6 +86,12 @@ func fullscreen_text():
 		$OptionsDialog/ToggleFullScreen.text = "ON"
 	else:
 		$OptionsDialog/ToggleFullScreen.text = "OFF"
+
+func crosshair_text():
+	if Global.use_cross_hair:
+		$OptionsDialog/ToggleCrosshair.text = "ON"
+	else:
+		$OptionsDialog/ToggleCrosshair.text = "OFF"
 
 func _on_CloseStoryDialog_pressed():
 	$StoryIntro.hide()
@@ -101,3 +110,21 @@ func _on_Levels_about_to_show():
 
 func _on_Levels_popup_hide():
 	$Play.grab_focus()
+
+func _on_ToggleCrosshair_pressed():
+	Global.use_cross_hair = !Global.use_cross_hair
+	crosshair_text()
+
+func _on_CloseHelpDialog_pressed():
+	$HelpDialog.hide()
+
+func _on_Help_pressed():
+	$HelpDialog.popup()
+
+func _on_SpeedRun_pressed():
+	if Global.get_total_stars() < 16:
+		$Levels/SpeedRun.text = String(Global.get_total_stars()) + "/16 STARS"
+		$Levels/SpeedRun.icon = lock_texture
+	else:
+		Global.start_speed_run()
+		Global.goto_scene(Global.levels[1])

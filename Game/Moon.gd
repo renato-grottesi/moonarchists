@@ -30,17 +30,14 @@ func _unhandled_input(event):
 			if event.is_pressed():
 				emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
 	if event is InputEventMouseMotion:
-		$SpriteNozzle.rotation_degrees += event.relative.y;
+		if !Global.use_cross_hair:
+			$SpriteNozzle.rotation_degrees += event.relative.y
 	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_LEFT:
-			$SpriteNozzle.rotation_degrees -= 3;
-		if event.pressed and event.scancode == KEY_RIGHT:
-			$SpriteNozzle.rotation_degrees += 3;
 		if event.pressed and event.scancode == KEY_UP:
 			$SpriteNozzle.rotation_degrees -= 3;
 		if event.pressed and event.scancode == KEY_DOWN:
 			$SpriteNozzle.rotation_degrees += 3;
-		if event.pressed and event.scancode == KEY_SPACE:
+		if event.pressed and event.scancode == KEY_SPACE and !event.echo :
 			emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
 
 func _on_Moon_body_entered(body):
@@ -67,4 +64,11 @@ func _on_Moon_body_entered(body):
 		emit_signal("destroyed")
 
 func _process(delta):
+	if Global.use_cross_hair:
+		var globpos = (get_global_mouse_position() - global_position).normalized()
+		if globpos.y < 0 :
+			globpos = globpos.rotated(PI)
+			$SpriteNozzle.rotation = acos(globpos.dot(Vector2(1, 0))) - rotation + PI
+		else:
+			$SpriteNozzle.rotation = acos(globpos.dot(Vector2(1, 0))) - rotation
 	update_shadow()

@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprites/moons_counter_fg.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/moons_counter_bg.png" type="Texture" id=2]
+[ext_resource path="res://UI/MoonsCounter.gd" type="Script" id=3]
+[ext_resource path="res://Fonts/24_no_outline.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Sprites/moons_counter_empty.png" type="Texture" id=5]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.401199, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.5, 0.942982, 1 )
+colors = PoolColorArray( 0.394737, 0.394737, 0.394737, 1, 1, 1, 1, 1, 0.0614035, 0.0614035, 0.0614035, 1, 0, 0, 0, 1 )
+
+[node name="MoonsCounter" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1024.0
+margin_bottom = -768.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Empty" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Foreground" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 180.0
+initial_velocity = 8.0
+initial_velocity_random = 1.0
+scale_amount = 3.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+
+[node name="FinalWarning" type="Label" parent="."]
+visible = false
+margin_left = 32.514
+margin_top = -3.75683
+margin_right = 223.514
+margin_bottom = 31.2432
+custom_fonts/font = ExtResource( 4 )
+text = "shoot to quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,11 +1,34 @@
 extends Node
 
-const game_version = 15
+const game_version = 16
 
 var current_scene = null
 var music_volume = 75
 var sound_volume = 90
 var music
+var use_cross_hair = true setget _set_cross_hair, _get_cross_hair
+var speed_run_start_time
+var speed_run_record = -1.0
+var is_speedrunning = false
+
+func start_speed_run():
+	speed_run_start_time = OS.get_ticks_msec()
+	is_speedrunning = true
+
+func stop_speed_run():
+	is_speedrunning = false
+	var speed_run_time = OS.get_ticks_msec() - speed_run_start_time
+	if speed_run_record < 0:
+		speed_run_record = speed_run_time
+	if speed_run_record > speed_run_time:
+		speed_run_record = speed_run_time
+	return speed_run_time
+
+func _set_cross_hair(val):
+	use_cross_hair = val
+
+func _get_cross_hair():
+	return use_cross_hair
 
 var levels = [
 	"res://Scenes/MainMenu.tscn",
@@ -35,8 +58,14 @@ var level_status = [
 	7,
 ]
 
+func get_total_stars():
+	var total_stars = 0
+	for E in level_status:
+		if E < 5:
+			total_stars += E
+	return total_stars
+
 func _ready():
-	#save_game()
 	load_game()
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
@@ -59,6 +88,7 @@ func save_game() :
 		save_file.store_8(E);
 	save_file.store_8(sound_volume)
 	save_file.store_8(music_volume)
+	save_file.store_8(use_cross_hair)
 	save_file.close()
 
 func load_game() :
@@ -71,6 +101,7 @@ func load_game() :
 				level_status[n] = load_file.get_8()
 			sound_volume = load_file.get_8()
 			music_volume = load_file.get_8()
+			use_cross_hair = load_file.get_8()
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,

@@ -18,7 +18,9 @@ var game_over = false;
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if !Global.use_cross_hair:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$CrossHair.visible = Global.use_cross_hair
 	rng.randomize()
 	var stars = Global.level_status[current_level-1]
 	if stars > 5 :
@@ -52,6 +54,7 @@ func _process(delta):
 			if B.friendly :
 				game_over = true
 				if ! $HUD/Victory.visible:
+					$HUD/Lost/Reason.text = "A friendly moon\n has been destroyed"
 					$HUD/Lost.popup()
 	if enemies_left < 1 :
 		if !game_over:
@@ -64,6 +67,7 @@ func _process(delta):
 		rand_range(-1.0, 1.0) * shake_amount, \
 		rand_range(-1.0, 1.0) * shake_amount \
 	))
+	$CrossHair.global_position = get_global_mouse_position()
 
 func _physics_process(delta):
 	for B in $Bodies.get_children():
@@ -87,6 +91,8 @@ func _unhandled_input(event):
 		if event.pressed and event.scancode == KEY_ESCAPE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			Global.goto_scene(Global.levels[0])
+		if event.pressed and event.scancode == KEY_R:
+			_on_Retry_pressed()
 
 func _on_Moon_shoot(moon_speed):
 	if !game_over:
@@ -97,13 +103,20 @@ func _on_Moon_shoot(moon_speed):
 		mass_bullet_instance.connect("swoosh", self, "swoosh")
 		$Bullets.add_child(mass_bullet_instance);
 		shoots += 1;
+		$HUD/MoonsCounter.moons = 10-shoots
 		$HUD/Score.text = "Shoots: " + String(shoots)
+		if shoots>10 and !game_over:
+			game_over = true
+			if ! $HUD/Victory.visible:
+				$HUD/Lost/Reason.text = "You run out of moons"
+				$HUD/Lost.popup()
 
 func _on_Moon_destroyed():
 	if !game_over:
 		game_over = true
 		shake_it()
 		if ! $HUD/Victory.visible:
+			$HUD/Lost/Reason.text = "Your moon took\n too much damage"
 			$HUD/Lost.popup()
 
 func _on_Moon_heath(health):
@@ -193,3 +206,7 @@ func _on_Opening_about_to_show():
 func beep():
 	$Beep.play()
 	$Beep.set_volume_db(Global.get_sound_volume_db())
+
+func _on_QuitVictory_pressed():
+	Global.goto_scene(Global.levels[0])
+	beep()
