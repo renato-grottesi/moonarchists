@@ -105,9 +105,6 @@ func beep():
 	$Beep.play()
 	$Beep.set_volume_db(Global.get_sound_volume_db())
 
-func _on_Levels_about_to_show():
-	$Levels/Level1.grab_focus()
-
 func _on_Levels_popup_hide():
 	$Play.grab_focus()
 
@@ -122,9 +119,16 @@ func _on_Help_pressed():
 	$HelpDialog.popup()
 
 func _on_SpeedRun_pressed():
+	if Global.get_total_stars() > 15:
+		Global.start_speed_run()
+		Global.goto_scene(Global.levels[1])
+
+func _on_Levels_about_to_show():
 	if Global.get_total_stars() < 16:
 		$Levels/SpeedRun.text = String(Global.get_total_stars()) + "/16 STARS"
 		$Levels/SpeedRun.icon = lock_texture
 	else:
-		Global.start_speed_run()
-		Global.goto_scene(Global.levels[1])
+		$Levels/SpeedRun.text = "Speedrun"
+	if Global.speed_run_record > 0:
+		$Levels/SpeedRun.text = "Speedrun: " + Global.ms2str(Global.speed_run_record)
+	$Levels/Level1.grab_focus()

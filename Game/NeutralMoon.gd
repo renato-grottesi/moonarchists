@@ -24,7 +24,7 @@ func _ready():
 	for i in range(0, moons_count):
 		var asteroid = asteroid_scene.instance();
 		var rad = i*(2*PI/moons_count)
-		var offset = rng.randf_range(0, 40) + 60
+		var offset = rng.randf_range(0, 35) + 60
 		var pos = Vector2( offset*sin(rad), offset*cos(rad))
 		asteroid.position = pos + global_position
 		asteroid.speed = rng.randf_range(0, 2) + 1

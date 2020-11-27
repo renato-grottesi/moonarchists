@@ -9,26 +9,27 @@
 current_level = 7
 next_level = 8
 asteroids_count = 8
+asteroids_offset = 185
 
 [node name="Moon" parent="." index="4"]
 position = Vector2( -150, 0 )
 impulse0 = Vector2( 20, 200 )
 
 [node name="Moon" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -350, -350 )
-impulse0 = Vector2( 1000, -250 )
+position = Vector2( -340, -340 )
+impulse0 = Vector2( 1000, -300 )
 texture = ExtResource( 3 )
 friendly = true
 
 [node name="Efisto" parent="Bodies" index="1" instance=ExtResource( 2 )]
 position = Vector2( -350, 0 )
-impulse0 = Vector2( -300, -900 )
+impulse0 = Vector2( -250, -900 )
 texture = ExtResource( 6 )
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
 You are trapped inside
-an asteroids belt!
+an asteroid belt!
 
 Maybe you can try to
 hit yourself to gain speed?"

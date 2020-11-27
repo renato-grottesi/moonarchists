@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Sprites/moon.png" type="Texture" id=1]
 [ext_resource path="res://Game/MassBullet.gd" type="Script" id=2]
@@ -13,7 +13,11 @@ _data = [ Vector2( 0, 0 ), 0.0, 6.28773, 0, 0, Vector2( 0.425287, 1 ), -0.061363
 [sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 0, 0, 1, 1, 0.866667, 0, 1 )
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="AudioStreamRandomPitch" id=4]
+audio_stream = ExtResource( 4 )
+random_pitch = 1.4
+
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.123506, 0.168182 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="MassBullet" type="RigidBody2D"]
@@ -48,7 +52,7 @@ scale_amount_curve = SubResource( 2 )
 color_ramp = SubResource( 3 )
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+stream = SubResource( 4 )
 
 [node name="Trail" type="CPUParticles2D" parent="."]
 amount = 32
@@ -71,6 +75,6 @@ damping = 10.39
 damping_random = 1.0
 angle_random = 0.84
 scale_amount_random = 0.79
-scale_amount_curve = SubResource( 4 )
+scale_amount_curve = SubResource( 5 )
 [connection signal="body_entered" from="." to="." method="_on_MassBullet_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

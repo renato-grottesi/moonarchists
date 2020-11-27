@@ -33,10 +33,10 @@ texture = ExtResource( 4 )
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
-There is another rougue moon
+There is another rogue moon
 associated with
 the moonarchists
 in this planetary system.
 
-Be carefull and 
+Be careful and 
 do not destroy it!"

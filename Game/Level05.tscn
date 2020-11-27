@@ -39,9 +39,8 @@ texture = ExtResource( 4 )
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
 Those planets are orbiting
-crazy fast, but you are
+crazily fast, but you are
 the best shooter there is!
 
 We detect two moonarchists
-affiliated moons, be carefull.
-"
+affiliated moons, be careful."

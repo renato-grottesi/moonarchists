@@ -207,7 +207,7 @@ the direction from the moon to the cross-hair.
 Without cross-hair: move the mouse up and down
 to aim the nozzle and click to shoot.
 
-Complete a level with one shoot to get three stars!"
+Complete a level with one shot to get three stars!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -327,7 +327,7 @@ margin_top = 256.0
 margin_right = 464.0
 margin_bottom = 320.0
 custom_fonts/font = ExtResource( 2 )
-text = "Toggle Fullscreen"
+text = "Fullscreen Enabled"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -536,9 +536,9 @@ level_number = 8
 level_name = "08"
 
 [node name="CloseLevelsDialog" type="Button" parent="Levels"]
-margin_left = 512.0
+margin_left = 480.0
 margin_top = 448.0
-margin_right = 768.0
+margin_right = 800.0
 margin_bottom = 512.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Level8")
@@ -558,9 +558,9 @@ __meta__ = {
 }
 
 [node name="SpeedRun" type="Button" parent="Levels"]
-margin_left = 128.0
+margin_left = 96.0
 margin_top = 448.0
-margin_right = 384.0
+margin_right = 416.0
 margin_bottom = 512.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Level8")
@@ -574,6 +574,7 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 2 )
+shortcut_in_tooltip = false
 text = "Speedrun ??:??"
 __meta__ = {
 "_edit_use_anchors_": false

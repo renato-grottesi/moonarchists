@@ -11,13 +11,15 @@ const asteroid_scene = preload("res://Game/Asteroid.tscn")
 const Asteroid = preload("res://Game/Asteroid.gd")
 const opening_duration = 4
 const gravity_k = 0.1
-const bullet_speed_k = 12
+const bullet_speed_k = 14
 
 var shoots = 0;
 var game_over = false;
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	if Global.is_speedrunning:
+		$HUD/Score.text = Global.ms2str(Global.get_partial_speed_run())
 	if !Global.use_cross_hair:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$CrossHair.visible = Global.use_cross_hair
@@ -25,7 +27,8 @@ func _ready():
 	var stars = Global.level_status[current_level-1]
 	if stars > 5 :
 		if $HUD/Opening/Label.text.length() > 1:
-			$HUD/Opening.popup()
+			if ! Global.is_speedrunning:
+				$HUD/Opening.popup()
 	for i in range(0, asteroids_count):
 		var asteroid = asteroid_scene.instance();
 		asteroid.speed = rng.randf_range(0, 2) + 1
@@ -39,6 +42,8 @@ func _ready():
 		B.connect("swoosh", self, "swoosh")
 
 func _process(delta):
+	if Global.is_speedrunning:
+		$HUD/Score.text = Global.ms2str(Global.get_partial_speed_run())
 	if $HUD/Opening.visible:
 		$HUD/Opening/Label.percent_visible = 1 - $HUD/Opening/Timer.time_left/opening_duration
 	var enemies_left = 0
@@ -55,12 +60,20 @@ func _process(delta):
 				game_over = true
 				if ! $HUD/Victory.visible:
 					$HUD/Lost/Reason.text = "A friendly moon\n has been destroyed"
-					$HUD/Lost.popup()
+					if !Global.is_speedrunning:
+						$HUD/Lost.popup()
+					else:
+						retry_level()
 	if enemies_left < 1 :
 		if !game_over:
 			game_over = true
 			if ! $HUD/Lost.visible:
-				$HUD/Victory.popup()
+				if !Global.is_speedrunning:
+					$HUD/Victory.popup()
+				elif next_level == 0 :
+					$HUD/LastLevel.popup()
+				else:
+					goto_next_level()
 
 	var shake_amount = 10 * $Camera/Shake.time_left
 	$Camera.set_offset(Vector2( \
@@ -90,9 +103,10 @@ func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_ESCAPE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			Global.abort_speed_run()
 			Global.goto_scene(Global.levels[0])
 		if event.pressed and event.scancode == KEY_R:
-			_on_Retry_pressed()
+			retry_level()
 
 func _on_Moon_shoot(moon_speed):
 	if !game_over:
@@ -104,12 +118,16 @@ func _on_Moon_shoot(moon_speed):
 		$Bullets.add_child(mass_bullet_instance);
 		shoots += 1;
 		$HUD/MoonsCounter.moons = 10-shoots
-		$HUD/Score.text = "Shoots: " + String(shoots)
+		if !Global.is_speedrunning:
+			$HUD/Score.text = "Shots: " + String(shoots)
 		if shoots>10 and !game_over:
 			game_over = true
 			if ! $HUD/Victory.visible:
 				$HUD/Lost/Reason.text = "You run out of moons"
-				$HUD/Lost.popup()
+				if !Global.is_speedrunning:
+					$HUD/Lost.popup()
+				else:
+					retry_level()
 
 func _on_Moon_destroyed():
 	if !game_over:
@@ -117,18 +135,24 @@ func _on_Moon_destroyed():
 		shake_it()
 		if ! $HUD/Victory.visible:
 			$HUD/Lost/Reason.text = "Your moon took\n too much damage"
-			$HUD/Lost.popup()
+			if !Global.is_speedrunning:
+				$HUD/Lost.popup()
+			else:
+				retry_level()
 
 func _on_Moon_heath(health):
 	if !game_over:
 		$HUD/HealthBar.health = health;
 
 func _on_CloseVictory_pressed():
+	goto_next_level()
+	beep()
+
+func goto_next_level():
 	if next_level != 0 :
 		Global.goto_scene(Global.levels[next_level])
 	else:
 		$HUD/LastLevel.popup()
-	beep()
 
 func _on_LastLevelVictory_pressed():
 	Global.goto_scene(Global.levels[next_level])
@@ -141,6 +165,7 @@ func _on_CloseOpening_pressed():
 
 func _on_LostQuit_pressed():
 	Global.goto_scene(Global.levels[0])
+	Global.abort_speed_run()
 	beep()
 
 func _on_Victory_about_to_show():
@@ -183,11 +208,14 @@ func _on_Lost_about_to_show():
 	$HUD/Lost/LostRetry.grab_focus()
 
 func _on_Retry_pressed():
+	retry_level()
+	beep()
+
+func retry_level():
 	var stars = Global.level_status[current_level-1]
 	if stars > 3 :
 		Global.level_status[current_level-1] = 5
 	Global.goto_scene(Global.levels[current_level])
-	beep()
 
 func shake_it():
 	$ExplosionSound.play()
@@ -209,4 +237,11 @@ func beep():
 
 func _on_QuitVictory_pressed():
 	Global.goto_scene(Global.levels[0])
+	Global.abort_speed_run()
 	beep()
+
+func _on_LastLevel_about_to_show():
+	if Global.is_speedrunning:
+		var time = Global.stop_speed_run()
+		$HUD/LastLevel/SpeedrunScore.visible = true
+		$HUD/LastLevel/SpeedrunScore.text = "Speedrun: " + Global.ms2str(time)

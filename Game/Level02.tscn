@@ -10,11 +10,11 @@ current_level = 2
 next_level = 3
 
 [node name="Moon" parent="." index="4"]
-position = Vector2( -200, 0 )
-impulse0 = Vector2( -400, -300 )
+position = Vector2( -140, 0 )
+impulse0 = Vector2( -400, -280 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 290, 0 )
+position = Vector2( 300, 0 )
 impulse0 = Vector2( -200, 700 )
 texture = ExtResource( 4 )
 moons_count = 1
