@@ -3,7 +3,7 @@ extends "res://Game/CelestialBody.gd"
 export (Vector2) var impulse0 : Vector2 = Vector2(0, 0)
 
 signal shoot(moon_speed)
-signal destroyed()
+signal destroyed(swallowed)
 signal heath(health)
 signal damage()
 
@@ -41,6 +41,7 @@ func _unhandled_input(event):
 			emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
 
 func _on_Moon_body_entered(body):
+	var swallowed = false
 	if body is MassBullet:
 		health -= 20;
 		emit_signal("damage")
@@ -52,6 +53,7 @@ func _on_Moon_body_entered(body):
 		body.hit()
 		emit_signal("damage")
 	else:
+		swallowed = true
 		health = 0;
 	if health <= 0:
 		health = 0
@@ -61,7 +63,7 @@ func _on_Moon_body_entered(body):
 		$SpriteNozzle.visible = false;
 		collision_layer = 0
 		collision_mask = 0
-		emit_signal("destroyed")
+		emit_signal("destroyed", swallowed)
 
 func _process(delta):
 	if Global.use_cross_hair:

@@ -2,6 +2,7 @@ extends Control
 
 var moons = 10 setget _set_moons, _get_moons
 var moons_width = [0, 32, 56, 80, 104, 128, 152, 176, 200, 224, 256]
+var alternate_color = true
 
 func _ready():
 	$Foreground.region_enabled = true
@@ -22,3 +23,13 @@ func _set_moons(val):
 
 func _get_moons():
 	return moons
+
+func _on_Timer_timeout():
+	alternate_color = !alternate_color
+	if alternate_color:
+		$FinalWarning.set("custom_colors/font_color", Color(1.0, 0.0, 0.0, 1.0))
+		if moons < 1:
+			$Alert.play()
+			$Alert.set_volume_db(Global.get_sound_volume_db())
+	else:
+		$FinalWarning.set("custom_colors/font_color", Color(1.0, 1.0, 1.0, 1.0))

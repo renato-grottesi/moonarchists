@@ -110,12 +110,13 @@ func _unhandled_input(event):
 
 func _on_Moon_shoot(moon_speed):
 	if !game_over:
-		var mass_bullet_instance = mass_bullet_scene.instance();
-		mass_bullet_instance.position = $Moon.position + moon_speed
-		mass_bullet_instance.linear_velocity = moon_speed * bullet_speed_k
-		mass_bullet_instance.connect("damage", self, "shake_it")
-		mass_bullet_instance.connect("swoosh", self, "swoosh")
-		$Bullets.add_child(mass_bullet_instance);
+		if shoots<10:
+			var mass_bullet_instance = mass_bullet_scene.instance();
+			mass_bullet_instance.position = $Moon.position + moon_speed
+			mass_bullet_instance.linear_velocity = moon_speed * bullet_speed_k
+			mass_bullet_instance.connect("damage", self, "shake_it")
+			mass_bullet_instance.connect("swoosh", self, "swoosh")
+			$Bullets.add_child(mass_bullet_instance);
 		shoots += 1;
 		$HUD/MoonsCounter.moons = 10-shoots
 		if !Global.is_speedrunning:
@@ -129,12 +130,15 @@ func _on_Moon_shoot(moon_speed):
 				else:
 					retry_level()
 
-func _on_Moon_destroyed():
+func _on_Moon_destroyed(swallowed):
 	if !game_over:
 		game_over = true
 		shake_it()
 		if ! $HUD/Victory.visible:
-			$HUD/Lost/Reason.text = "Your moon took\n too much damage"
+			if swallowed:
+				$HUD/Lost/Reason.text = "Your moon was swallowed\nby the black hole"
+			else:
+				$HUD/Lost/Reason.text = "Your moon took\n too much damage"
 			if !Global.is_speedrunning:
 				$HUD/Lost.popup()
 			else:

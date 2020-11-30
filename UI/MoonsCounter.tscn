@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Sprites/moons_counter_fg.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/moons_counter_bg.png" type="Texture" id=2]
 [ext_resource path="res://UI/MoonsCounter.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/24_no_outline.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Sprites/moons_counter_empty.png" type="Texture" id=5]
+[ext_resource path="res://Sounds/alert.wav" type="AudioStream" id=6]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.401199, 0.0, 0, 0 ]
@@ -61,3 +62,11 @@ text = "shoot to quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="Alert" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
