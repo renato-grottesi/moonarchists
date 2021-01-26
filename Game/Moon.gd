@@ -16,11 +16,22 @@ var health = 100;
 func _ready():
 	apply_impulse(Vector2(0, 0), impulse0);
 	emit_signal("heath", health)
+	$SpriteNozzle.visible = OS.get_name() != "Android"
 
 func _physics_process(delta):
 	rotation = 0
 
+func update_nozzle():
+	if Global.use_cross_hair:
+		var globpos = (get_global_mouse_position() - global_position).normalized()
+		if globpos.y < 0 :
+			globpos = globpos.rotated(PI)
+			$SpriteNozzle.rotation = acos(globpos.dot(Vector2(1, 0))) - rotation + PI
+		else:
+			$SpriteNozzle.rotation = acos(globpos.dot(Vector2(1, 0))) - rotation
+
 func _unhandled_input(event):
+	update_nozzle()
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_WHEEL_UP:
 			$SpriteNozzle.rotation_degrees += 3;
@@ -66,11 +77,5 @@ func _on_Moon_body_entered(body):
 		emit_signal("destroyed", swallowed)
 
 func _process(delta):
-	if Global.use_cross_hair:
-		var globpos = (get_global_mouse_position() - global_position).normalized()
-		if globpos.y < 0 :
-			globpos = globpos.rotated(PI)
-			$SpriteNozzle.rotation = acos(globpos.dot(Vector2(1, 0))) - rotation + PI
-		else:
-			$SpriteNozzle.rotation = acos(globpos.dot(Vector2(1, 0))) - rotation
+	update_nozzle()
 	update_shadow()

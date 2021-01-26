@@ -22,7 +22,7 @@ func _ready():
 		$HUD/Score.text = Global.ms2str(Global.get_partial_speed_run())
 	if !Global.use_cross_hair:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	$CrossHair.visible = Global.use_cross_hair
+	$CrossHair.visible = Global.use_cross_hair && (OS.get_name() != "Android")
 	rng.randomize()
 	var stars = Global.level_status[current_level-1]
 	if stars > 5 :

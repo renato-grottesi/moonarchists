@@ -9,7 +9,7 @@ current_level = 1
 next_level = 2
 asteroids_offset = 120
 
-[node name="Moon" parent="." index="4"]
+[node name="Moon" parent="." index="3"]
 position = Vector2( 270, 0 )
 impulse0 = Vector2( 0, -500 )
 

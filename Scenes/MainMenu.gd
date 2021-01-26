@@ -68,6 +68,10 @@ func _on_OptionsDialog_about_to_show():
 	$OptionsDialog/SoundSlider.value = Global.get_sound_volume()
 	$OptionsDialog/MusicSlider.value = Global.get_music_volume()
 	$OptionsDialog/CloseOptionsDialog.grab_focus()
+	$OptionsDialog/CrosshairAim.visible = OS.get_name() != "Android"
+	$OptionsDialog/FullScreen.visible = OS.get_name() != "Android"
+	$OptionsDialog/ToggleFullScreen.visible = OS.get_name() != "Android"
+	$OptionsDialog/ToggleCrosshair.visible = OS.get_name() != "Android"
 	fullscreen_text()
 	crosshair_text()
 
