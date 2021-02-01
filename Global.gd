@@ -7,6 +7,7 @@ var music_volume = 75
 var sound_volume = 90
 var music
 var use_cross_hair = true setget _set_cross_hair, _get_cross_hair
+var use_joy_pad = false
 var speed_run_start_time
 var speed_run_record = 0
 var is_speedrunning = false

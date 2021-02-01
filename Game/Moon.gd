@@ -11,7 +11,7 @@ const MassBullet = preload("res://Game/MassBullet.gd")
 const NeutralMoon = preload("res://Game/NeutralMoon.gd")
 const Asteroid = preload("res://Game/Asteroid.gd")
 
-var health = 100;
+var health = 100
 
 func _ready():
 	apply_impulse(Vector2(0, 0), impulse0);
@@ -21,14 +21,22 @@ func _ready():
 func _physics_process(delta):
 	rotation = 0
 
+func set_nozzle(pos):
+	if pos.y < 0 :
+		pos = pos.rotated(PI)
+		$SpriteNozzle.rotation = acos(pos.dot(Vector2(1, 0))) - rotation + PI
+	else:
+		$SpriteNozzle.rotation = acos(pos.dot(Vector2(1, 0))) - rotation
+
 func update_nozzle():
 	if Global.use_cross_hair:
 		var globpos = (get_global_mouse_position() - global_position).normalized()
-		if globpos.y < 0 :
-			globpos = globpos.rotated(PI)
-			$SpriteNozzle.rotation = acos(globpos.dot(Vector2(1, 0))) - rotation + PI
-		else:
-			$SpriteNozzle.rotation = acos(globpos.dot(Vector2(1, 0))) - rotation
+		set_nozzle(globpos)
+	if Global.use_joy_pad:
+		var joypos = Vector2(Input.get_joy_axis(0,0), Input.get_joy_axis(0,1))
+		if joypos.length() > 0.75:
+			joypos = joypos.normalized()
+			set_nozzle(joypos)
 
 func _unhandled_input(event):
 	update_nozzle()
@@ -50,6 +58,10 @@ func _unhandled_input(event):
 			$SpriteNozzle.rotation_degrees += 3;
 		if event.pressed and event.scancode == KEY_SPACE and !event.echo :
 			emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
+	if event is InputEventJoypadButton:
+		if event.is_pressed() && event.button_index == 0 && Global.use_joy_pad:
+			emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
+		Global.use_joy_pad = true
 
 func _on_Moon_body_entered(body):
 	var swallowed = false
