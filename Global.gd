@@ -11,6 +11,7 @@ var use_joy_pad = false
 var speed_run_start_time
 var speed_run_record = 0
 var is_speedrunning = false
+var slowmo
 
 var levels = [
 	"res://Scenes/MainMenu.tscn",
@@ -91,6 +92,17 @@ func _ready():
 	music.volume_db = 1
 	music.pitch_scale = 1
 	play_music()
+	slowmo = Timer.new()
+	slowmo.connect("timeout", self, "short_slow_done")
+	add_child(slowmo)
+
+func short_slow():
+	slowmo.start(0.05)
+	Engine.time_scale = 0.5
+
+func short_slow_done():
+	print("done")
+	Engine.time_scale = 0.75
 
 func _process(delta):
 	play_music()

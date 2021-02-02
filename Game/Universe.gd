@@ -225,6 +225,7 @@ func shake_it():
 	$ExplosionSound.play()
 	$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
 	$Camera/Shake.start()
+	Global.short_slow()
 
 func swoosh():
 	$SwooshSound.play()

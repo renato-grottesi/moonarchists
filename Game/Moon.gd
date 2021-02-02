@@ -12,11 +12,12 @@ const NeutralMoon = preload("res://Game/NeutralMoon.gd")
 const Asteroid = preload("res://Game/Asteroid.gd")
 
 var health = 100
+var time = 0
 
 func _ready():
 	apply_impulse(Vector2(0, 0), impulse0);
 	emit_signal("heath", health)
-	$SpriteNozzle.visible = OS.get_name() != "Android"
+	$SpriteNozzle.visible = OS.get_name() != "Android" || Global.use_joy_pad
 
 func _physics_process(delta):
 	rotation = 0
@@ -62,6 +63,11 @@ func _unhandled_input(event):
 		if event.is_pressed() && event.button_index == 0 && Global.use_joy_pad:
 			emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
 		Global.use_joy_pad = true
+		Global.use_cross_hair = false
+		$SpriteNozzle.visible = true
+#		print("JOYSTICK BUTTON: " + String(event.button_index))
+#	if event is InputEventJoypadMotion:
+#		print("JOYSTICK AXIS: " + String(event.axis) + ", VALUE: " + String(event.axis_value))
 
 func _on_Moon_body_entered(body):
 	var swallowed = false
@@ -91,3 +97,5 @@ func _on_Moon_body_entered(body):
 func _process(delta):
 	update_nozzle()
 	update_shadow()
+	time+=delta
+	$Outline.material.set_shader_param("time", time);
