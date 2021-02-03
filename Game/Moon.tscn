@@ -10,7 +10,7 @@
 custom_solver_bias = 1.0
 radius = 23.0
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 5 )
 shader_param/time = 0.0
 
@@ -23,7 +23,7 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Outline" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 3 )
 
@@ -40,4 +40,7 @@ offset = Vector2( 25, 0 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 4 )
 centered = false
+
+[node name="Death" type="Timer" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_Moon_body_entered"]
+[connection signal="timeout" from="Death" to="." method="_on_Death_timeout"]

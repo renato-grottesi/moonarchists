@@ -54,7 +54,7 @@ func _process(delta):
 		var b = B.position
 		var l = b.distance_to(c)
 		if l < 60.0:
-			B.queue_free();
+			B.absorb();
 			swoosh()
 			if B.friendly :
 				game_over = true
@@ -89,7 +89,7 @@ func _physics_process(delta):
 		A.position = A.position.rotated(delta*A.speed)
 	for B in $Bullets.get_children():
 		B.attract_to($BlackHole.position, gravity_k)
-		# Bullets feel planets' gragity to make it easier to hit them
+		# Bullets feel planets' gravity to make it easier to hit them
 		for P in $Bodies.get_children():
 			B.attract_to(P.position, gravity_k/10)
 	$Moon.attract_to($BlackHole.position, gravity_k)
@@ -100,13 +100,12 @@ func _input(event):
 			$HUD/Opening/Timer.start(0.001)
 
 func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_ESCAPE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			Global.abort_speed_run()
-			Global.goto_scene(Global.levels[0])
-		if event.pressed and event.scancode == KEY_R:
-			retry_level()
+	if Input.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Global.abort_speed_run()
+		Global.goto_scene(Global.levels[0])
+	if Input.is_action_pressed("ui_retry"):
+		retry_level()
 
 func _on_Moon_shoot(moon_speed):
 	if !game_over:
@@ -225,7 +224,7 @@ func shake_it():
 	$ExplosionSound.play()
 	$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
 	$Camera/Shake.start()
-	Global.short_slow()
+	Global.do_slowmo()
 
 func swoosh():
 	$SwooshSound.play()

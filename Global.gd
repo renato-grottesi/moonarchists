@@ -81,7 +81,7 @@ func get_total_stars():
 	return total_stars
 
 func _ready():
-	Engine.time_scale = 0.75
+	end_slowmo()
 	load_game()
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
@@ -93,16 +93,17 @@ func _ready():
 	music.pitch_scale = 1
 	play_music()
 	slowmo = Timer.new()
-	slowmo.connect("timeout", self, "short_slow_done")
+	slowmo.connect("timeout", self, "end_slowmo")
 	add_child(slowmo)
 
-func short_slow():
+func do_slowmo():
 	slowmo.start(0.05)
-	Engine.time_scale = 0.5
+	Engine.time_scale = 0.20
+	Engine.iterations_per_second = 10
 
-func short_slow_done():
-	print("done")
+func end_slowmo():
 	Engine.time_scale = 0.75
+	Engine.iterations_per_second = 60
 
 func _process(delta):
 	play_music()

@@ -13,6 +13,7 @@ const Asteroid = preload("res://Game/Asteroid.gd")
 
 var health = 100
 var time = 0
+var swallowed = false
 
 func _ready():
 	apply_impulse(Vector2(0, 0), impulse0);
@@ -65,12 +66,8 @@ func _unhandled_input(event):
 		Global.use_joy_pad = true
 		Global.use_cross_hair = false
 		$SpriteNozzle.visible = true
-#		print("JOYSTICK BUTTON: " + String(event.button_index))
-#	if event is InputEventJoypadMotion:
-#		print("JOYSTICK AXIS: " + String(event.axis) + ", VALUE: " + String(event.axis_value))
 
 func _on_Moon_body_entered(body):
-	var swallowed = false
 	if body is MassBullet:
 		health -= 20;
 		emit_signal("damage")
@@ -88,14 +85,22 @@ func _on_Moon_body_entered(body):
 		health = 0
 	emit_signal("heath", health)
 	if health < 1:
-		$SpriteMoon.visible = false;
+		$Outline.visible = false;
 		$SpriteNozzle.visible = false;
 		collision_layer = 0
 		collision_mask = 0
-		emit_signal("destroyed", swallowed)
+		$Shape.disabled = true
+		$Death.start(0.5)
 
 func _process(delta):
 	update_nozzle()
 	update_shadow()
 	time+=delta
 	$Outline.material.set_shader_param("time", time);
+	if !($Death.is_stopped()):
+		scale = Vector2($Death.time_left*2, $Death.time_left*2)
+		$SpriteMoon.scale = Vector2($Death.time_left*2, $Death.time_left*2)
+		$Shadow.scale = Vector2($Death.time_left*2, $Death.time_left*2)
+
+func _on_Death_timeout():
+	emit_signal("destroyed", swallowed)

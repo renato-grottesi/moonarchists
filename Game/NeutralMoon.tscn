@@ -23,4 +23,8 @@ texture = ExtResource( 3 )
 centered = false
 
 [node name="Satellites" type="Node" parent="."]
+
+[node name="Absorb" type="Timer" parent="."]
+one_shot = true
 [connection signal="body_entered" from="." to="." method="_on_NeutralMoon_body_entered"]
+[connection signal="timeout" from="Absorb" to="." method="_on_Absorb_timeout"]

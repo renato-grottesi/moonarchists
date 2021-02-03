@@ -20,9 +20,11 @@ func _input(event):
 			$StoryIntro/Timer.start(0.001)
 
 func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_ESCAPE:
-			get_tree().quit()
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().quit()
+	if event is InputEventJoypadButton:
+		Global.use_joy_pad = true
+		Global.use_cross_hair = false
 
 func _on_exit_pressed():
 	beep()

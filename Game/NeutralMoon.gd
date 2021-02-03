@@ -53,3 +53,17 @@ func _on_NeutralMoon_body_entered(body):
 
 func _process(delta):
 	update_shadow()
+	if !($Absorb.is_stopped()):
+		scale = Vector2($Absorb.time_left*2, $Absorb.time_left*2)
+		$Sprite.scale = Vector2($Absorb.time_left*2, $Absorb.time_left*2)
+		$Shadow.scale = Vector2($Absorb.time_left*2, $Absorb.time_left*2)
+
+func absorb():
+	if ($Absorb.is_stopped()):
+		collision_layer = 0
+		collision_mask = 0
+		$Absorb.start(0.25)
+		$CollisionShape2D.disabled = true
+
+func _on_Absorb_timeout():
+	queue_free()
