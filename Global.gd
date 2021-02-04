@@ -12,6 +12,7 @@ var speed_run_start_time
 var speed_run_record = 0
 var is_speedrunning = false
 var slowmo
+var rng = RandomNumberGenerator.new()
 
 var levels = [
 	"res://Scenes/MainMenu.tscn",

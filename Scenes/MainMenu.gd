@@ -138,3 +138,9 @@ func _on_Levels_about_to_show():
 	if Global.speed_run_record > 0:
 		$Levels/SpeedRun.text = "Speedrun: " + Global.ms2str(Global.speed_run_record)
 	$Levels/Level1.grab_focus()
+
+func _on_Next_pressed():
+	pass # Replace with function body.
+
+func _on_Previous_pressed():
+	pass # Replace with function body.

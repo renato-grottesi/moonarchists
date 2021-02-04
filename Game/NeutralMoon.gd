@@ -7,27 +7,26 @@ export (int) var moons_count : int = 0
 
 signal damage()
 signal swoosh()
+signal friendly_destroyed()
 
 const asteroid_scene = preload("res://Game/Asteroid.tscn")
 const Asteroid = preload("res://Game/Asteroid.gd")
 
 var time = 0.0
 var last_pos
-var rng = RandomNumberGenerator.new()
 
 func _ready():
-	rng.randomize()
 	apply_impulse(Vector2(0, 0), impulse0);
-	angular_velocity = (1 + rng.randf_range(0, 1)) * sign(rng.randf_range(-1, 1));
+	angular_velocity = (1 + Global.rng.randf_range(0, 1)) * sign(Global.rng.randf_range(-1, 1));
 	$Sprite.set_texture(texture)
 	last_pos = global_position
 	for i in range(0, moons_count):
 		var asteroid = asteroid_scene.instance();
 		var rad = i*(2*PI/moons_count)
-		var offset = rng.randf_range(0, 35) + 60
+		var offset = Global.rng.randf_range(0, 35) + 60
 		var pos = Vector2( offset*sin(rad), offset*cos(rad))
 		asteroid.position = pos + global_position
-		asteroid.speed = rng.randf_range(0, 2) + 1
+		asteroid.speed = Global.rng.randf_range(0, 2) + 1
 		asteroid.connect("damage", self, "on_asteroid_damage")
 		asteroid.connect("swoosh", self, "on_asteroid_swoosh")
 		$Satellites.add_child(asteroid);
@@ -66,4 +65,6 @@ func absorb():
 		$CollisionShape2D.disabled = true
 
 func _on_Absorb_timeout():
+	if friendly:
+		emit_signal("friendly_destroyed")
 	queue_free()

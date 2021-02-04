@@ -6,6 +6,16 @@ signal swoosh()
 
 var explosion_pos = Vector2(0, 0)
 var done = false
+var rotation_speed = 0.0
+
+func _ready():
+	rotation_speed = Global.rng.randf_range(5, 10)
+	if (Global.rng.randf_range(-1, 1) > 0.0):
+		rotation_speed = -rotation_speed
+	var randscale = Vector2(Global.rng.randf_range(0.4, 1.2), Global.rng.randf_range(0.4, 1.2))
+	$Sprite.scale = randscale
+	var grey = Global.rng.randf_range(0.25, 1.0)
+	$Sprite.modulate = Color(grey, grey, grey)
 
 func hit():
 	if !done:
@@ -27,3 +37,4 @@ func _process(delta):
 	if global_position.length() < 60 :
 		emit_signal("swoosh")
 		queue_free()
+	$Sprite.rotation += delta * rotation_speed

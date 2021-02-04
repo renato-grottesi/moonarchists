@@ -15,15 +15,14 @@ const bullet_speed_k = 14
 
 var shoots = 0;
 var game_over = false;
-var rng = RandomNumberGenerator.new()
 
 func _ready():
+	Global.rng.seed = current_level
 	if Global.is_speedrunning:
 		$HUD/Score.text = Global.ms2str(Global.get_partial_speed_run())
 	if !Global.use_cross_hair:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$CrossHair.visible = Global.use_cross_hair && (OS.get_name() != "Android")
-	rng.randomize()
 	var stars = Global.level_status[current_level-1]
 	if stars > 5 :
 		if $HUD/Opening/Label.text.length() > 1:
@@ -31,15 +30,16 @@ func _ready():
 				$HUD/Opening.popup()
 	for i in range(0, asteroids_count):
 		var asteroid = asteroid_scene.instance();
-		asteroid.speed = rng.randf_range(0, 2) + 1
+		asteroid.speed = Global.rng.randf_range(0, 2) + 1
 		var rad = i*(2*PI/asteroids_count)
-		var offset = asteroids_offset + rng.randf_range(0, 64)
+		var offset = asteroids_offset + Global.rng.randf_range(0, 64)
 		var pos = Vector2( offset*sin(rad), offset*cos(rad))
 		asteroid.position = pos
 		$Asteroids.add_child(asteroid);
 	for B in $Bodies.get_children():
 		B.connect("damage", self, "shake_it")
 		B.connect("swoosh", self, "swoosh")
+		B.connect("friendly_destroyed", self, "friendly_destroyed")
 
 func _process(delta):
 	if Global.is_speedrunning:
@@ -56,14 +56,6 @@ func _process(delta):
 		if l < 60.0:
 			B.absorb();
 			swoosh()
-			if B.friendly :
-				game_over = true
-				if ! $HUD/Victory.visible:
-					$HUD/Lost/Reason.text = "A friendly moon\n has been destroyed"
-					if !Global.is_speedrunning:
-						$HUD/Lost.popup()
-					else:
-						retry_level()
 	if enemies_left < 1 :
 		if !game_over:
 			game_over = true
@@ -249,3 +241,12 @@ func _on_LastLevel_about_to_show():
 		var time = Global.stop_speed_run()
 		$HUD/LastLevel/SpeedrunScore.visible = true
 		$HUD/LastLevel/SpeedrunScore.text = "Speedrun: " + Global.ms2str(time)
+
+func friendly_destroyed():
+	game_over = true
+	if ! $HUD/Victory.visible:
+		$HUD/Lost/Reason.text = "A friendly moon\n has been destroyed"
+		if !Global.is_speedrunning:
+			$HUD/Lost.popup()
+		else:
+			retry_level()

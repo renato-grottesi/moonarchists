@@ -141,7 +141,7 @@ __meta__ = {
 margin_left = 64.0
 margin_top = 192.0
 margin_right = 960.0
-margin_bottom = 768.0
+margin_bottom = 736.0
 custom_styles/panel = ExtResource( 3 )
 popup_exclusive = true
 __meta__ = {
@@ -185,7 +185,7 @@ text = "Close"
 margin_left = 64.0
 margin_top = 192.0
 margin_right = 960.0
-margin_bottom = 768.0
+margin_bottom = 736.0
 custom_styles/panel = ExtResource( 3 )
 popup_exclusive = true
 __meta__ = {
@@ -229,7 +229,7 @@ text = "Close"
 margin_left = 64.0
 margin_top = 192.0
 margin_right = 960.0
-margin_bottom = 768.0
+margin_bottom = 736.0
 custom_styles/panel = ExtResource( 3 )
 popup_exclusive = true
 __meta__ = {
@@ -277,7 +277,7 @@ one_shot = true
 margin_left = 64.0
 margin_top = 192.0
 margin_right = 960.0
-margin_bottom = 768.0
+margin_bottom = 736.0
 custom_styles/panel = ExtResource( 3 )
 popup_exclusive = true
 __meta__ = {
@@ -401,9 +401,9 @@ value = 50.0
 
 [node name="CloseOptionsDialog" type="Button" parent="OptionsDialog"]
 margin_left = 384.0
-margin_top = 448.0
+margin_top = 416.0
 margin_right = 512.0
-margin_bottom = 512.0
+margin_bottom = 480.0
 focus_neighbour_top = NodePath("../ToggleCrosshair")
 focus_neighbour_bottom = NodePath("../SoundSlider")
 custom_styles/hover = ExtResource( 4 )
@@ -418,7 +418,7 @@ text = "Close"
 margin_left = 64.0
 margin_top = 192.0
 margin_right = 960.0
-margin_bottom = 768.0
+margin_bottom = 736.0
 custom_styles/panel = ExtResource( 3 )
 popup_exclusive = true
 __meta__ = {
@@ -426,9 +426,9 @@ __meta__ = {
 }
 
 [node name="Level1" parent="Levels" instance=ExtResource( 7 )]
-margin_left = 96.0
+margin_left = 144.0
 margin_top = 64.0
-margin_right = 224.0
+margin_right = 272.0
 margin_bottom = 192.0
 focus_neighbour_left = NodePath("../Level4")
 focus_neighbour_top = NodePath("../SpeedRun")
@@ -438,9 +438,9 @@ focus_next = NodePath("../Level2")
 focus_previous = NodePath("../Level8")
 
 [node name="Level2" parent="Levels" instance=ExtResource( 7 )]
-margin_left = 288.0
+margin_left = 304.0
 margin_top = 64.0
-margin_right = 416.0
+margin_right = 432.0
 margin_bottom = 192.0
 focus_neighbour_left = NodePath("../Level1")
 focus_neighbour_top = NodePath("../SpeedRun")
@@ -452,9 +452,9 @@ level_number = 2
 level_name = "02"
 
 [node name="Level3" parent="Levels" instance=ExtResource( 7 )]
-margin_left = 480.0
+margin_left = 464.0
 margin_top = 64.0
-margin_right = 608.0
+margin_right = 592.0
 margin_bottom = 192.0
 focus_neighbour_left = NodePath("../Level2")
 focus_neighbour_top = NodePath("../CloseLevelsDialog")
@@ -466,9 +466,9 @@ level_number = 3
 level_name = "03"
 
 [node name="Level4" parent="Levels" instance=ExtResource( 7 )]
-margin_left = 672.0
+margin_left = 624.0
 margin_top = 64.0
-margin_right = 800.0
+margin_right = 752.0
 margin_bottom = 192.0
 focus_neighbour_left = NodePath("../Level3")
 focus_neighbour_top = NodePath("../CloseLevelsDialog")
@@ -480,10 +480,10 @@ level_number = 4
 level_name = "04"
 
 [node name="Level5" parent="Levels" instance=ExtResource( 7 )]
-margin_left = 96.0
-margin_top = 256.0
-margin_right = 224.0
-margin_bottom = 384.0
+margin_left = 144.0
+margin_top = 224.0
+margin_right = 272.0
+margin_bottom = 352.0
 focus_neighbour_left = NodePath("../Level8")
 focus_neighbour_top = NodePath("../Level1")
 focus_neighbour_right = NodePath("../Level6")
@@ -494,10 +494,10 @@ level_number = 5
 level_name = "05"
 
 [node name="Level6" parent="Levels" instance=ExtResource( 7 )]
-margin_left = 288.0
-margin_top = 256.0
-margin_right = 416.0
-margin_bottom = 384.0
+margin_left = 304.0
+margin_top = 224.0
+margin_right = 432.0
+margin_bottom = 352.0
 focus_neighbour_left = NodePath("../Level5")
 focus_neighbour_top = NodePath("../Level2")
 focus_neighbour_right = NodePath("../Level7")
@@ -508,10 +508,10 @@ level_number = 6
 level_name = "06"
 
 [node name="Level7" parent="Levels" instance=ExtResource( 7 )]
-margin_left = 480.0
-margin_top = 256.0
-margin_right = 608.0
-margin_bottom = 384.0
+margin_left = 464.0
+margin_top = 224.0
+margin_right = 592.0
+margin_bottom = 352.0
 focus_neighbour_left = NodePath("../Level6")
 focus_neighbour_top = NodePath("../Level3")
 focus_neighbour_right = NodePath("../Level8")
@@ -522,10 +522,10 @@ level_number = 7
 level_name = "07"
 
 [node name="Level8" parent="Levels" instance=ExtResource( 7 )]
-margin_left = 672.0
-margin_top = 256.0
-margin_right = 800.0
-margin_bottom = 384.0
+margin_left = 624.0
+margin_top = 224.0
+margin_right = 752.0
+margin_bottom = 352.0
 focus_neighbour_left = NodePath("../Level7")
 focus_neighbour_top = NodePath("../Level4")
 focus_neighbour_right = NodePath("../Level5")
@@ -536,10 +536,10 @@ level_number = 8
 level_name = "08"
 
 [node name="CloseLevelsDialog" type="Button" parent="Levels"]
-margin_left = 480.0
-margin_top = 448.0
-margin_right = 800.0
-margin_bottom = 512.0
+margin_left = 464.0
+margin_top = 416.0
+margin_right = 752.0
+margin_bottom = 488.0
 focus_neighbour_left = NodePath("../SpeedRun")
 focus_neighbour_top = NodePath("../Level8")
 focus_neighbour_right = NodePath("../SpeedRun")
@@ -558,10 +558,10 @@ __meta__ = {
 }
 
 [node name="SpeedRun" type="Button" parent="Levels"]
-margin_left = 96.0
-margin_top = 448.0
-margin_right = 416.0
-margin_bottom = 512.0
+margin_left = 144.0
+margin_top = 416.0
+margin_right = 432.0
+margin_bottom = 488.0
 focus_neighbour_left = NodePath("../CloseLevelsDialog")
 focus_neighbour_top = NodePath("../Level5")
 focus_neighbour_right = NodePath("../CloseLevelsDialog")
@@ -576,6 +576,50 @@ custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 shortcut_in_tooltip = false
 text = "Speedrun ??:??"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Next" type="Button" parent="Levels"]
+margin_left = 768.0
+margin_top = 128.0
+margin_right = 880.0
+margin_bottom = 288.0
+focus_neighbour_left = NodePath("../SpeedRun")
+focus_neighbour_top = NodePath("../Level8")
+focus_neighbour_right = NodePath("../SpeedRun")
+focus_neighbour_bottom = NodePath("../Level4")
+focus_next = NodePath("../Level1")
+focus_previous = NodePath("../Level8")
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 6 )
+text = ">"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Previous" type="Button" parent="Levels"]
+margin_left = 16.0
+margin_top = 128.0
+margin_right = 128.0
+margin_bottom = 288.0
+focus_neighbour_left = NodePath("../SpeedRun")
+focus_neighbour_top = NodePath("../Level8")
+focus_neighbour_right = NodePath("../SpeedRun")
+focus_neighbour_bottom = NodePath("../Level4")
+focus_next = NodePath("../Level1")
+focus_previous = NodePath("../Level8")
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "<"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -615,3 +659,5 @@ stream = ExtResource( 9 )
 [connection signal="popup_hide" from="Levels" to="." method="_on_Levels_popup_hide"]
 [connection signal="pressed" from="Levels/CloseLevelsDialog" to="." method="_on_CloseLevelsDialog_pressed"]
 [connection signal="pressed" from="Levels/SpeedRun" to="." method="_on_SpeedRun_pressed"]
+[connection signal="pressed" from="Levels/Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="Levels/Previous" to="." method="_on_Previous_pressed"]
