@@ -4,6 +4,7 @@ const story_duration = 8
 const lock_texture = preload("res://Sprites/lock.png")
 
 var click_start;
+var levels_page = 0;
 
 func _ready():
 	$Play.grab_focus()
@@ -137,10 +138,25 @@ func _on_Levels_about_to_show():
 		$Levels/SpeedRun.text = "Speedrun"
 	if Global.speed_run_record > 0:
 		$Levels/SpeedRun.text = "Speedrun: " + Global.ms2str(Global.speed_run_record)
+	_setup_levels_page()
 	$Levels/Level1.grab_focus()
 
 func _on_Next_pressed():
-	pass # Replace with function body.
+	if levels_page < 3:
+		levels_page+=1
+	_setup_levels_page()
 
 func _on_Previous_pressed():
-	pass # Replace with function body.
+	if levels_page > 0:
+		levels_page-=1
+	_setup_levels_page()
+
+func _setup_levels_page():
+	$Levels/Level1.level_number = 1 + levels_page * 8
+	$Levels/Level2.level_number = 2 + levels_page * 8
+	$Levels/Level3.level_number = 3 + levels_page * 8
+	$Levels/Level4.level_number = 4 + levels_page * 8
+	$Levels/Level5.level_number = 5 + levels_page * 8
+	$Levels/Level6.level_number = 6 + levels_page * 8
+	$Levels/Level7.level_number = 7 + levels_page * 8
+	$Levels/Level8.level_number = 8 + levels_page * 8

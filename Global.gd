@@ -1,6 +1,6 @@
 extends Node
 
-const game_version = 18
+const game_version = 19
 
 var current_scene = null
 var music_volume = 75
@@ -24,6 +24,30 @@ var levels = [
 	"res://Game/Level06.tscn",
 	"res://Game/Level07.tscn",
 	"res://Game/Level08.tscn",
+	"res://Game/Level09.tscn",
+	"res://Game/Level02.tscn",
+	"res://Game/Level03.tscn",
+	"res://Game/Level04.tscn",
+	"res://Game/Level05.tscn",
+	"res://Game/Level06.tscn",
+	"res://Game/Level07.tscn",
+	"res://Game/Level08.tscn",
+	"res://Game/Level01.tscn",
+	"res://Game/Level02.tscn",
+	"res://Game/Level03.tscn",
+	"res://Game/Level04.tscn",
+	"res://Game/Level05.tscn",
+	"res://Game/Level06.tscn",
+	"res://Game/Level07.tscn",
+	"res://Game/Level08.tscn",
+	"res://Game/Level01.tscn",
+	"res://Game/Level02.tscn",
+	"res://Game/Level03.tscn",
+	"res://Game/Level04.tscn",
+	"res://Game/Level05.tscn",
+	"res://Game/Level06.tscn",
+	"res://Game/Level07.tscn",
+	"res://Game/Level08.tscn",
 	];
 
 # Score for each level
@@ -32,14 +56,10 @@ var levels = [
 # 6 means never played and ready to play
 # 7 means never played and disabled
 var level_status = [
-	6,
-	7,
-	7,
-	7,
-	7,
-	7,
-	7,
-	7,
+	6,	7,	7,	7,	7,	7,	7,	7,
+	7,	7,	7,	7,	7,	7,	7,	7,
+	7,	7,	7,	7,	7,	7,	7,	7,
+	7,	7,	7,	7,	7,	7,	7,	7,
 ]
 
 func start_speed_run():

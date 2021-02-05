@@ -449,7 +449,6 @@ focus_neighbour_bottom = NodePath("../Level6")
 focus_next = NodePath("../Level3")
 focus_previous = NodePath("../Level1")
 level_number = 2
-level_name = "02"
 
 [node name="Level3" parent="Levels" instance=ExtResource( 7 )]
 margin_left = 464.0
@@ -463,7 +462,6 @@ focus_neighbour_bottom = NodePath("../Level7")
 focus_next = NodePath("../Level4")
 focus_previous = NodePath("../Level2")
 level_number = 3
-level_name = "03"
 
 [node name="Level4" parent="Levels" instance=ExtResource( 7 )]
 margin_left = 624.0
@@ -477,7 +475,6 @@ focus_neighbour_bottom = NodePath("../Level8")
 focus_next = NodePath("../Level5")
 focus_previous = NodePath("../Level3")
 level_number = 4
-level_name = "04"
 
 [node name="Level5" parent="Levels" instance=ExtResource( 7 )]
 margin_left = 144.0
@@ -491,7 +488,6 @@ focus_neighbour_bottom = NodePath("../SpeedRun")
 focus_next = NodePath("../Level6")
 focus_previous = NodePath("../Level4")
 level_number = 5
-level_name = "05"
 
 [node name="Level6" parent="Levels" instance=ExtResource( 7 )]
 margin_left = 304.0
@@ -505,7 +501,6 @@ focus_neighbour_bottom = NodePath("../SpeedRun")
 focus_next = NodePath("../Level7")
 focus_previous = NodePath("../Level5")
 level_number = 6
-level_name = "06"
 
 [node name="Level7" parent="Levels" instance=ExtResource( 7 )]
 margin_left = 464.0
@@ -519,7 +514,6 @@ focus_neighbour_bottom = NodePath("../CloseLevelsDialog")
 focus_next = NodePath("../Level8")
 focus_previous = NodePath("../Level6")
 level_number = 7
-level_name = "07"
 
 [node name="Level8" parent="Levels" instance=ExtResource( 7 )]
 margin_left = 624.0
@@ -533,7 +527,6 @@ focus_neighbour_bottom = NodePath("../CloseLevelsDialog")
 focus_next = NodePath("../Level1")
 focus_previous = NodePath("../Level7")
 level_number = 8
-level_name = "08"
 
 [node name="CloseLevelsDialog" type="Button" parent="Levels"]
 margin_left = 464.0
