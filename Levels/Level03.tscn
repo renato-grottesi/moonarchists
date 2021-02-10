@@ -5,8 +5,8 @@
 [ext_resource path="res://Sprites/saturn.png" type="Texture" id=4]
 
 [node name="Level01" instance=ExtResource( 1 )]
-current_level = 1
-next_level = 2
+current_level = 3
+next_level = 4
 asteroids_offset = 120
 
 [node name="Moon" parent="." index="3"]

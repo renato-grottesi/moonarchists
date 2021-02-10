@@ -6,10 +6,10 @@
 [ext_resource path="res://Sprites/mars.png" type="Texture" id=5]
 
 [node name="Level02" instance=ExtResource( 1 )]
-current_level = 2
-next_level = 3
+current_level = 4
+next_level = 5
 
-[node name="Moon" parent="." index="4"]
+[node name="Moon" parent="." index="3"]
 position = Vector2( -140, 0 )
 impulse0 = Vector2( -400, -280 )
 

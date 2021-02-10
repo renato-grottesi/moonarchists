@@ -5,14 +5,15 @@
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=5]
 
 [node name="Level09" instance=ExtResource( 1 )]
-current_level = 9
+current_level = 1
+next_level = 2
 asteroids_offset = 0
 
 [node name="Moon" parent="." index="3"]
-position = Vector2( 350, 0 )
-impulse0 = Vector2( 0, -800 )
+position = Vector2( 192, 0 )
+impulse0 = Vector2( 0, -500 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -64, 64 )
-impulse0 = Vector2( -500, -200 )
+position = Vector2( 96, 0 )
+impulse0 = Vector2( 0, -300 )
 texture = ExtResource( 5 )

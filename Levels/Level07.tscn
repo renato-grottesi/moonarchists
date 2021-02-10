@@ -7,10 +7,10 @@
 [ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
 
 [node name="Level05" instance=ExtResource( 1 )]
-current_level = 5
-next_level = 6
+current_level = 7
+next_level = 8
 
-[node name="Moon" parent="." index="4"]
+[node name="Moon" parent="." index="3"]
 position = Vector2( 50, 50 )
 impulse0 = Vector2( -200, 200 )
 

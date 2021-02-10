@@ -7,8 +7,7 @@
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=5]
 
 [node name="Level08" instance=ExtResource( 1 )]
-current_level = 8
-next_level = 9
+current_level = 10
 asteroids_count = 16
 asteroids_offset = 145
 
