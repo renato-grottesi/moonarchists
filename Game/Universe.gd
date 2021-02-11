@@ -99,15 +99,8 @@ func _unhandled_input(event):
 	if Input.is_action_pressed("ui_retry"):
 		retry_level()
 
-func _on_Moon_shoot(moon_speed):
+func _incr_shoots():
 	if !game_over:
-		if shoots<10:
-			var mass_bullet_instance = mass_bullet_scene.instance();
-			mass_bullet_instance.position = $Moon.position + moon_speed
-			mass_bullet_instance.linear_velocity = moon_speed * bullet_speed_k
-			mass_bullet_instance.connect("damage", self, "shake_it")
-			mass_bullet_instance.connect("swoosh", self, "swoosh")
-			$Bullets.add_child(mass_bullet_instance);
 		shoots += 1;
 		$HUD/MoonsCounter.moons = 10-shoots
 		if !Global.is_speedrunning:
@@ -120,6 +113,21 @@ func _on_Moon_shoot(moon_speed):
 					$HUD/Lost.popup()
 				else:
 					retry_level()
+
+func _on_Moon_shoot(moon_speed):
+	if !game_over:
+		if shoots<10:
+			var mass_bullet_instance = mass_bullet_scene.instance();
+			mass_bullet_instance.position = $Moon.position + moon_speed
+			mass_bullet_instance.linear_velocity = moon_speed * bullet_speed_k
+			mass_bullet_instance.connect("damage", self, "shake_it")
+			mass_bullet_instance.connect("swoosh", self, "swoosh")
+			$Bullets.add_child(mass_bullet_instance);
+		_incr_shoots()
+
+func _on_Moon_push():
+	if !game_over:
+		_incr_shoots()
 
 func _on_Moon_destroyed(swallowed):
 	if !game_over:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game/Moon.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/nozzle.png" type="Texture" id=2]
@@ -13,6 +13,19 @@ radius = 23.0
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 5 )
 shader_param/time = 0.0
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.354582, 0.886364 ), -0.500887, -0.500887, 0, 0, Vector2( 1, 0 ), -0.0172865, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0.00877193, 0.947368 )
+colors = PoolColorArray( 0, 0, 1, 1, 0, 1, 0, 1 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0 ), 0.0, 4.73916, 0, 0, Vector2( 0.286853, 0.890909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=6]
+colors = PoolColorArray( 1, 0, 0, 1, 1, 1, 0, 1 )
 
 [node name="Moon" type="RigidBody2D"]
 contacts_reported = 1000
@@ -42,5 +55,47 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="Death" type="Timer" parent="."]
+
+[node name="Trail" type="CPUParticles2D" parent="."]
+amount = 64
+lifetime = 2.0
+preprocess = 10.0
+randomness = 1.0
+local_coords = false
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity_random = 1.0
+angular_velocity_random = 1.0
+orbit_velocity_random = 1.0
+linear_accel_random = 1.0
+radial_accel_random = 1.0
+tangential_accel_random = 1.0
+damping = 20.0
+damping_random = 1.0
+angle_random = 1.0
+scale_amount = 2.0
+scale_amount_random = 0.8
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 5 )
+
+[node name="Push" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 128
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+randomness = 1.0
+local_coords = false
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 64.0
+initial_velocity_random = 0.75
+angular_velocity = 32.0
+angular_velocity_random = 1.0
+linear_accel = 1.0
+scale_amount_curve = SubResource( 4 )
+color_ramp = SubResource( 6 )
 [connection signal="body_entered" from="." to="." method="_on_Moon_body_entered"]
 [connection signal="timeout" from="Death" to="." method="_on_Death_timeout"]

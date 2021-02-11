@@ -348,6 +348,7 @@ texture = ExtResource( 16 )
 [connection signal="damage" from="Moon" to="." method="shake_it"]
 [connection signal="destroyed" from="Moon" to="." method="_on_Moon_destroyed"]
 [connection signal="heath" from="Moon" to="." method="_on_Moon_heath"]
+[connection signal="push" from="Moon" to="." method="_on_Moon_push"]
 [connection signal="shoot" from="Moon" to="." method="_on_Moon_shoot"]
 [connection signal="about_to_show" from="HUD/Victory" to="." method="_on_Victory_about_to_show"]
 [connection signal="focus_entered" from="HUD/Victory/NextVictory" to="." method="beep"]

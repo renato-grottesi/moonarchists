@@ -6,6 +6,7 @@ signal shoot(moon_speed)
 signal destroyed(swallowed)
 signal heath(health)
 signal damage()
+signal push()
 
 const MassBullet = preload("res://Game/MassBullet.gd")
 const NeutralMoon = preload("res://Game/NeutralMoon.gd")
@@ -40,6 +41,16 @@ func update_nozzle():
 			joypos = joypos.normalized()
 			set_nozzle(joypos)
 
+func _shoot():
+	emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
+
+func _push():
+	var offset = Vector2(0, 0);
+	var force = Vector2(300, 0).rotated($SpriteNozzle.rotation)
+	apply_impulse(offset, force);
+	$Push.restart()
+	emit_signal("push")
+
 func _unhandled_input(event):
 	update_nozzle()
 	if event is InputEventMouseButton:
@@ -47,9 +58,10 @@ func _unhandled_input(event):
 			$SpriteNozzle.rotation_degrees += 3;
 		if event.button_index == BUTTON_WHEEL_DOWN:
 			$SpriteNozzle.rotation_degrees -= 3;
-		if event.button_index == BUTTON_LEFT:
-			if event.is_pressed():
-				emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
+		if event.button_index == BUTTON_LEFT and event.is_pressed():
+			_shoot()
+		if event.button_index == BUTTON_RIGHT and event.is_pressed():
+			_push()
 	if event is InputEventMouseMotion:
 		if !Global.use_cross_hair:
 			$SpriteNozzle.rotation_degrees += event.relative.y
@@ -59,10 +71,14 @@ func _unhandled_input(event):
 		if event.pressed and event.scancode == KEY_DOWN:
 			$SpriteNozzle.rotation_degrees += 3;
 		if event.pressed and event.scancode == KEY_SPACE and !event.echo :
-			emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
+			_shoot()
+		if event.pressed and event.scancode == KEY_C and !event.echo :
+			_push()
 	if event is InputEventJoypadButton:
 		if event.is_pressed() && event.button_index == 0 && Global.use_joy_pad:
-			emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
+			_shoot()
+		if event.is_pressed() && event.button_index == 1 && Global.use_joy_pad:
+			_push()
 		Global.use_joy_pad = true
 		Global.use_cross_hair = false
 		$SpriteNozzle.visible = true
