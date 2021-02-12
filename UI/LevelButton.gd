@@ -41,7 +41,7 @@ func _on_Level_pressed():
 	beep()
 	var stars = Global.level_status[level_number-1]
 	if stars < 7:
-		Global.goto_scene(Global.levels[level_number])
+		Global.current_level = level_number
 
 func beep():
 	$Beep.play()

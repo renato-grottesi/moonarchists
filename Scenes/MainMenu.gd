@@ -128,7 +128,7 @@ func _on_Help_pressed():
 func _on_SpeedRun_pressed():
 	if Global.get_total_stars() > 15:
 		Global.start_speed_run()
-		Global.goto_scene(Global.levels[1])
+		Global.current_level = 1
 
 func _on_Levels_about_to_show():
 	if Global.get_total_stars() < 16:

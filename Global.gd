@@ -1,8 +1,9 @@
 extends Node
 
-const game_version = 19
+const game_version = 20
 
 var current_scene = null
+var current_level = 0 setget _set_current_level, _get_current_level
 var music_volume = 75
 var sound_volume = 90
 var music
@@ -26,28 +27,28 @@ var levels = [
 	"res://Levels/Level08.tscn",
 	"res://Levels/Level09.tscn",
 	"res://Levels/Level10.tscn",
-	"res://Levels/Level03.tscn",
-	"res://Levels/Level04.tscn",
-	"res://Levels/Level05.tscn",
-	"res://Levels/Level06.tscn",
-	"res://Levels/Level07.tscn",
-	"res://Levels/Level08.tscn",
+	"res://Levels/Level11.tscn",
 	"res://Levels/Level01.tscn",
-	"res://Levels/Level02.tscn",
-	"res://Levels/Level03.tscn",
-	"res://Levels/Level04.tscn",
-	"res://Levels/Level05.tscn",
-	"res://Levels/Level06.tscn",
-	"res://Levels/Level07.tscn",
-	"res://Levels/Level08.tscn",
 	"res://Levels/Level01.tscn",
-	"res://Levels/Level02.tscn",
-	"res://Levels/Level03.tscn",
-	"res://Levels/Level04.tscn",
-	"res://Levels/Level05.tscn",
-	"res://Levels/Level06.tscn",
-	"res://Levels/Level07.tscn",
-	"res://Levels/Level08.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level01.tscn",
 	];
 
 # Score for each level
@@ -154,6 +155,13 @@ func load_game() :
 			use_cross_hair = load_file.get_8()
 			speed_run_record = load_file.get_64()
 		load_file.close()
+
+func _set_current_level(level):
+	current_level = level
+	goto_scene(levels[level])
+
+func _get_current_level():
+	return current_level
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,

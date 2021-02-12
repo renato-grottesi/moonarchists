@@ -2,6 +2,8 @@ extends Node2D
 
 export (int) var current_level : int = 0
 export (int) var next_level : int = 0
+export (int) var two_stars_requirements : int = 3
+export (int) var three_stars_requirements : int = 1
 export (int) var asteroids_count : int = 0
 export (int) var asteroids_offset : int = 200
 
@@ -95,7 +97,7 @@ func _unhandled_input(event):
 	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		Global.abort_speed_run()
-		Global.goto_scene(Global.levels[0])
+		Global.current_level = 0
 	if Input.is_action_pressed("ui_retry"):
 		retry_level()
 
@@ -153,12 +155,12 @@ func _on_CloseVictory_pressed():
 
 func goto_next_level():
 	if next_level != 0 :
-		Global.goto_scene(Global.levels[next_level])
+		Global.current_level = next_level
 	else:
 		$HUD/LastLevel.popup()
 
 func _on_LastLevelVictory_pressed():
-	Global.goto_scene(Global.levels[next_level])
+	Global.current_level = next_level
 	beep()
 
 func _on_CloseOpening_pressed():
@@ -167,7 +169,7 @@ func _on_CloseOpening_pressed():
 	beep()
 
 func _on_LostQuit_pressed():
-	Global.goto_scene(Global.levels[0])
+	Global.current_level = 0
 	Global.abort_speed_run()
 	beep()
 
@@ -176,11 +178,9 @@ func _on_Victory_about_to_show():
 	var stars = Global.level_status[current_level-1]
 	# You get 1 star simply for completing the level alive
 	var new_stars = 1
-	# You get 2 stars for using less than 4 shots
-	if shoots < 4:
+	if shoots < (two_stars_requirements+1):
 		new_stars = 2
-	# You get all 3 stars only if you complete the level with 1 shot
-	if shoots < 2:
+	if shoots < (three_stars_requirements+1):
 		new_stars = 3
 	# Calculate and assign the new number of stars
 	if stars > 4 :
@@ -218,7 +218,7 @@ func retry_level():
 	var stars = Global.level_status[current_level-1]
 	if stars > 3 :
 		Global.level_status[current_level-1] = 5
-	Global.goto_scene(Global.levels[current_level])
+	Global.current_level = current_level
 
 func shake_it():
 	$ExplosionSound.play()
@@ -240,7 +240,7 @@ func beep():
 	$Beep.set_volume_db(Global.get_sound_volume_db())
 
 func _on_QuitVictory_pressed():
-	Global.goto_scene(Global.levels[0])
+	Global.current_level = 0
 	Global.abort_speed_run()
 	beep()
 

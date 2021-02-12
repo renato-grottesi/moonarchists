@@ -15,11 +15,14 @@ const Asteroid = preload("res://Game/Asteroid.gd")
 var health = 100
 var time = 0
 var swallowed = false
+var fingers_count = 0
+var max_fingers_count = 0
 
 func _ready():
 	apply_impulse(Vector2(0, 0), impulse0);
 	emit_signal("heath", health)
 	$SpriteNozzle.visible = OS.get_name() != "Android" || Global.use_joy_pad
+	max_fingers_count = 0
 
 func _physics_process(delta):
 	rotation = 0
@@ -45,15 +48,17 @@ func _shoot():
 	emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
 
 func _push():
-	var offset = Vector2(0, 0);
-	var force = Vector2(300, 0).rotated($SpriteNozzle.rotation)
-	apply_impulse(offset, force);
-	$Push.restart()
-	emit_signal("push")
+	#TODO decide from which level pushing is allowed
+	if Global.current_level > 3:
+		var offset = Vector2(0, 0);
+		var force = Vector2(300, 0).rotated($SpriteNozzle.rotation)
+		apply_impulse(offset, force);
+		$Push.restart()
+		emit_signal("push")
 
 func _unhandled_input(event):
 	update_nozzle()
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and OS.get_name() != "Android":
 		if event.button_index == BUTTON_WHEEL_UP:
 			$SpriteNozzle.rotation_degrees += 3;
 		if event.button_index == BUTTON_WHEEL_DOWN:
@@ -62,7 +67,7 @@ func _unhandled_input(event):
 			_shoot()
 		if event.button_index == BUTTON_RIGHT and event.is_pressed():
 			_push()
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and OS.get_name() != "Android":
 		if !Global.use_cross_hair:
 			$SpriteNozzle.rotation_degrees += event.relative.y
 	if event is InputEventKey:
@@ -82,6 +87,23 @@ func _unhandled_input(event):
 		Global.use_joy_pad = true
 		Global.use_cross_hair = false
 		$SpriteNozzle.visible = true
+	if event is InputEventScreenTouch:
+		# Update the current and max number of fingers in the screen
+		if event.pressed:
+			fingers_count += 1
+			if fingers_count > max_fingers_count:
+				max_fingers_count = fingers_count
+		else:
+			fingers_count -= 1
+		if fingers_count < 0:
+			fingers_count = 0
+		# If there are no fingers in the screen, trigger the action
+		if fingers_count == 0 and max_fingers_count != 0:
+			if max_fingers_count == 1:
+				_shoot()
+			else:
+				_push()
+			max_fingers_count = 0
 
 func _on_Moon_body_entered(body):
 	if body is MassBullet:

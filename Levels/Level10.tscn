@@ -8,6 +8,7 @@
 
 [node name="Level08" instance=ExtResource( 1 )]
 current_level = 10
+next_level = 11
 asteroids_count = 16
 asteroids_offset = 145
 
