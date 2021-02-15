@@ -6,7 +6,7 @@
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
 
-[node name="Level05" instance=ExtResource( 1 )]
+[node name="Level" instance=ExtResource( 1 )]
 current_level = 7
 next_level = 8
 
