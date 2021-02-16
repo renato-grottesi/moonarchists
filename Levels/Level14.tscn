@@ -6,23 +6,23 @@
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=5]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 13
-next_level = 14
-asteroids_count = 6
+current_level = 14
 asteroids_offset = 150
 
 [node name="Moon" parent="." index="3"]
-position = Vector2( 96, 0 )
+position = Vector2( 128, 0 )
 impulse0 = Vector2( 0, 200 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
 position = Vector2( -288, 160 )
-impulse0 = Vector2( 500, 900 )
+mass = 1.5
+impulse0 = Vector2( 500, 500 )
 texture = ExtResource( 5 )
 moons_count = 3
 
 [node name="Efisto" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 0, -352 )
+position = Vector2( 0, -192 )
+mass = 0.5
 impulse0 = Vector2( -800, 0 )
 texture = ExtResource( 3 )
 

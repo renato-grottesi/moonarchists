@@ -55,7 +55,7 @@ func _process(delta):
 		var c = $BlackHole.position
 		var b = B.position
 		var l = b.distance_to(c)
-		if l < 60.0:
+		if l <= $BlackHole.get_radius() + B.get_radius():
 			B.absorb();
 			swoosh()
 	if enemies_left < 1 :

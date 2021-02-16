@@ -23,3 +23,6 @@ func _process(delta):
 func eat():
 	$ShakeTimer.start()
 	pass
+
+func get_radius():
+	return $Shape.shape.radius

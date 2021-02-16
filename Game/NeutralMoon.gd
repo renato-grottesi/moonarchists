@@ -14,6 +14,7 @@ const Asteroid = preload("res://Game/Asteroid.gd")
 
 var time = 0.0
 var last_pos
+var absorb_scale = 3.0
 
 func _ready():
 	apply_impulse(Vector2(0, 0), impulse0);
@@ -52,16 +53,22 @@ func _on_NeutralMoon_body_entered(body):
 
 func _process(delta):
 	update_shadow()
+	var childs_scale = mass
 	if !($Absorb.is_stopped()):
-		scale = Vector2($Absorb.time_left*2, $Absorb.time_left*2)
-		$Sprite.scale = Vector2($Absorb.time_left*2, $Absorb.time_left*2)
-		$Shadow.scale = Vector2($Absorb.time_left*2, $Absorb.time_left*2)
+		childs_scale = $Absorb.time_left*absorb_scale
+	$Sprite.scale = Vector2(childs_scale, childs_scale)
+	$Shadow.scale = Vector2(childs_scale, childs_scale)
+	$CollisionShape2D.shape.radius = 30.0 * childs_scale
+	# TODO it doesn't look correct on bigger planets...
+
+func get_radius():
+	return $CollisionShape2D.shape.radius
 
 func absorb():
 	if ($Absorb.is_stopped()):
 		collision_layer = 0
 		collision_mask = 0
-		$Absorb.start(0.25)
+		$Absorb.start(mass/absorb_scale)
 		$CollisionShape2D.disabled = true
 
 func _on_Absorb_timeout():
