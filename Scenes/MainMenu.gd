@@ -5,6 +5,7 @@ const lock_texture = preload("res://Sprites/lock.png")
 
 var click_start;
 var levels_page = 0;
+var pages_count = 2;
 
 func _ready():
 	$Play.grab_focus()
@@ -142,7 +143,7 @@ func _on_Levels_about_to_show():
 	$Levels/Level1.grab_focus()
 
 func _on_Next_pressed():
-	if levels_page < 3:
+	if levels_page < (pages_count-1):
 		levels_page+=1
 	_setup_levels_page()
 

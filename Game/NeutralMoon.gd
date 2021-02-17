@@ -31,6 +31,7 @@ func _ready():
 		asteroid.connect("damage", self, "on_asteroid_damage")
 		asteroid.connect("swoosh", self, "on_asteroid_swoosh")
 		$Satellites.add_child(asteroid);
+	$Shape.shape = CircleShape2D.new()
 
 func on_asteroid_damage():
 	emit_signal("damage")
@@ -58,18 +59,17 @@ func _process(delta):
 		childs_scale = $Absorb.time_left*absorb_scale
 	$Sprite.scale = Vector2(childs_scale, childs_scale)
 	$Shadow.scale = Vector2(childs_scale, childs_scale)
-	$CollisionShape2D.shape.radius = 30.0 * childs_scale
-	# TODO it doesn't look correct on bigger planets...
+	$Shape.shape.radius = 30.0 * childs_scale
 
 func get_radius():
-	return $CollisionShape2D.shape.radius
+	return $Shape.shape.radius
 
 func absorb():
 	if ($Absorb.is_stopped()):
 		collision_layer = 0
 		collision_mask = 0
 		$Absorb.start(mass/absorb_scale)
-		$CollisionShape2D.disabled = true
+		$Shape.disabled = true
 
 func _on_Absorb_timeout():
 	if friendly:

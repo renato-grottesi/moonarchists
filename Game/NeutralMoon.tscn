@@ -12,9 +12,6 @@ contacts_reported = 1000
 contact_monitor = true
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 
@@ -26,5 +23,8 @@ centered = false
 
 [node name="Absorb" type="Timer" parent="."]
 one_shot = true
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
 [connection signal="body_entered" from="." to="." method="_on_NeutralMoon_body_entered"]
 [connection signal="timeout" from="Absorb" to="." method="_on_Absorb_timeout"]

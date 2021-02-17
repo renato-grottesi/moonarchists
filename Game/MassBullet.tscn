@@ -5,28 +5,25 @@
 [ext_resource path="res://Sounds/shoot.wav" type="AudioStream" id=4]
 [ext_resource path="res://Sprites/asteroid.png" type="Texture" id=5]
 
-[sub_resource type="CircleShape2D" id=1]
-
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 6.28773, 0, 0, Vector2( 0.425287, 1 ), -0.0613638, -0.0613638, 0, 0, Vector2( 1, 0 ), 0.0023126, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 1, 0, 0, 1, 1, 0.866667, 0, 1 )
 
-[sub_resource type="AudioStreamRandomPitch" id=4]
+[sub_resource type="AudioStreamRandomPitch" id=3]
 audio_stream = ExtResource( 4 )
 random_pitch = 1.4
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.123506, 0.168182 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CircleShape2D" id=5]
 
 [node name="MassBullet" type="RigidBody2D"]
 contacts_reported = 1000
 contact_monitor = true
 script = ExtResource( 2 )
-
-[node name="Shape" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.3, 0.3 )
@@ -49,11 +46,11 @@ initial_velocity_random = 0.75
 angular_velocity = 32.0
 angular_velocity_random = 1.0
 linear_accel = 1.0
-scale_amount_curve = SubResource( 2 )
-color_ramp = SubResource( 3 )
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
-stream = SubResource( 4 )
+stream = SubResource( 3 )
 
 [node name="Trail" type="CPUParticles2D" parent="."]
 amount = 32
@@ -76,6 +73,9 @@ damping = 10.0
 damping_random = 1.0
 angle_random = 0.84
 scale_amount_random = 0.79
-scale_amount_curve = SubResource( 5 )
+scale_amount_curve = SubResource( 4 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 5 )
 [connection signal="body_entered" from="." to="." method="_on_MassBullet_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
