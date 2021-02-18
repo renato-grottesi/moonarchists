@@ -6,7 +6,6 @@
 
 [node name="Level" instance=ExtResource( 1 )]
 current_level = 2
-next_level = 3
 asteroids_offset = 0
 
 [node name="Moon" parent="." index="3"]

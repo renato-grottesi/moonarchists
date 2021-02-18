@@ -1,7 +1,6 @@
 extends Node2D
 
 export (int) var current_level : int = 0
-export (int) var next_level : int = 0
 export (int) var two_stars_requirements : int = 3
 export (int) var three_stars_requirements : int = 1
 export (int) var asteroids_count : int = 0
@@ -64,7 +63,7 @@ func _process(delta):
 			if ! $HUD/Lost.visible:
 				if !Global.is_speedrunning:
 					$HUD/Victory.popup()
-				elif next_level == 0 :
+				elif current_level >= Global.last_level:
 					$HUD/LastLevel.popup()
 				else:
 					goto_next_level()
@@ -154,13 +153,13 @@ func _on_CloseVictory_pressed():
 	beep()
 
 func goto_next_level():
-	if next_level != 0 :
-		Global.current_level = next_level
+	if current_level < Global.last_level:
+		Global.current_level = current_level + 1
 	else:
 		$HUD/LastLevel.popup()
 
 func _on_LastLevelVictory_pressed():
-	Global.current_level = next_level
+	Global.current_level = 0
 	beep()
 
 func _on_CloseOpening_pressed():
@@ -193,9 +192,9 @@ func _on_Victory_about_to_show():
 		enable_star($HUD/Victory/Star2)
 	if stars > 2 :
 		enable_star($HUD/Victory/Star3)
-	if next_level > 0:
-		if Global.level_status[next_level-1] > 6:
-			Global.level_status[next_level-1] = 6
+	if current_level < Global.last_level:
+		if Global.level_status[current_level] > 6:
+			Global.level_status[current_level] = 6
 
 func enable_star(which_star):
 	which_star.set_texture(star_texture)

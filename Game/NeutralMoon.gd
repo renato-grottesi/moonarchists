@@ -4,6 +4,7 @@ export (Vector2) var impulse0 : Vector2 = Vector2(0, 0)
 export (Resource) var texture
 export (bool) var friendly : bool = false
 export (int) var moons_count : int = 0
+export (int) var moons_max_offset : int = 20
 
 signal damage()
 signal swoosh()
@@ -14,7 +15,7 @@ const Asteroid = preload("res://Game/Asteroid.gd")
 
 var time = 0.0
 var last_pos
-var absorb_scale = 3.0
+const absorb_scale = 3.0
 
 func _ready():
 	apply_impulse(Vector2(0, 0), impulse0);
@@ -24,7 +25,8 @@ func _ready():
 	for i in range(0, moons_count):
 		var asteroid = asteroid_scene.instance();
 		var rad = i*(2*PI/moons_count)
-		var offset = Global.rng.randf_range(0, 35) + 60
+		var randoff = moons_max_offset*Global.rng.randf_range(0, 1)
+		var offset = Global.rng.randf_range(0, 35) + (40 + randoff) * mass
 		var pos = Vector2( offset*sin(rad), offset*cos(rad))
 		asteroid.position = pos + global_position
 		asteroid.speed = Global.rng.randf_range(0, 2) + 1

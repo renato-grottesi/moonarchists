@@ -5,7 +5,7 @@ const lock_texture = preload("res://Sprites/lock.png")
 
 var click_start;
 var levels_page = 0;
-var pages_count = 2;
+const pages_count = 2;
 
 func _ready():
 	$Play.grab_focus()

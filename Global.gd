@@ -1,6 +1,7 @@
 extends Node
 
-const game_version = 21
+const game_version = 22
+const last_level = 16
 
 var current_scene = null
 var current_level = 0 setget _set_current_level, _get_current_level
@@ -32,7 +33,7 @@ var levels = [
 	"res://Levels/Level13.tscn",
 	"res://Levels/Level14.tscn",
 	"res://Levels/Level15.tscn",
-	"res://Levels/Level01.tscn",
+	"res://Levels/Level16.tscn",
 	"res://Levels/Level01.tscn",
 	"res://Levels/Level01.tscn",
 	"res://Levels/Level01.tscn",
@@ -61,10 +62,6 @@ var level_status = [
 	7,	7,	7,	7,	7,	7,	7,	7,
 	7,	7,	7,	7,	7,	7,	7,	7,
 	7,	7,	7,	7,	7,	7,	7,	7,
-#	1,	1,	1,	1,	1,	1,	1,	1,
-#	1,	1,	1,	1,	1,	1,	1,	1,
-#	1,	1,	1,	1,	1,	1,	1,	1,
-#	1,	1,	1,	1,	1,	1,	1,	1,
 ]
 
 func start_speed_run():
