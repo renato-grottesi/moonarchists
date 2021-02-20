@@ -26,6 +26,7 @@ mass = 1.8
 impulse0 = Vector2( -1000.04, 0 )
 texture = ExtResource( 3 )
 moons_count = 2
+moons_max_offset = 0
 
 [node name="Luna" parent="Bodies" index="2" instance=ExtResource( 2 )]
 position = Vector2( 0, 160 )
@@ -36,9 +37,6 @@ friendly = true
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
-That Earth-like planet is where
-the planets federation
-head quarters reside.
-
-Get rid of them and we'll
-finally be free!"
+Not destroying that small
+moon will be as difficult as
+getting rid of that huge planet!"

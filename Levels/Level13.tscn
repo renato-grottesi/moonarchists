@@ -27,9 +27,10 @@ texture = ExtResource( 3 )
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
-That Earth-like planet is where
-the planets federation
-head quarters reside.
+Maybe you can kill a few
+pigeons with one stone?
 
-Get rid of them and we'll
-finally be free!"
+...
+
+I mean, kill a few asteroids
+with one moon!"

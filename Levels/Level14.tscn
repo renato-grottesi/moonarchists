@@ -27,9 +27,8 @@ texture = ExtResource( 3 )
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
-That Earth-like planet is where
-the planets federation
-head quarters reside.
+That's a big planet!
 
-Get rid of them and we'll
-finally be free!"
+You'll surely need more
+than one shoot to 
+take it down!"

@@ -48,15 +48,14 @@ func _shoot():
 	emit_signal("shoot", Vector2(60, 0).rotated($SpriteNozzle.rotation))
 
 func _push():
-	#TODO decide from which level pushing is allowed
-	if Global.current_level > 3:
+	if Global.current_level > 10:
 		var offset = Vector2(0, 0);
 		var force = Vector2(300, 0).rotated($SpriteNozzle.rotation)
 		apply_impulse(offset, force);
 		$Push.restart()
 		emit_signal("push")
 
-func _unhandled_input(event):
+func process_input(event):
 	update_nozzle()
 	if event is InputEventMouseButton and OS.get_name() != "Android":
 		if event.button_index == BUTTON_WHEEL_UP:
@@ -67,9 +66,13 @@ func _unhandled_input(event):
 			_shoot()
 		if event.button_index == BUTTON_RIGHT and event.is_pressed():
 			_push()
+		Global.use_cross_hair = true
+		$SpriteNozzle.visible = false
 	if event is InputEventMouseMotion and OS.get_name() != "Android":
 		if !Global.use_cross_hair:
 			$SpriteNozzle.rotation_degrees += event.relative.y
+		Global.use_cross_hair = true
+		$SpriteNozzle.visible = false
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_UP:
 			$SpriteNozzle.rotation_degrees -= 3;
@@ -79,6 +82,8 @@ func _unhandled_input(event):
 			_shoot()
 		if event.pressed and event.scancode == KEY_C and !event.echo :
 			_push()
+		Global.use_cross_hair = true
+		$SpriteNozzle.visible = false
 	if event is InputEventJoypadButton:
 		if event.is_pressed() && event.button_index == 0 && Global.use_joy_pad:
 			_shoot()

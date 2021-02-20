@@ -16,3 +16,11 @@ impulse0 = Vector2( 0, -600 )
 position = Vector2( -64, 64 )
 impulse0 = Vector2( -500, -200 )
 texture = ExtResource( 5 )
+
+[node name="Opening" parent="HUD" index="4"]
+visible = true
+
+[node name="Label" parent="HUD/Opening" index="0"]
+text = "
+Another straigth shoot,
+but this time aiming is key!"

@@ -35,9 +35,9 @@ friendly = true
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
-That Earth-like planet is where
-the planets federation
-head quarters reside.
+It looks like different sized
+planetes have different 
+orbital speeds...
 
-Get rid of them and we'll
-finally be free!"
+This can be a problem for 
+accuratelly timing your shoots."

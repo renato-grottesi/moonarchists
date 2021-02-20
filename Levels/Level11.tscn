@@ -20,9 +20,12 @@ moons_count = 1
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
-That Earth-like planet is where
-the planets federation
-head quarters reside.
+We are aware that our
+mini-moon generator
+can't generate enough
+power to hit that planet.
 
-Get rid of them and we'll
-finally be free!"
+That's why we installed a dark
+matter propeller to your moon!
+PROP
+to propel yourself."

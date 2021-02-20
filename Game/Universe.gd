@@ -25,9 +25,21 @@ func _ready():
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$CrossHair.visible = Global.use_cross_hair && (OS.get_name() != "Android")
 	var stars = Global.level_status[current_level-1]
-	if stars > 5 :
-		if $HUD/Opening/Label.text.length() > 1:
+	if stars > 4 :
+		if $HUD/Opening/Label.text.length() > 0:
 			if ! Global.is_speedrunning:
+				if Global.use_joy_pad:
+					$HUD/Opening/Label.text = $HUD/Opening/Label.text.replace("SHOOT", "Press A")
+					$HUD/Opening/Label.text = $HUD/Opening/Label.text.replace("PROP", "Press B")
+					$HUD/Opening/Label.text = $HUD/Opening/Label.text.replace("AIMING", "Move the joystick to aim.")
+				elif OS.get_name() == "Android":
+					$HUD/Opening/Label.text = $HUD/Opening/Label.text.replace("SHOOT", "Tap")
+					$HUD/Opening/Label.text = $HUD/Opening/Label.text.replace("PROP", "Tap with two fingers")
+					$HUD/Opening/Label.text = $HUD/Opening/Label.text.replace("AIMING", "")
+				else:
+					$HUD/Opening/Label.text = $HUD/Opening/Label.text.replace("SHOOT", "Click or press space")
+					$HUD/Opening/Label.text = $HUD/Opening/Label.text.replace("PROP", "Right click or press C")
+					$HUD/Opening/Label.text = $HUD/Opening/Label.text.replace("AIMING", "Move the mouse or \nuse the arrow keys to aim")
 				$HUD/Opening.popup()
 	for i in range(0, asteroids_count):
 		var asteroid = asteroid_scene.instance();
@@ -89,16 +101,17 @@ func _physics_process(delta):
 
 func _input(event):
 	if $HUD/Opening.visible:
-		if (event is InputEventMouseButton) or (event is InputEventKey):
+		if Input.is_action_pressed("ui_accept"):
 			$HUD/Opening/Timer.start(0.001)
-
-func _unhandled_input(event):
-	if Input.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		Global.abort_speed_run()
-		Global.current_level = 0
-	if Input.is_action_pressed("ui_retry"):
-		retry_level()
+	else:
+		if Input.is_action_pressed("ui_cancel"):
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			Global.abort_speed_run()
+			Global.current_level = 0
+		elif Input.is_action_pressed("ui_retry"):
+			retry_level()
+		else:
+			$Moon.process_input(event)
 
 func _incr_shoots():
 	if !game_over:

@@ -34,9 +34,6 @@ moons_count = 2
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
-That Earth-like planet is where
-the planets federation
-head quarters reside.
-
-Get rid of them and we'll
-finally be free!"
+Be carefull not to hit the
+moon orbiting inside the
+asteroids belt!"

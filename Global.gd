@@ -1,6 +1,6 @@
 extends Node
 
-const game_version = 22
+const game_version = 23
 const last_level = 16
 
 var current_scene = null
