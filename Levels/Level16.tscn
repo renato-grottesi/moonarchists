@@ -15,13 +15,13 @@ position = Vector2( 64, 0 )
 impulse0 = Vector2( 0, -300 )
 
 [node name="Mars" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -160, 0 )
+position = Vector2( -208, -144 )
 mass = 1.3
-impulse0 = Vector2( 200, 700 )
+impulse0 = Vector2( -500, 500 )
 texture = ExtResource( 5 )
 
 [node name="Saturn" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 0, 384 )
+position = Vector2( 0, 400 )
 mass = 1.8
 impulse0 = Vector2( -1000.04, 0 )
 texture = ExtResource( 3 )
@@ -29,7 +29,7 @@ moons_count = 2
 moons_max_offset = 0
 
 [node name="Luna" parent="Bodies" index="2" instance=ExtResource( 2 )]
-position = Vector2( 0, 160 )
+position = Vector2( 0, 176 )
 mass = 0.6
 impulse0 = Vector2( 400, 0 )
 texture = ExtResource( 4 )

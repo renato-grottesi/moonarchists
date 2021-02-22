@@ -72,12 +72,9 @@ func _on_OptionsDialog_about_to_show():
 	$OptionsDialog/SoundSlider.value = Global.get_sound_volume()
 	$OptionsDialog/MusicSlider.value = Global.get_music_volume()
 	$OptionsDialog/CloseOptionsDialog.grab_focus()
-	$OptionsDialog/CrosshairAim.visible = OS.get_name() != "Android"
 	$OptionsDialog/FullScreen.visible = OS.get_name() != "Android"
 	$OptionsDialog/ToggleFullScreen.visible = OS.get_name() != "Android"
-	$OptionsDialog/ToggleCrosshair.visible = OS.get_name() != "Android"
 	fullscreen_text()
-	crosshair_text()
 
 func _on_OptionsDialog_popup_hide():
 	# Save the sound and music volumes
@@ -95,12 +92,6 @@ func fullscreen_text():
 	else:
 		$OptionsDialog/ToggleFullScreen.text = "OFF"
 
-func crosshair_text():
-	if Global.use_cross_hair:
-		$OptionsDialog/ToggleCrosshair.text = "ON"
-	else:
-		$OptionsDialog/ToggleCrosshair.text = "OFF"
-
 func _on_CloseStoryDialog_pressed():
 	$StoryIntro.hide()
 	$Levels.popup()
@@ -115,10 +106,6 @@ func beep():
 
 func _on_Levels_popup_hide():
 	$Play.grab_focus()
-
-func _on_ToggleCrosshair_pressed():
-	Global.use_cross_hair = !Global.use_cross_hair
-	crosshair_text()
 
 func _on_CloseHelpDialog_pressed():
 	$HelpDialog.hide()

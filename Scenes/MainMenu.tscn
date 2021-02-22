@@ -333,18 +333,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CrosshairAim" type="Label" parent="OptionsDialog"]
-margin_left = 192.0
-margin_top = 320.0
-margin_right = 464.0
-margin_bottom = 384.0
-custom_fonts/font = ExtResource( 2 )
-text = "Crosshair Aiming"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ToggleFullScreen" type="Button" parent="OptionsDialog"]
 margin_left = 512.0
 margin_top = 256.0
@@ -352,21 +340,6 @@ margin_right = 640.0
 margin_bottom = 315.138
 focus_neighbour_top = NodePath("../MusicSlider")
 focus_neighbour_bottom = NodePath("../ToggleCrosshair")
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
-text = "OFF"
-
-[node name="ToggleCrosshair" type="Button" parent="OptionsDialog"]
-margin_left = 512.0
-margin_top = 320.0
-margin_right = 640.0
-margin_bottom = 379.138
-focus_neighbour_top = NodePath("../ToggleFullScreen")
-focus_neighbour_bottom = NodePath("../CloseOptionsDialog")
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
@@ -415,7 +388,6 @@ custom_fonts/font = ExtResource( 2 )
 text = "Close"
 
 [node name="Levels" type="PopupDialog" parent="."]
-visible = true
 margin_left = 64.0
 margin_top = 192.0
 margin_right = 960.0
@@ -641,8 +613,6 @@ stream = ExtResource( 9 )
 [connection signal="popup_hide" from="OptionsDialog" to="." method="_on_OptionsDialog_popup_hide"]
 [connection signal="focus_entered" from="OptionsDialog/ToggleFullScreen" to="." method="beep"]
 [connection signal="pressed" from="OptionsDialog/ToggleFullScreen" to="." method="_on_ToggleFullScreen_pressed"]
-[connection signal="focus_entered" from="OptionsDialog/ToggleCrosshair" to="." method="beep"]
-[connection signal="pressed" from="OptionsDialog/ToggleCrosshair" to="." method="_on_ToggleCrosshair_pressed"]
 [connection signal="focus_entered" from="OptionsDialog/SoundSlider" to="." method="beep"]
 [connection signal="value_changed" from="OptionsDialog/SoundSlider" to="." method="_on_SoundSlider_value_changed"]
 [connection signal="focus_entered" from="OptionsDialog/MusicSlider" to="." method="beep"]

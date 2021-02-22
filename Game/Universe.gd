@@ -71,7 +71,7 @@ func _process(delta):
 			swoosh()
 	if enemies_left < 1 :
 		if !game_over:
-			game_over = true
+			set_game_over()
 			if ! $HUD/Lost.visible:
 				if !Global.is_speedrunning:
 					$HUD/Victory.popup()
@@ -120,7 +120,7 @@ func _incr_shoots():
 		if !Global.is_speedrunning:
 			$HUD/Score.text = "Shots: " + String(shoots)
 		if shoots>10 and !game_over:
-			game_over = true
+			set_game_over()
 			if ! $HUD/Victory.visible:
 				$HUD/Lost/Reason.text = "You run out of moons"
 				if !Global.is_speedrunning:
@@ -145,7 +145,7 @@ func _on_Moon_push():
 
 func _on_Moon_destroyed(swallowed):
 	if !game_over:
-		game_over = true
+		set_game_over()
 		shake_it()
 		if ! $HUD/Victory.visible:
 			if swallowed:
@@ -263,10 +263,14 @@ func _on_LastLevel_about_to_show():
 		$HUD/LastLevel/SpeedrunScore.text = "Speedrun: " + Global.ms2str(time)
 
 func friendly_destroyed():
-	game_over = true
+	set_game_over()
 	if ! $HUD/Victory.visible:
 		$HUD/Lost/Reason.text = "A friendly moon\n has been destroyed"
 		if !Global.is_speedrunning:
 			$HUD/Lost.popup()
 		else:
 			retry_level()
+
+func set_game_over():
+	game_over = true
+	$HUD/MoonsCounter.game_over = true

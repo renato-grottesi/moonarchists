@@ -2,7 +2,8 @@ extends Button
 
 export (int) var level_number : int = 1 setget set_level_number
 
-const star_texture = preload("res://Sprites/star_full.png")
+const star_texture_full = preload("res://Sprites/star_full.png")
+const star_texture_empty = preload("res://Sprites/star_empty.png")
 
 func _ready():
 	setup()
@@ -17,13 +18,16 @@ func setup():
 		level_name = "0" + level_name
 	$Name.text = level_name
 	var stars = Global.level_status[level_number-1]
+	$Star1.set_texture(star_texture_empty)
+	$Star2.set_texture(star_texture_empty)
+	$Star3.set_texture(star_texture_empty)
 	if stars < 4:
 		if stars > 0 :
-			$Star1.set_texture(star_texture)
+			$Star1.set_texture(star_texture_full)
 		if stars > 1 :
-			$Star2.set_texture(star_texture)
+			$Star2.set_texture(star_texture_full)
 		if stars > 2 :
-			$Star3.set_texture(star_texture)
+			$Star3.set_texture(star_texture_full)
 	if stars < 7:
 		$Name.set("custom_colors/font_color", Color(1.0, 1.0, 1.0, 1.0))
 		$Lock.hide()

@@ -1,6 +1,7 @@
 extends Control
 
 var moons = 10 setget _set_moons, _get_moons
+var game_over = false
 var moons_width = [0, 32, 56, 80, 104, 128, 152, 176, 200, 224, 256]
 var alternate_color = true
 
@@ -28,7 +29,7 @@ func _on_Timer_timeout():
 	alternate_color = !alternate_color
 	if alternate_color:
 		$FinalWarning.set("custom_colors/font_color", Color(1.0, 0.0, 0.0, 1.0))
-		if moons < 1:
+		if moons < 1 and !(game_over):
 			$Alert.play()
 			$Alert.set_volume_db(Global.get_sound_volume_db())
 	else:

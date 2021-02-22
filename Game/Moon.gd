@@ -67,12 +67,12 @@ func process_input(event):
 		if event.button_index == BUTTON_RIGHT and event.is_pressed():
 			_push()
 		Global.use_cross_hair = true
-		$SpriteNozzle.visible = false
+		$SpriteNozzle.visible = true
 	if event is InputEventMouseMotion and OS.get_name() != "Android":
 		if !Global.use_cross_hair:
 			$SpriteNozzle.rotation_degrees += event.relative.y
 		Global.use_cross_hair = true
-		$SpriteNozzle.visible = false
+		$SpriteNozzle.visible = true
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_UP:
 			$SpriteNozzle.rotation_degrees -= 3;
@@ -82,8 +82,8 @@ func process_input(event):
 			_shoot()
 		if event.pressed and event.scancode == KEY_C and !event.echo :
 			_push()
-		Global.use_cross_hair = true
-		$SpriteNozzle.visible = false
+		Global.use_cross_hair = false
+		$SpriteNozzle.visible = true
 	if event is InputEventJoypadButton:
 		if event.is_pressed() && event.button_index == 0 && Global.use_joy_pad:
 			_shoot()
