@@ -1,14 +1,14 @@
 extends "res://Game/CelestialBody.gd"
 
-export (Vector2) var impulse0 : Vector2 = Vector2(0, 0)
+export (Vector2) var impulse0: Vector2 = Vector2(0, 0)
 export (Resource) var texture
-export (bool) var friendly : bool = false
-export (int) var moons_count : int = 0
-export (int) var moons_max_offset : int = 20
+export (bool) var friendly: bool = false
+export (int) var moons_count: int = 0
+export (int) var moons_max_offset: int = 20
 
-signal damage()
-signal swoosh()
-signal friendly_destroyed()
+signal damage
+signal swoosh
+signal friendly_destroyed
 
 const asteroid_scene = preload("res://Game/Asteroid.tscn")
 const Asteroid = preload("res://Game/Asteroid.gd")
@@ -17,36 +17,41 @@ var time = 0.0
 var last_pos
 const absorb_scale = 3.0
 
+
 func _ready():
-	apply_impulse(Vector2(0, 0), impulse0);
-	angular_velocity = (1 + Global.rng.randf_range(0, 1)) * sign(Global.rng.randf_range(-1, 1));
+	apply_impulse(Vector2(0, 0), impulse0)
+	angular_velocity = (1 + Global.rng.randf_range(0, 1)) * sign(Global.rng.randf_range(-1, 1))
 	$Sprite.set_texture(texture)
 	last_pos = global_position
 	for i in range(0, moons_count):
-		var asteroid = asteroid_scene.instance();
-		var rad = i*(2*PI/moons_count)
-		var randoff = moons_max_offset*Global.rng.randf_range(0, 1)
+		var asteroid = asteroid_scene.instance()
+		var rad = i * (2 * PI / moons_count)
+		var randoff = moons_max_offset * Global.rng.randf_range(0, 1)
 		var offset = Global.rng.randf_range(0, 35) + (40 + randoff) * mass
-		var pos = Vector2( offset*sin(rad), offset*cos(rad))
+		var pos = Vector2(offset * sin(rad), offset * cos(rad))
 		asteroid.position = pos + global_position
 		asteroid.speed = Global.rng.randf_range(0, 2) + 1
 		asteroid.connect("damage", self, "on_asteroid_damage")
 		asteroid.connect("swoosh", self, "on_asteroid_swoosh")
-		$Satellites.add_child(asteroid);
+		$Satellites.add_child(asteroid)
 	$Shape.shape = CircleShape2D.new()
+
 
 func on_asteroid_damage():
 	emit_signal("damage")
 
+
 func on_asteroid_swoosh():
 	emit_signal("swoosh")
+
 
 func _physics_process(delta):
 	for S in $Satellites.get_children():
 		S.position -= last_pos
-		S.position = S.position.rotated(delta*S.speed)
+		S.position = S.position.rotated(delta * S.speed)
 		S.position += global_position
 	last_pos = global_position
+
 
 func _on_NeutralMoon_body_entered(body):
 	if ! body is get_script():
@@ -54,24 +59,28 @@ func _on_NeutralMoon_body_entered(body):
 	if body is Asteroid:
 		body.hit()
 
+
 func _process(delta):
 	update_shadow()
 	var childs_scale = mass
-	if !($Absorb.is_stopped()):
-		childs_scale = $Absorb.time_left*absorb_scale
+	if ! ($Absorb.is_stopped()):
+		childs_scale = $Absorb.time_left * absorb_scale
 	$Sprite.scale = Vector2(childs_scale, childs_scale)
 	$Shadow.scale = Vector2(childs_scale, childs_scale)
 	$Shape.shape.radius = 30.0 * childs_scale
 
+
 func get_radius():
 	return $Shape.shape.radius
 
+
 func absorb():
-	if ($Absorb.is_stopped()):
+	if $Absorb.is_stopped():
 		collision_layer = 0
 		collision_mask = 0
-		$Absorb.start(mass/absorb_scale)
+		$Absorb.start(mass / absorb_scale)
 		$Shape.disabled = true
+
 
 func _on_Absorb_timeout():
 	if friendly:
