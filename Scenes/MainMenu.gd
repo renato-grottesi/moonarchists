@@ -159,12 +159,14 @@ func _on_Next_pressed():
 	if levels_page < (pages_count - 1):
 		levels_page += 1
 	_setup_levels_page()
+	beep()
 
 
 func _on_Previous_pressed():
 	if levels_page > 0:
 		levels_page -= 1
 	_setup_levels_page()
+	beep()
 
 
 func _setup_levels_page():
