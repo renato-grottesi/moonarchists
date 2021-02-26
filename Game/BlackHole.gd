@@ -3,10 +3,6 @@ extends StaticBody2D
 var com_rotation = 0
 
 
-func _ready():
-	pass
-
-
 func _process(delta):
 	com_rotation += delta * 8
 	var com_transform = Transform2D(com_rotation, Vector2(0, 0))
@@ -17,10 +13,11 @@ func _process(delta):
 	$SpriteBack.set_offset(Vector2(rand_range(-1.0, 1.0) * shake_amount, rand_range(-1.0, 1.0) * shake_amount))
 
 
-func eat():
-	$ShakeTimer.start()
-	pass
-
-
 func get_radius():
 	return $Shape.shape.radius
+
+
+func eat():
+	$SwooshSound.play()
+	$SwooshSound.set_volume_db(Global.get_sound_volume_db())
+	$ShakeTimer.start()

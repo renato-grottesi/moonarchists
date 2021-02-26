@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Sprites/blackhole.png" type="Texture" id=1]
 [ext_resource path="res://Game/BlackHole.gd" type="Script" id=2]
+[ext_resource path="res://Sounds/swoosh.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.0
@@ -44,3 +45,8 @@ color_ramp = SubResource( 3 )
 
 [node name="ShakeTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="SwooshSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -24.0
+pitch_scale = 0.75

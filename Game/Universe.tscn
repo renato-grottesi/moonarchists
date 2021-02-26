@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Game/Universe.gd" type="Script" id=1]
 [ext_resource path="res://Game/BlackHole.tscn" type="PackedScene" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://Game/Moon.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Sprites/star_empty.png" type="Texture" id=11]
 [ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Sounds/swoosh.wav" type="AudioStream" id=13]
 [ext_resource path="res://Sounds/select.wav" type="AudioStream" id=14]
 [ext_resource path="res://UI/MoonsCounter.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Sprites/cross_hair.png" type="Texture" id=16]
@@ -23,10 +22,6 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.00446841, 0, 0, Vector2( 0.494253, 1 ), -2.880
 [sub_resource type="AudioStreamRandomPitch" id=2]
 audio_stream = ExtResource( 9 )
 random_pitch = 1.8
-
-[sub_resource type="AudioStreamRandomPitch" id=3]
-audio_stream = ExtResource( 13 )
-random_pitch = 2.0
 
 [node name="Universe" type="Node2D"]
 script = ExtResource( 1 )
@@ -66,7 +61,9 @@ one_shot = true
 
 [node name="Asteroids" type="Node" parent="."]
 
-[node name="BlackHole" parent="." instance=ExtResource( 2 )]
+[node name="BlackHoles" type="Node" parent="."]
+
+[node name="BlackHole" parent="BlackHoles" instance=ExtResource( 2 )]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -333,11 +330,6 @@ __meta__ = {
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 2 )
 volume_db = -12.0
-pitch_scale = 0.75
-
-[node name="SwooshSound" type="AudioStreamPlayer" parent="."]
-stream = SubResource( 3 )
-volume_db = -24.0
 pitch_scale = 0.75
 
 [node name="Beep" type="AudioStreamPlayer" parent="."]

@@ -52,7 +52,6 @@ func _ready():
 		$Asteroids.add_child(asteroid)
 	for B in $Bodies.get_children():
 		B.connect("damage", self, "shake_it")
-		B.connect("swoosh", self, "swoosh")
 		B.connect("friendly_destroyed", self, "friendly_destroyed")
 
 
@@ -65,12 +64,6 @@ func _process(delta):
 	for B in $Bodies.get_children():
 		if ! B.friendly:
 			enemies_left += 1
-		var c = $BlackHole.position
-		var b = B.position
-		var l = b.distance_to(c)
-		if l <= $BlackHole.get_radius() + B.get_radius():
-			B.absorb()
-			swoosh()
 	if enemies_left < 1:
 		if ! game_over:
 			set_game_over()
@@ -88,16 +81,20 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	for B in $Bodies.get_children():
-		B.attract_to($BlackHole.position, gravity_k)
+	#TODO: Need to increase gravity with proximity...
 	for A in $Asteroids.get_children():
 		A.position = A.position.rotated(delta * A.speed)
-	for B in $Bullets.get_children():
-		B.attract_to($BlackHole.position, gravity_k)
-		# Bullets feel planets' gravity to make it easier to hit them
-		for P in $Bodies.get_children():
-			B.attract_to(P.position, gravity_k / 10)
-	$Moon.attract_to($BlackHole.position, gravity_k)
+	var bhs = $BlackHoles.get_children().size()
+	for BH in $BlackHoles.get_children():
+		for B in $Bodies.get_children():
+			B.check_asteroids(BH)
+			B.attract_to(BH.position, gravity_k / bhs)
+		for B in $Bullets.get_children():
+			B.attract_to(BH.position, gravity_k / bhs)
+			# Bullets feel planets' gravity to make it easier to hit them
+			for P in $Bodies.get_children():
+				B.attract_to(P.position, gravity_k / bhs / 10)
+		$Moon.attract_to(BH.position, gravity_k / bhs)
 
 
 func _input(event):
@@ -138,7 +135,6 @@ func _on_Moon_shoot(moon_speed):
 			mass_bullet_instance.position = $Moon.position + moon_speed
 			mass_bullet_instance.linear_velocity = moon_speed * bullet_speed_k
 			mass_bullet_instance.connect("damage", self, "shake_it")
-			mass_bullet_instance.connect("swoosh", self, "swoosh")
 			$Bullets.add_child(mass_bullet_instance)
 		_incr_shoots()
 
@@ -252,12 +248,6 @@ func shake_it():
 	$ExplosionSound.set_volume_db(Global.get_sound_volume_db())
 	$Camera/Shake.start()
 	Global.do_slowmo()
-
-
-func swoosh():
-	$SwooshSound.play()
-	$SwooshSound.set_volume_db(Global.get_sound_volume_db())
-	$BlackHole.eat()
 
 
 func _on_Opening_about_to_show():

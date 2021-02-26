@@ -34,7 +34,7 @@ var levels = [
 	"res://Levels/Level14.tscn",
 	"res://Levels/Level15.tscn",
 	"res://Levels/Level16.tscn",
-	"res://Levels/Level01.tscn",
+	"res://Levels/Level17.tscn",
 	"res://Levels/Level01.tscn",
 	"res://Levels/Level01.tscn",
 	"res://Levels/Level01.tscn",

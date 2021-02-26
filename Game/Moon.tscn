@@ -17,11 +17,11 @@ shader_param/time = 0.0
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.354582, 0.886364 ), -0.500887, -0.500887, 0, 0, Vector2( 1, 0 ), -0.0172865, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0.00877193, 0.947368 )
 colors = PoolColorArray( 0, 0, 1, 1, 0, 1, 0, 1 )
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 0 ), 0.0, 4.73916, 0, 0, Vector2( 0.286853, 0.890909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=6]
@@ -77,7 +77,7 @@ angle_random = 1.0
 scale_amount = 2.0
 scale_amount_random = 0.8
 scale_amount_curve = SubResource( 3 )
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 4 )
 
 [node name="Push" type="CPUParticles2D" parent="."]
 emitting = false
@@ -95,7 +95,7 @@ initial_velocity_random = 0.75
 angular_velocity = 32.0
 angular_velocity_random = 1.0
 linear_accel = 1.0
-scale_amount_curve = SubResource( 4 )
+scale_amount_curve = SubResource( 5 )
 color_ramp = SubResource( 6 )
 [connection signal="body_entered" from="." to="." method="_on_Moon_body_entered"]
 [connection signal="timeout" from="Death" to="." method="_on_Death_timeout"]

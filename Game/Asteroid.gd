@@ -2,7 +2,6 @@ extends StaticBody2D
 
 export (float) var speed: float = 1.0
 signal damage
-signal swoosh
 
 var explosion_pos = Vector2(0, 0)
 var done = false
@@ -38,7 +37,4 @@ func _on_Timer_timeout():
 func _process(delta):
 	if done:
 		position = explosion_pos
-	if global_position.length() < 60:
-		emit_signal("swoosh")
-		queue_free()
 	$Sprite.rotation += delta * rotation_speed

@@ -7,11 +7,11 @@ export (int) var moons_count: int = 0
 export (int) var moons_max_offset: int = 20
 
 signal damage
-signal swoosh
 signal friendly_destroyed
 
 const asteroid_scene = preload("res://Game/Asteroid.tscn")
 const Asteroid = preload("res://Game/Asteroid.gd")
+const BlackHole = preload("res://Game/BlackHole.gd")
 
 var time = 0.0
 var last_pos
@@ -32,17 +32,18 @@ func _ready():
 		asteroid.position = pos + global_position
 		asteroid.speed = Global.rng.randf_range(0, 2) + 1
 		asteroid.connect("damage", self, "on_asteroid_damage")
-		asteroid.connect("swoosh", self, "on_asteroid_swoosh")
 		$Satellites.add_child(asteroid)
 	$Shape.shape = CircleShape2D.new()
 
 
+func check_asteroids(bh):
+	for S in $Satellites.get_children():
+		if (S.position - bh.position).length() < bh.get_radius():
+			bh.eat()
+			S.queue_free()
+
 func on_asteroid_damage():
 	emit_signal("damage")
-
-
-func on_asteroid_swoosh():
-	emit_signal("swoosh")
 
 
 func _physics_process(delta):
@@ -58,6 +59,9 @@ func _on_NeutralMoon_body_entered(body):
 		emit_signal("damage")
 	if body is Asteroid:
 		body.hit()
+	if body is BlackHole:
+		absorb()
+		body.eat()
 
 
 func _process(delta):

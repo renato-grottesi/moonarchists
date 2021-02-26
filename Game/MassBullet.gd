@@ -1,7 +1,6 @@
 extends "res://Game/CelestialBody.gd"
 
 signal damage
-signal swoosh
 
 const asteroid_texture = preload("res://Sprites/asteroid.png")
 const Asteroid = preload("res://Game/Asteroid.gd")
@@ -37,7 +36,7 @@ func _on_MassBullet_body_entered(body):
 		body.hit()
 	if body is BlackHole:
 		queue_free()
-		emit_signal("swoosh")
+		body.eat()
 	else:
 		$Timer.start()
 		$Explosion.restart()

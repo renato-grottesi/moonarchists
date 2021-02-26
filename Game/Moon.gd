@@ -11,6 +11,7 @@ signal push
 const MassBullet = preload("res://Game/MassBullet.gd")
 const NeutralMoon = preload("res://Game/NeutralMoon.gd")
 const Asteroid = preload("res://Game/Asteroid.gd")
+const BlackHole = preload("res://Game/BlackHole.gd")
 
 var health = 100
 var time = 0
@@ -129,7 +130,8 @@ func _on_Moon_body_entered(body):
 		health -= 15
 		body.hit()
 		emit_signal("damage")
-	else:
+	elif body is BlackHole:
+		body.eat()
 		swallowed = true
 		health = 0
 	if health <= 0:

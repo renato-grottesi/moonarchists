@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game/Universe.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/NeutralMoon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/saturn.png" type="Texture" id=3]
+[ext_resource path="res://Game/BlackHole.tscn" type="PackedScene" id=4]
+
+[node name="Level" instance=ExtResource( 1 )]
+current_level = 17
+asteroids_offset = 150
+
+[node name="Moon" parent="." index="3"]
+impulse0 = Vector2( 1000, 1000 )
+
+[node name="Saturn" parent="Bodies" index="0" instance=ExtResource( 2 )]
+position = Vector2( 512, 384 )
+impulse0 = Vector2( -1000, 1000 )
+texture = ExtResource( 3 )
+moons_count = 2
+moons_max_offset = 0
+
+[node name="BlackHole" parent="BlackHoles" index="0"]
+position = Vector2( 192, 0 )
+
+[node name="BlackHole2" parent="BlackHoles" index="1" instance=ExtResource( 4 )]
+position = Vector2( -192, 0 )
+
+[node name="Label" parent="HUD/Opening" index="0"]
+text = "
+Not destroying that small
+moon will be as difficult as
+getting rid of that huge planet!"
