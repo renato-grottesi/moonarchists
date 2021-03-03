@@ -10,20 +10,21 @@ current_level = 12
 asteroids_offset = 0
 
 [node name="Moon" parent="." index="3"]
-position = Vector2( 96, 0 )
-impulse0 = Vector2( 0, -200 )
+position = Vector2( 104, 0 )
+impulse0 = Vector2( 0, -400 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
 position = Vector2( -416, 0 )
-impulse0 = Vector2( 0, 1000 )
+impulse0 = Vector2( 0, 800 )
 texture = ExtResource( 5 )
 moons_count = 3
 
 [node name="Efisto" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 0, -192 )
+position = Vector2( 0, -288 )
 impulse0 = Vector2( 600, 0 )
 texture = ExtResource( 3 )
 moons_count = 4
+moons_max_offset = 0
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "

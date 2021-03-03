@@ -10,11 +10,11 @@ current_level = 17
 asteroids_offset = 150
 
 [node name="Moon" parent="." index="3"]
-impulse0 = Vector2( 1000, 1000 )
+impulse0 = Vector2( 400, 400 )
 
 [node name="Saturn" parent="Bodies" index="0" instance=ExtResource( 2 )]
 position = Vector2( 512, 384 )
-impulse0 = Vector2( -1000, 1000 )
+impulse0 = Vector2( 10000, 10000 )
 texture = ExtResource( 3 )
 moons_count = 2
 moons_max_offset = 0

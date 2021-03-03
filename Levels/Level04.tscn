@@ -9,20 +9,22 @@
 current_level = 4
 
 [node name="Moon" parent="." index="3"]
-position = Vector2( -140, 0 )
-impulse0 = Vector2( -400, -280 )
+position = Vector2( -128, 0 )
+impulse0 = Vector2( 0, -500 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 300, 0 )
-impulse0 = Vector2( -200, 700 )
+position = Vector2( 0, 136 )
+impulse0 = Vector2( -600, 0 )
 texture = ExtResource( 4 )
 moons_count = 1
+moons_max_offset = 0
 
 [node name="Mars" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 0, -250 )
-impulse0 = Vector2( -700, -500 )
+position = Vector2( 0, -288 )
+impulse0 = Vector2( -700, 0 )
 texture = ExtResource( 5 )
 moons_count = 2
+moons_max_offset = 0
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "

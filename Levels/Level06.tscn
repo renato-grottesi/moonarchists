@@ -10,24 +10,25 @@
 current_level = 6
 
 [node name="Moon" parent="." index="3"]
-position = Vector2( 350, 0 )
-impulse0 = Vector2( 200, -600 )
+position = Vector2( 288, 0 )
+impulse0 = Vector2( 0, -600 )
 
 [node name="Moon" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -220, -170 )
-impulse0 = Vector2( 0, 500 )
+position = Vector2( 0, 160 )
+impulse0 = Vector2( 500, 0 )
 texture = ExtResource( 3 )
 friendly = true
 
 [node name="Efisto" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 0, -180 )
+position = Vector2( 0, -160 )
 impulse0 = Vector2( -500, -100 )
 texture = ExtResource( 6 )
 moons_count = 2
+moons_max_offset = 10
 
 [node name="Saturn" parent="Bodies" index="2" instance=ExtResource( 2 )]
-position = Vector2( -280, 60 )
-impulse0 = Vector2( -500, -800 )
+position = Vector2( -288, 224 )
+impulse0 = Vector2( -500, -600 )
 texture = ExtResource( 4 )
 
 [node name="Label" parent="HUD/Opening" index="0"]

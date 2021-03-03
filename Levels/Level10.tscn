@@ -16,19 +16,19 @@ position = Vector2( 350, 0 )
 impulse0 = Vector2( 0, -800 )
 
 [node name="Moon" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -45, -45 )
-impulse0 = Vector2( 175, -175 )
+position = Vector2( 0, -96 )
+impulse0 = Vector2( -400, 0 )
 texture = ExtResource( 3 )
 friendly = true
 
 [node name="Saturn" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( -185, -185 )
-impulse0 = Vector2( -600, 600 )
+position = Vector2( -256, 0 )
+impulse0 = Vector2( 0, 700 )
 texture = ExtResource( 4 )
 
 [node name="Terra" parent="Bodies" index="2" instance=ExtResource( 2 )]
-position = Vector2( -250, 75 )
-impulse0 = Vector2( 500, 1000 )
+position = Vector2( 0, 352 )
+impulse0 = Vector2( 800, 0 )
 texture = ExtResource( 5 )
 moons_count = 2
 

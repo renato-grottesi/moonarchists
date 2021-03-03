@@ -11,27 +11,27 @@ current_level = 16
 asteroids_offset = 150
 
 [node name="Moon" parent="." index="3"]
-position = Vector2( 64, 0 )
+position = Vector2( 88, 0 )
 impulse0 = Vector2( 0, -300 )
 
 [node name="Mars" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -208, -144 )
+position = Vector2( -112, -112 )
 mass = 1.3
-impulse0 = Vector2( -500, 500 )
+impulse0 = Vector2( -400, 400 )
 texture = ExtResource( 5 )
 
 [node name="Saturn" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 0, 400 )
+position = Vector2( 0, 416 )
 mass = 1.8
-impulse0 = Vector2( -1000.04, 0 )
+impulse0 = Vector2( -900, 0 )
 texture = ExtResource( 3 )
 moons_count = 2
 moons_max_offset = 0
 
 [node name="Luna" parent="Bodies" index="2" instance=ExtResource( 2 )]
-position = Vector2( 0, 176 )
+position = Vector2( 0, 288 )
 mass = 0.6
-impulse0 = Vector2( 400, 0 )
+impulse0 = Vector2( 600, 0 )
 texture = ExtResource( 4 )
 friendly = true
 

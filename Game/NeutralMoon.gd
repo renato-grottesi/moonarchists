@@ -84,6 +84,8 @@ func absorb():
 		collision_mask = 0
 		$Absorb.start(mass / absorb_scale)
 		$Shape.disabled = true
+		for S in $Satellites.get_children():
+			S.absorb()
 
 
 func _on_Absorb_timeout():

@@ -13,8 +13,8 @@ position = Vector2( 192, 0 )
 impulse0 = Vector2( 0, -500 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 96, 16 )
-impulse0 = Vector2( 0, -300 )
+position = Vector2( 96, 0 )
+impulse0 = Vector2( 0, 300 )
 texture = ExtResource( 5 )
 
 [node name="Label" parent="HUD/Opening" index="0"]

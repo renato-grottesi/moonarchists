@@ -11,18 +11,19 @@ asteroids_count = 6
 asteroids_offset = 150
 
 [node name="Moon" parent="." index="3"]
-position = Vector2( 96, 0 )
-impulse0 = Vector2( 0, 200 )
+position = Vector2( 88, 0 )
+impulse0 = Vector2( 0, 350 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -288, 160 )
-impulse0 = Vector2( 500, 900 )
+position = Vector2( 0, -384 )
+impulse0 = Vector2( -850, 0 )
 texture = ExtResource( 5 )
 moons_count = 3
+moons_max_offset = 0
 
 [node name="Efisto" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 0, -352 )
-impulse0 = Vector2( -800, 0 )
+position = Vector2( -192, 192 )
+impulse0 = Vector2( 600, 600 )
 texture = ExtResource( 3 )
 
 [node name="Label" parent="HUD/Opening" index="0"]

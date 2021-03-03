@@ -12,24 +12,24 @@ asteroids_offset = 150
 
 [node name="Moon" parent="." index="3"]
 position = Vector2( 64, 0 )
-impulse0 = Vector2( 0, 200 )
+impulse0 = Vector2( 0, 350 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
 position = Vector2( -224, 0 )
 mass = 0.8
-impulse0 = Vector2( 100, 500 )
+impulse0 = Vector2( 0, -550 )
 texture = ExtResource( 5 )
 
 [node name="Saturn" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 0, 320 )
+position = Vector2( 0, 352 )
 mass = 1.2
-impulse0 = Vector2( -1000, 0 )
+impulse0 = Vector2( -900, 0 )
 texture = ExtResource( 3 )
 
 [node name="Luna" parent="Bodies" index="2" instance=ExtResource( 2 )]
 position = Vector2( 0, 128 )
 mass = 0.7
-impulse0 = Vector2( -400, 0 )
+impulse0 = Vector2( -500, 0 )
 texture = ExtResource( 4 )
 friendly = true
 

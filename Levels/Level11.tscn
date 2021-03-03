@@ -9,12 +9,12 @@ current_level = 11
 asteroids_offset = 0
 
 [node name="Moon" parent="." index="3"]
-position = Vector2( 96, 0 )
-impulse0 = Vector2( 0, -200 )
+position = Vector2( 88, 0 )
+impulse0 = Vector2( 0, -400 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
 position = Vector2( -416, 0 )
-impulse0 = Vector2( 0, -1000 )
+impulse0 = Vector2( 0, 800 )
 texture = ExtResource( 5 )
 moons_count = 1
 

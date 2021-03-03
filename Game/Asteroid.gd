@@ -38,3 +38,8 @@ func _process(delta):
 	if done:
 		position = explosion_pos
 	$Sprite.rotation += delta * rotation_speed
+
+func absorb():
+	collision_layer = 0
+	collision_mask = 0
+	$Shape.disabled = true

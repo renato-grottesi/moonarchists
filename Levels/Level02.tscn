@@ -13,12 +13,9 @@ position = Vector2( 192, 0 )
 impulse0 = Vector2( 0, -600 )
 
 [node name="Terra" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -64, 64 )
-impulse0 = Vector2( -500, -200 )
+position = Vector2( -128, 0 )
+impulse0 = Vector2( 0, 400 )
 texture = ExtResource( 5 )
-
-[node name="Opening" parent="HUD" index="4"]
-visible = true
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "

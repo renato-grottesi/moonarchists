@@ -8,21 +8,21 @@
 [node name="Level" instance=ExtResource( 1 )]
 current_level = 9
 asteroids_count = 8
-asteroids_offset = 185
+asteroids_offset = 180
 
 [node name="Moon" parent="." index="3"]
-position = Vector2( -150, 0 )
-impulse0 = Vector2( 20, 200 )
+position = Vector2( -128, 0 )
+impulse0 = Vector2( 0, 400 )
 
 [node name="Moon" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -340, -340 )
-impulse0 = Vector2( 1000, -300 )
+position = Vector2( 0, -352 )
+impulse0 = Vector2( -900, 0 )
 texture = ExtResource( 3 )
 friendly = true
 
 [node name="Efisto" parent="Bodies" index="1" instance=ExtResource( 2 )]
-position = Vector2( -350, 0 )
-impulse0 = Vector2( -250, -900 )
+position = Vector2( -288, 0 )
+impulse0 = Vector2( 0, -700 )
 texture = ExtResource( 6 )
 
 [node name="Label" parent="HUD/Opening" index="0"]

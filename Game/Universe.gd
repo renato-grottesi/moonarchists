@@ -11,12 +11,10 @@ const star_texture = preload("res://Sprites/star_full.png")
 const asteroid_scene = preload("res://Game/Asteroid.tscn")
 const Asteroid = preload("res://Game/Asteroid.gd")
 const opening_duration = 4
-const gravity_k = 0.1
 const bullet_speed_k = 14
 
 var shoots = 0
 var game_over = false
-
 
 func _ready():
 	Global.rng.seed = current_level
@@ -88,13 +86,16 @@ func _physics_process(delta):
 	for BH in $BlackHoles.get_children():
 		for B in $Bodies.get_children():
 			B.check_asteroids(BH)
-			B.attract_to(BH.position, gravity_k / bhs)
+			B.attract_to(BH.position, 1.0)
 		for B in $Bullets.get_children():
-			B.attract_to(BH.position, gravity_k / bhs)
-			# Bullets feel planets' gravity to make it easier to hit them
-			for P in $Bodies.get_children():
-				B.attract_to(P.position, gravity_k / bhs / 10)
-		$Moon.attract_to(BH.position, gravity_k / bhs)
+			B.attract_to(BH.position, 1.0)
+		$Moon.attract_to(BH.position, 1.0)
+	for B in $Bullets.get_children():
+		B.mass = 0.1
+		# Bullets feel some planets' gravity to make it easier to hit them
+		for P in $Bodies.get_children():
+			B.attract_to(P.position, P.mass/10.0)
+		B.mass = 1
 
 
 func _input(event):
