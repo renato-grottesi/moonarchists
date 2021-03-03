@@ -55,6 +55,7 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="Death" type="Timer" parent="."]
+one_shot = true
 
 [node name="Trail" type="CPUParticles2D" parent="."]
 amount = 64

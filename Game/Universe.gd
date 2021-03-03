@@ -79,17 +79,15 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	#TODO: Need to increase gravity with proximity...
 	for A in $Asteroids.get_children():
 		A.position = A.position.rotated(delta * A.speed)
-	var bhs = $BlackHoles.get_children().size()
 	for BH in $BlackHoles.get_children():
 		for B in $Bodies.get_children():
 			B.check_asteroids(BH)
-			B.attract_to(BH.position, 1.0)
+			B.attract_to(BH.position, BH.mass)
 		for B in $Bullets.get_children():
-			B.attract_to(BH.position, 1.0)
-		$Moon.attract_to(BH.position, 1.0)
+			B.attract_to(BH.position, BH.mass)
+		$Moon.attract_to(BH.position, BH.mass)
 	for B in $Bullets.get_children():
 		B.mass = 0.1
 		# Bullets feel some planets' gravity to make it easier to hit them

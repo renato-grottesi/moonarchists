@@ -155,7 +155,12 @@ func _process(delta):
 		scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
 		$SpriteMoon.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
 		$Shadow.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
+		$SpriteNozzle.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
 
 
 func _on_Death_timeout():
 	emit_signal("destroyed", swallowed)
+	collision_layer = 0
+	collision_mask = 0
+	$Shape.disabled = true
+	$Trail.emitting = false

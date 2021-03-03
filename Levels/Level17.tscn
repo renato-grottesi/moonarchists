@@ -10,23 +10,22 @@ current_level = 17
 asteroids_offset = 150
 
 [node name="Moon" parent="." index="3"]
-impulse0 = Vector2( 400, 400 )
+position = Vector2( 448, 96 )
+impulse0 = Vector2( -800, -200 )
 
 [node name="Saturn" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 512, 384 )
-impulse0 = Vector2( 10000, 10000 )
+position = Vector2( 448, -136 )
+impulse0 = Vector2( -1000, 0 )
 texture = ExtResource( 3 )
-moons_count = 2
 moons_max_offset = 0
 
 [node name="BlackHole" parent="BlackHoles" index="0"]
-position = Vector2( 192, 0 )
+position = Vector2( 448, 0 )
 
-[node name="BlackHole2" parent="BlackHoles" index="1" instance=ExtResource( 4 )]
-position = Vector2( -192, 0 )
+[node name="LittleBlackHole" parent="BlackHoles" index="1" instance=ExtResource( 4 )]
+position = Vector2( -448, 328 )
+mass = 0.5
 
 [node name="Label" parent="HUD/Opening" index="0"]
 text = "
-Not destroying that small
-moon will be as difficult as
-getting rid of that huge planet!"
+Are there two black holes!?"
