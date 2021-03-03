@@ -16,6 +16,7 @@ const bullet_speed_k = 14
 var shoots = 0
 var game_over = false
 
+
 func _ready():
 	Global.rng.seed = current_level
 	if Global.is_speedrunning:
@@ -92,7 +93,7 @@ func _physics_process(delta):
 		B.mass = 0.1
 		# Bullets feel some planets' gravity to make it easier to hit them
 		for P in $Bodies.get_children():
-			B.attract_to(P.position, P.mass/10.0)
+			B.attract_to(P.position, P.mass / 10.0)
 		B.mass = 1
 
 

@@ -2,6 +2,7 @@ extends RigidBody2D
 
 const gravity_k = 20
 
+
 func attract_to(t_center, t_mass):
 	var offset = Vector2(0, 0)
 	var direction = t_center - position

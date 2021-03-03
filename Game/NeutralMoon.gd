@@ -42,6 +42,7 @@ func check_asteroids(bh):
 			bh.eat()
 			S.queue_free()
 
+
 func on_asteroid_damage():
 	emit_signal("damage")
 
