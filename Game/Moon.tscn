@@ -57,6 +57,9 @@ centered = false
 [node name="Death" type="Timer" parent="."]
 one_shot = true
 
+[node name="Immunity" type="Timer" parent="."]
+one_shot = true
+
 [node name="Trail" type="CPUParticles2D" parent="."]
 amount = 64
 lifetime = 2.0

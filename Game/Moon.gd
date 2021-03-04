@@ -119,17 +119,27 @@ func process_input(event):
 			max_fingers_count = 0
 
 
+func _on_immunity():
+	if health > 0:
+		$Immunity.start(1)
+
 func _on_Moon_body_entered(body):
 	if body is MassBullet:
-		health -= 20
-		emit_signal("damage")
+		if $Immunity.is_stopped():
+			health -= 20
+			emit_signal("damage")
+			_on_immunity()
 	elif body is NeutralMoon:
-		health -= 30
-		emit_signal("damage")
+		if $Immunity.is_stopped():
+			health -= 30
+			emit_signal("damage")
+			_on_immunity()
 	elif body is Asteroid:
-		health -= 15
-		body.hit()
-		emit_signal("damage")
+		if $Immunity.is_stopped():
+			health -= 15
+			body.hit()
+			emit_signal("damage")
+			_on_immunity()
 	elif body is BlackHole:
 		body.eat()
 		swallowed = true
@@ -149,6 +159,11 @@ func _on_Moon_body_entered(body):
 func _process(delta):
 	update_nozzle()
 	update_shadow()
+	$SpriteMoon.set_modulate(Color(1, 1, 1, 1))
+	if ! ($Immunity.is_stopped()):
+		var remaining = $Immunity.time_left
+		var modulation = (remaining * 10) - (int((remaining * 10)) )
+		$SpriteMoon.set_modulate(Color(1, modulation, modulation, 1))
 	time += delta
 	$Outline.material.set_shader_param("time", time)
 	if ! ($Death.is_stopped()):
