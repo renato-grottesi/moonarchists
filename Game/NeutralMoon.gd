@@ -56,8 +56,7 @@ func _physics_process(delta):
 
 
 func _on_NeutralMoon_body_entered(body):
-	if ! body is get_script():
-		emit_signal("damage")
+	emit_signal("damage")
 	if body is Asteroid:
 		body.hit()
 	if body is BlackHole:
