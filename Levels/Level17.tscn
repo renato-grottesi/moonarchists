@@ -10,20 +10,21 @@ current_level = 17
 asteroids_offset = 150
 
 [node name="Moon" parent="." index="3"]
-position = Vector2( 448, 96 )
-impulse0 = Vector2( -800, -200 )
+position = Vector2( -384, 0 )
+impulse0 = Vector2( 0, -800 )
 
 [node name="Saturn" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 448, -136 )
-impulse0 = Vector2( -1000, 0 )
+position = Vector2( 0, -320 )
+impulse0 = Vector2( 900, 0 )
 texture = ExtResource( 3 )
 moons_max_offset = 0
 
 [node name="BlackHole" parent="BlackHoles" index="0"]
-position = Vector2( 448, 0 )
+position = Vector2( 128, -120 )
+mass = 0.5
 
 [node name="LittleBlackHole" parent="BlackHoles" index="1" instance=ExtResource( 4 )]
-position = Vector2( -448, 328 )
+position = Vector2( -136, 128 )
 mass = 0.5
 
 [node name="Label" parent="HUD/Opening" index="0"]

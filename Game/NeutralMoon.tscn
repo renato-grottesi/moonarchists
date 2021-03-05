@@ -24,6 +24,9 @@ centered = false
 [node name="Absorb" type="Timer" parent="."]
 one_shot = true
 
+[node name="Hit" type="Timer" parent="."]
+one_shot = true
+
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 [connection signal="body_entered" from="." to="." method="_on_NeutralMoon_body_entered"]

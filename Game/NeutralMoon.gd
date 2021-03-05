@@ -56,12 +56,14 @@ func _physics_process(delta):
 
 
 func _on_NeutralMoon_body_entered(body):
-	emit_signal("damage")
-	if body is Asteroid:
-		body.hit()
 	if body is BlackHole:
 		absorb()
 		body.eat()
+	else:
+		emit_signal("damage")
+		$Hit.start(0.5)
+		if body is Asteroid:
+			body.hit()
 
 
 func _process(delta):
@@ -72,6 +74,8 @@ func _process(delta):
 	$Sprite.scale = Vector2(childs_scale, childs_scale)
 	$Shadow.scale = Vector2(childs_scale, childs_scale)
 	$Shape.shape.radius = 30.0 * childs_scale
+	var modulation = 1 - ($Hit.time_left * 2)
+	$Sprite.set_modulate(Color(1, modulation, modulation, 1))
 
 
 func get_radius():
