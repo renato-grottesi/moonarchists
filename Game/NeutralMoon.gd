@@ -60,7 +60,8 @@ func _on_NeutralMoon_body_entered(body):
 		absorb()
 		body.eat()
 	else:
-		emit_signal("damage")
+		if body != get_script():
+			emit_signal("damage")
 		$Hit.start(0.5)
 		if body is Asteroid:
 			body.hit()

@@ -12,12 +12,15 @@ const MassBullet = preload("res://Game/MassBullet.gd")
 const NeutralMoon = preload("res://Game/NeutralMoon.gd")
 const Asteroid = preload("res://Game/Asteroid.gd")
 const BlackHole = preload("res://Game/BlackHole.gd")
+const swipe_dead_zone = 64
 
 var health = 100
 var time = 0
 var swallowed = false
 var fingers_count = 0
 var max_fingers_count = 0
+var finger_position = Vector2(0, 0)
+var push_direction = Vector2(0, 0)
 
 
 func _ready():
@@ -58,6 +61,8 @@ func _push():
 	if Global.current_level > 10:
 		var offset = Vector2(0, 0)
 		var force = Vector2(300, 0).rotated($SpriteNozzle.rotation)
+		if (push_direction.length()>swipe_dead_zone):
+			force = push_direction.normalized() * 300;
 		apply_impulse(offset, force)
 		$Push.restart()
 		emit_signal("push")
@@ -102,17 +107,22 @@ func process_input(event):
 		$SpriteNozzle.visible = true
 	if event is InputEventScreenTouch:
 		# Update the current and max number of fingers in the screen
+		push_direction = Vector2(0, 0)
 		if event.pressed:
+			if event.index == 0:
+				finger_position = event.position
 			fingers_count += 1
 			if fingers_count > max_fingers_count:
 				max_fingers_count = fingers_count
 		else:
+			if event.index == 0:
+				push_direction = event.position - finger_position
 			fingers_count -= 1
 		if fingers_count < 0:
 			fingers_count = 0
 		# If there are no fingers in the screen, trigger the action
 		if fingers_count == 0 and max_fingers_count != 0:
-			if max_fingers_count == 1:
+			if max_fingers_count == 1 && push_direction.length() < swipe_dead_zone:
 				_shoot()
 			else:
 				_push()
