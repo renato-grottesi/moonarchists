@@ -103,13 +103,17 @@ func _input(event):
 			$HUD/Opening/Timer.start(0.001)
 	else:
 		if Input.is_action_pressed("ui_cancel"):
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			Global.abort_speed_run()
-			Global.current_level = 0
+			quit_level()
 		elif Input.is_action_pressed("ui_retry"):
 			retry_level()
 		else:
 			$Moon.process_input(event)
+
+
+func quit_level():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Global.abort_speed_run()
+	Global.current_level = 0
 
 
 func _incr_shoots():
@@ -286,3 +290,11 @@ func friendly_destroyed():
 func set_game_over():
 	game_over = true
 	$HUD/MoonsCounter.game_over = true
+
+
+func _on_Moon_retry():
+	retry_level()
+
+
+func _on_Moon_quit():
+	quit_level()

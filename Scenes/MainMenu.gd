@@ -26,8 +26,6 @@ func _input(event):
 
 
 func _unhandled_input(event):
-	if Input.is_action_pressed("ui_cancel"):
-		get_tree().quit()
 	if event is InputEventJoypadButton:
 		Global.use_joy_pad = true
 		Global.use_cross_hair = false

@@ -7,7 +7,7 @@
 
 [node name="Level" instance=ExtResource( 1 )]
 current_level = 9
-asteroids_count = 8
+asteroids_count = 12
 asteroids_offset = 180
 
 [node name="Moon" parent="." index="3"]
@@ -16,7 +16,7 @@ impulse0 = Vector2( 0, 400 )
 
 [node name="Moon" parent="Bodies" index="0" instance=ExtResource( 2 )]
 position = Vector2( 0, -352 )
-impulse0 = Vector2( -900, 0 )
+impulse0 = Vector2( -800, 0 )
 texture = ExtResource( 3 )
 friendly = true
 

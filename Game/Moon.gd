@@ -7,6 +7,8 @@ signal destroyed(swallowed)
 signal heath(health)
 signal damage
 signal push
+signal retry
+signal quit
 
 const MassBullet = preload("res://Game/MassBullet.gd")
 const NeutralMoon = preload("res://Game/NeutralMoon.gd")
@@ -58,11 +60,11 @@ func _shoot():
 
 
 func _push():
-	if Global.current_level > 10:
+	if (Global.current_level > 10) && (health > 0):
 		var offset = Vector2(0, 0)
 		var force = Vector2(300, 0).rotated($SpriteNozzle.rotation)
-		if (push_direction.length()>swipe_dead_zone):
-			force = push_direction.normalized() * 300;
+		if push_direction.length() > swipe_dead_zone:
+			force = push_direction.normalized() * 300
 		apply_impulse(offset, force)
 		$Push.restart()
 		emit_signal("push")
@@ -122,16 +124,22 @@ func process_input(event):
 			fingers_count = 0
 		# If there are no fingers in the screen, trigger the action
 		if fingers_count == 0 and max_fingers_count != 0:
-			if max_fingers_count == 1 && push_direction.length() < swipe_dead_zone:
-				_shoot()
-			else:
-				_push()
+			if max_fingers_count == 1:
+				if push_direction.length() < swipe_dead_zone:
+					_shoot()
+				else:
+					_push()
+			if max_fingers_count == 2:
+				emit_signal("retry")
+			if max_fingers_count == 3:
+				emit_signal("quit")
 			max_fingers_count = 0
 
 
 func _on_immunity():
 	if health > 0:
 		$Immunity.start(1)
+
 
 func _on_Moon_body_entered(body):
 	if body is MassBullet:
@@ -172,7 +180,7 @@ func _process(delta):
 	$SpriteMoon.set_modulate(Color(1, 1, 1, 1))
 	if ! ($Immunity.is_stopped()):
 		var remaining = $Immunity.time_left
-		var modulation = (remaining * 10) - (int((remaining * 10)) )
+		var modulation = (remaining * 10) - (int(remaining * 10))
 		$SpriteMoon.set_modulate(Color(1, modulation, modulation, 1))
 	time += delta
 	$Outline.material.set_shader_param("time", time)
