@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/24_no_outline.tres" type="DynamicFont" id=2]
@@ -9,12 +9,19 @@
 [ext_resource path="res://UI/LevelButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/transparent.tres" type="StyleBox" id=8]
 [ext_resource path="res://Sounds/select.wav" type="AudioStream" id=9]
+[ext_resource path="res://Game/StarField.tscn" type="PackedScene" id=10]
 
 [node name="MainMenu" type="Control"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="StarFieldL" parent="." instance=ExtResource( 10 )]
+position = Vector2( 100, 400 )
+
+[node name="StarFieldR" parent="." instance=ExtResource( 10 )]
+position = Vector2( 900, 400 )
 
 [node name="Title" type="Label" parent="."]
 margin_right = 1024.0
