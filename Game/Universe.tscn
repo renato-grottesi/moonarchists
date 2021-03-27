@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Game/Universe.gd" type="Script" id=1]
 [ext_resource path="res://Game/BlackHole.tscn" type="PackedScene" id=2]
@@ -12,9 +12,13 @@
 [ext_resource path="res://Game/Moon.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Sprites/star_empty.png" type="Texture" id=11]
 [ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Sprites/swipe.png" type="Texture" id=13]
 [ext_resource path="res://Sounds/select.wav" type="AudioStream" id=14]
 [ext_resource path="res://UI/MoonsCounter.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Sprites/cross_hair.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/tap.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/triple_tap.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/double_tap.png" type="Texture" id=19]
 
 [sub_resource type="AudioStreamRandomPitch" id=1]
 audio_stream = ExtResource( 9 )
@@ -307,6 +311,66 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShootSprite" type="Sprite" parent="HUD"]
+position = Vector2( 16, 704 )
+texture = ExtResource( 17 )
+
+[node name="ShootLabel" type="Label" parent="HUD"]
+margin_left = 32.0
+margin_top = 688.0
+margin_right = 113.0
+margin_bottom = 723.0
+custom_fonts/font = ExtResource( 4 )
+text = "Shoot"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PropulsionSprite" type="Sprite" parent="HUD"]
+position = Vector2( 16, 744 )
+texture = ExtResource( 13 )
+
+[node name="PropulsionLabel" type="Label" parent="HUD"]
+margin_left = 32.0
+margin_top = 728.0
+margin_right = 189.0
+margin_bottom = 763.0
+custom_fonts/font = ExtResource( 4 )
+text = "Propulsion"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartSprite" type="Sprite" parent="HUD"]
+position = Vector2( 888, 704 )
+texture = ExtResource( 18 )
+
+[node name="RestartLabel" type="Label" parent="HUD"]
+margin_left = 904.0
+margin_top = 688.0
+margin_right = 1019.0
+margin_bottom = 723.0
+custom_fonts/font = ExtResource( 4 )
+text = "Restart"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuSprite" type="Sprite" parent="HUD"]
+position = Vector2( 888, 744 )
+texture = ExtResource( 19 )
+
+[node name="MenuLabel" type="Label" parent="HUD"]
+margin_left = 904.0
+margin_top = 728.0
+margin_right = 985.0
+margin_bottom = 763.0
+custom_fonts/font = ExtResource( 4 )
+text = "Menu"
 __meta__ = {
 "_edit_use_anchors_": false
 }
