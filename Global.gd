@@ -2,6 +2,7 @@ extends Node
 
 const game_version = 24
 const last_level = 16
+const enable_propulsion = 11
 
 var current_scene = null
 var current_level = 0 setget _set_current_level, _get_current_level

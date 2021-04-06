@@ -43,29 +43,44 @@ func _process(delta):
 	if Global.is_speedrunning:
 		$Score.text = Global.ms2str(Global.get_partial_speed_run())
 	$ShootSprite.rotation_degrees = 0
-	$PropulsionSprite.rotation_degrees = 0
+	$PropelSprite.rotation_degrees = 0
 	$RestartSprite.rotation_degrees = 0
 	$MenuSprite.rotation_degrees = 0
+	$KeyControls.visible = false;
 	if Global.use_joy_pad:
 		$ShootSprite.set_texture(gamepad_button_texture)
-		$PropulsionSprite.set_texture(gamepad_button_texture)
+		$PropelSprite.set_texture(gamepad_button_texture)
 		$RestartSprite.set_texture(gamepad_button_texture)
 		$MenuSprite.set_texture(gamepad_button_texture)
 		$ShootSprite.rotation_degrees = 180
-		$PropulsionSprite.rotation_degrees = 90
+		$PropelSprite.rotation_degrees = 90
 		$RestartSprite.rotation_degrees = 270
 		$MenuSprite.rotation_degrees = 0
 	elif OS.get_name() == "Android":
 		$ShootSprite.set_texture(tap_texture)
-		$PropulsionSprite.set_texture(swipe_texture)
+		$PropelSprite.set_texture(swipe_texture)
 		$RestartSprite.set_texture(triple_tap_texture)
 		$MenuSprite.set_texture(double_tap_texture)
 	else:
+		$KeyControls.visible = true;
 		$ShootSprite.set_texture(left_click_texture)
-		$PropulsionSprite.set_texture(right_click_texture)
+		$PropelSprite.set_texture(right_click_texture)
 		$RestartSprite.set_texture(key_texture)
 		$MenuSprite.set_texture(key_texture)
-
+	if (Global.current_level < Global.enable_propulsion):
+		$PropelSprite.visible = false
+		$PropelLabel.visible = false
+		$KeyControls/PropelSprite.visible = false
+		$KeyControls/PropelLabel.visible = false
+	if (Global.current_level == 1):
+		$ShootSprite.modulate = Color(1, 0, 0)
+		$ShootLabel.modulate = Color(1, 0, 0)
+		$KeyControls/ShootSprite.modulate = Color(1, 0, 0)
+	if (Global.current_level == Global.enable_propulsion):
+		$PropelSprite.modulate = Color(1, 0, 0)
+		$PropelLabel.modulate = Color(1, 0, 0)
+		$KeyControls/PropelSprite.modulate = Color(1, 0, 0)
+		$KeyControls/PropelLabel.modulate = Color(1, 0, 0)
 
 func enable_star(which_star):
 	which_star.set_texture(star_texture)

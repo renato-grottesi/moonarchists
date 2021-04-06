@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Game/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/star_empty.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://Sprites/tap.png" type="Texture" id=12]
 [ext_resource path="res://UI/stretchable_button_hover.tres" type="StyleBox" id=13]
 [ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Sprites/space_bar.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/key.png" type="Texture" id=16]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -279,13 +281,13 @@ __meta__ = {
 }
 
 [node name="ShootSprite" type="Sprite" parent="."]
-position = Vector2( 16, 704 )
+position = Vector2( 120, 704 )
 texture = ExtResource( 12 )
 
 [node name="ShootLabel" type="Label" parent="."]
-margin_left = 32.0
+margin_left = 8.0
 margin_top = 688.0
-margin_right = 113.0
+margin_right = 89.0
 margin_bottom = 723.0
 custom_fonts/font = ExtResource( 6 )
 text = "Shoot"
@@ -293,17 +295,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PropulsionSprite" type="Sprite" parent="."]
-position = Vector2( 16, 744 )
+[node name="PropelSprite" type="Sprite" parent="."]
+position = Vector2( 120, 744 )
 texture = ExtResource( 4 )
 
-[node name="PropulsionLabel" type="Label" parent="."]
-margin_left = 32.0
+[node name="PropelLabel" type="Label" parent="."]
+margin_left = 8.0
 margin_top = 728.0
-margin_right = 189.0
+margin_right = 165.0
 margin_bottom = 763.0
 custom_fonts/font = ExtResource( 6 )
-text = "Propulsion"
+text = "Propel"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -343,6 +345,66 @@ stream = ExtResource( 3 )
 
 [node name="InputDisable" type="Timer" parent="."]
 one_shot = true
+
+[node name="KeyControls" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShootSprite" type="Sprite" parent="KeyControls"]
+position = Vector2( 152, 704 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 15 )
+
+[node name="PropelSprite" type="Sprite" parent="KeyControls"]
+position = Vector2( 152, 744 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 16 )
+
+[node name="RestartSprite" type="Sprite" parent="KeyControls"]
+position = Vector2( 856, 704 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 16 )
+
+[node name="MenuSprite" type="Sprite" parent="KeyControls"]
+position = Vector2( 856, 744 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 16 )
+
+[node name="PropelLabel" type="Label" parent="KeyControls"]
+margin_left = 144.0
+margin_top = 728.0
+margin_right = 160.0
+margin_bottom = 763.0
+custom_fonts/font = ExtResource( 6 )
+text = "c"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuLabel" type="Label" parent="KeyControls"]
+margin_left = 848.0
+margin_top = 728.0
+margin_right = 867.0
+margin_bottom = 763.0
+custom_fonts/font = ExtResource( 6 )
+text = "m"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartLabel" type="Label" parent="KeyControls"]
+margin_left = 848.0
+margin_top = 688.0
+margin_right = 864.0
+margin_bottom = 723.0
+custom_fonts/font = ExtResource( 6 )
+text = "r"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="about_to_show" from="Victory" to="." method="_on_Victory_about_to_show"]
 [connection signal="focus_entered" from="Victory/NextVictory" to="." method="beep"]
 [connection signal="pressed" from="Victory/NextVictory" to="." method="_on_NextVictory_pressed"]

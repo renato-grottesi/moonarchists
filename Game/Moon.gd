@@ -60,7 +60,7 @@ func _shoot():
 
 
 func _push():
-	if (Global.current_level > 10) && (health > 0):
+	if (Global.current_level >= Global.enable_propulsion) && (health > 0):
 		var offset = Vector2(0, 0)
 		var force = Vector2(300, 0).rotated($SpriteNozzle.rotation)
 		if push_direction.length() > swipe_dead_zone:
