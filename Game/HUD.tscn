@@ -1,0 +1,363 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Game/HUD.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/star_empty.png" type="Texture" id=2]
+[ext_resource path="res://Sounds/select.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sprites/swipe.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/96_no_outline.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Fonts/24_no_outline.tres" type="DynamicFont" id=6]
+[ext_resource path="res://UI/MoonsCounter.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sprites/triple_tap.png" type="Texture" id=8]
+[ext_resource path="res://UI/stretchable_button_pressed.tres" type="StyleBox" id=9]
+[ext_resource path="res://UI/stretchable_button.tres" type="StyleBox" id=10]
+[ext_resource path="res://Sprites/double_tap.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/tap.png" type="Texture" id=12]
+[ext_resource path="res://UI/stretchable_button_hover.tres" type="StyleBox" id=13]
+[ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=14]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Score" type="Label" parent="."]
+margin_left = 800.0
+margin_top = 32.0
+margin_right = 1056.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 6 )
+text = "Shoots: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" parent="." instance=ExtResource( 14 )]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -992.0
+margin_bottom = -736.0
+
+[node name="MoonsCounter" parent="." instance=ExtResource( 7 )]
+margin_left = 384.0
+margin_top = 32.0
+margin_right = -640.0
+margin_bottom = -736.0
+
+[node name="Victory" type="PopupDialog" parent="."]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 768.0
+margin_bottom = 704.0
+custom_styles/panel = ExtResource( 10 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Victory"]
+margin_right = 512.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 5 )
+text = "You won!"
+align = 1
+valign = 1
+
+[node name="NextVictory" type="Button" parent="Victory"]
+margin_left = 352.0
+margin_top = 384.0
+margin_right = 480.0
+margin_bottom = 448.0
+focus_neighbour_left = NodePath("../QuitVictory")
+focus_neighbour_right = NodePath("../RetryVictory")
+focus_next = NodePath("../RetryVictory")
+focus_previous = NodePath("../QuitVictory")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 6 )
+text = "Next"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RetryVictory" type="Button" parent="Victory"]
+margin_left = 32.0
+margin_top = 384.0
+margin_right = 160.0
+margin_bottom = 448.0
+focus_neighbour_left = NodePath("../NextVictory")
+focus_neighbour_right = NodePath("../QuitVictory")
+focus_next = NodePath("../QuitVictory")
+focus_previous = NodePath("../NextVictory")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 6 )
+text = "Retry"
+
+[node name="QuitVictory" type="Button" parent="Victory"]
+margin_left = 192.0
+margin_top = 384.0
+margin_right = 320.0
+margin_bottom = 448.0
+focus_neighbour_left = NodePath("../RetryVictory")
+focus_neighbour_right = NodePath("../NextVictory")
+focus_next = NodePath("../NextVictory")
+focus_previous = NodePath("../RetryVictory")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 6 )
+text = "Quit"
+
+[node name="Star1" type="Sprite" parent="Victory"]
+position = Vector2( 160, 288 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="Star2" type="Sprite" parent="Victory"]
+position = Vector2( 256, 264 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="Star3" type="Sprite" parent="Victory"]
+position = Vector2( 352, 288 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="Opening" type="PopupDialog" parent="."]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 768.0
+margin_bottom = 704.0
+custom_styles/panel = ExtResource( 10 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Opening"]
+margin_right = 512.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 6 )
+align = 1
+valign = 1
+
+[node name="CloseOpening" type="Button" parent="Opening"]
+margin_left = 192.0
+margin_top = 384.0
+margin_right = 320.0
+margin_bottom = 448.0
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 6 )
+text = "Close"
+
+[node name="Timer" type="Timer" parent="Opening"]
+wait_time = 2.0
+one_shot = true
+
+[node name="LastLevel" type="PopupDialog" parent="."]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 768.0
+margin_bottom = 704.0
+custom_styles/panel = ExtResource( 10 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="LastLevel"]
+margin_right = 512.0
+margin_bottom = 271.0
+custom_fonts/font = ExtResource( 5 )
+text = "You beat
+the game"
+align = 1
+valign = 1
+
+[node name="LastLevelVictory" type="Button" parent="LastLevel"]
+margin_left = 192.0
+margin_top = 384.0
+margin_right = 320.0
+margin_bottom = 448.0
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 6 )
+text = "Close"
+
+[node name="SpeedrunScore" type="Label" parent="LastLevel"]
+visible = false
+margin_left = 128.0
+margin_top = 320.0
+margin_right = 384.0
+margin_bottom = 355.0
+custom_fonts/font = ExtResource( 6 )
+text = "Speedrun: ??:??"
+align = 1
+valign = 1
+
+[node name="Lost" type="PopupDialog" parent="."]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 768.0
+margin_bottom = 704.0
+custom_styles/panel = ExtResource( 10 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Lost"]
+margin_right = 512.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 5 )
+text = "You lost"
+align = 1
+valign = 1
+
+[node name="Reason" type="Label" parent="Lost"]
+margin_top = 192.0
+margin_right = 512.0
+margin_bottom = 326.0
+custom_fonts/font = ExtResource( 6 )
+text = "
+"
+align = 1
+valign = 1
+
+[node name="LostRetry" type="Button" parent="Lost"]
+margin_left = 288.0
+margin_top = 384.0
+margin_right = 416.0
+margin_bottom = 448.0
+focus_neighbour_left = NodePath("../LostQuit")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../LostQuit")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../LostQuit")
+focus_previous = NodePath("../LostQuit")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 6 )
+text = "Retry"
+
+[node name="LostQuit" type="Button" parent="Lost"]
+margin_left = 96.0
+margin_top = 384.0
+margin_right = 224.0
+margin_bottom = 448.0
+focus_neighbour_left = NodePath("../LostRetry")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../LostRetry")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../LostRetry")
+focus_previous = NodePath("../LostRetry")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 6 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShootSprite" type="Sprite" parent="."]
+position = Vector2( 16, 704 )
+texture = ExtResource( 12 )
+
+[node name="ShootLabel" type="Label" parent="."]
+margin_left = 32.0
+margin_top = 688.0
+margin_right = 113.0
+margin_bottom = 723.0
+custom_fonts/font = ExtResource( 6 )
+text = "Shoot"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PropulsionSprite" type="Sprite" parent="."]
+position = Vector2( 16, 744 )
+texture = ExtResource( 4 )
+
+[node name="PropulsionLabel" type="Label" parent="."]
+margin_left = 32.0
+margin_top = 728.0
+margin_right = 189.0
+margin_bottom = 763.0
+custom_fonts/font = ExtResource( 6 )
+text = "Propulsion"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartSprite" type="Sprite" parent="."]
+position = Vector2( 888, 704 )
+texture = ExtResource( 8 )
+
+[node name="RestartLabel" type="Label" parent="."]
+margin_left = 904.0
+margin_top = 688.0
+margin_right = 1019.0
+margin_bottom = 723.0
+custom_fonts/font = ExtResource( 6 )
+text = "Restart"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuSprite" type="Sprite" parent="."]
+position = Vector2( 888, 744 )
+texture = ExtResource( 11 )
+
+[node name="MenuLabel" type="Label" parent="."]
+margin_left = 904.0
+margin_top = 728.0
+margin_right = 985.0
+margin_bottom = 763.0
+custom_fonts/font = ExtResource( 6 )
+text = "Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Beep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="InputDisable" type="Timer" parent="."]
+one_shot = true
+[connection signal="about_to_show" from="Victory" to="." method="_on_Victory_about_to_show"]
+[connection signal="focus_entered" from="Victory/NextVictory" to="." method="beep"]
+[connection signal="pressed" from="Victory/NextVictory" to="." method="_on_NextVictory_pressed"]
+[connection signal="focus_entered" from="Victory/RetryVictory" to="." method="beep"]
+[connection signal="pressed" from="Victory/RetryVictory" to="." method="_on_Retry_pressed"]
+[connection signal="focus_entered" from="Victory/QuitVictory" to="." method="beep"]
+[connection signal="pressed" from="Victory/QuitVictory" to="." method="_on_QuitVictory_pressed"]
+[connection signal="about_to_show" from="Opening" to="." method="_on_Opening_about_to_show"]
+[connection signal="focus_entered" from="Opening/CloseOpening" to="." method="beep"]
+[connection signal="pressed" from="Opening/CloseOpening" to="." method="_on_CloseOpening_pressed"]
+[connection signal="about_to_show" from="LastLevel" to="." method="_on_LastLevel_about_to_show"]
+[connection signal="focus_entered" from="LastLevel/LastLevelVictory" to="." method="beep"]
+[connection signal="pressed" from="LastLevel/LastLevelVictory" to="." method="_on_LastLevelVictory_pressed"]
+[connection signal="about_to_show" from="Lost" to="." method="_on_Lost_about_to_show"]
+[connection signal="focus_entered" from="Lost/LostRetry" to="." method="beep"]
+[connection signal="pressed" from="Lost/LostRetry" to="." method="_on_Retry_pressed"]
+[connection signal="focus_entered" from="Lost/LostQuit" to="." method="beep"]
+[connection signal="pressed" from="Lost/LostQuit" to="." method="_on_LostQuit_pressed"]

@@ -227,3 +227,10 @@ func get_sound_volume():
 
 func get_music_volume():
 	return music_volume
+
+
+func retry_level():
+	var stars = level_status[current_level - 1]
+	if stars > 3:
+		level_status[current_level - 1] = 5
+	_set_current_level(current_level)
