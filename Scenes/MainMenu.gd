@@ -9,7 +9,8 @@ const pages_count = 2
 
 
 func _ready():
-	$Play.grab_focus()
+	$MainControls.visible = true
+	$MainControls/Play.grab_focus()
 	fullscreen_text()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -42,32 +43,39 @@ func _on_play_pressed():
 	else:
 		$StoryIntro.popup()
 	beep()
+	$MainControls.visible = false
 
 
 func _on_Options_pressed():
 	$OptionsDialog.popup()
+	$MainControls.visible = false
 	beep()
 
 
 func _on_CloseCreditsDialog_pressed():
 	$CreditsDialog.hide()
+	$MainControls.visible = true
+	$MainControls/Credits.grab_focus()
 	beep()
 
 
 func _on_Credits_pressed():
 	$CreditsDialog.popup()
+	$MainControls.visible = false
 	beep()
 
 
 func _on_CloseOptionsDialog_pressed():
 	$OptionsDialog.hide()
-	$Options.grab_focus()
+	$MainControls.visible = true
+	$MainControls/Options.grab_focus()
 	beep()
 
 
 func _on_CloseLevelsDialog_pressed():
 	$Levels.hide()
-	$Play.grab_focus()
+	$MainControls.visible = true
+	$MainControls/Play.grab_focus()
 	beep()
 
 
@@ -92,7 +100,7 @@ func _on_OptionsDialog_about_to_show():
 func _on_OptionsDialog_popup_hide():
 	# Save the sound and music volumes
 	Global.save_game()
-	$Options.grab_focus()
+	$MainControls/Options.grab_focus()
 
 
 func _on_ToggleFullScreen_pressed():
@@ -124,15 +132,18 @@ func beep():
 
 
 func _on_Levels_popup_hide():
-	$Play.grab_focus()
+	$MainControls/Play.grab_focus()
 
 
 func _on_CloseHelpDialog_pressed():
 	$HelpDialog.hide()
-
+	$MainControls.visible = true
+	$MainControls/Help.grab_focus()
+	beep()
 
 func _on_Help_pressed():
 	$HelpDialog.popup()
+	$MainControls.visible = false
 
 
 func _on_SpeedRun_pressed():
