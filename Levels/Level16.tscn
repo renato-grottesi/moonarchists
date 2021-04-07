@@ -7,10 +7,8 @@
 [ext_resource path="res://Sprites/mars.png" type="Texture" id=5]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 16
-asteroids_offset = 150
 
-[node name="Moon" parent="." index="3"]
+[node name="Moon" parent="." index="4"]
 position = Vector2( 88, 0 )
 impulse0 = Vector2( 0, -300 )
 
@@ -35,8 +33,8 @@ impulse0 = Vector2( 600, 0 )
 texture = ExtResource( 4 )
 friendly = true
 
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
+[node name="HUD" parent="." index="8"]
+opening = "
 Not destroying that small
 moon will be as difficult as
 getting rid of that huge planet!"

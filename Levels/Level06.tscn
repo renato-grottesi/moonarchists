@@ -7,7 +7,6 @@
 [ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 6
 
 [node name="Moon" parent="." index="3"]
 position = Vector2( 288, 0 )
@@ -31,8 +30,8 @@ position = Vector2( -288, 224 )
 impulse0 = Vector2( -500, -600 )
 texture = ExtResource( 4 )
 
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
+[node name="HUD" parent="." index="8"]
+opening = "
 There is another rogue moon
 associated with
 the moonarchists

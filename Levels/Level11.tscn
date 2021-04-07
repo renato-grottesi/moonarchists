@@ -5,8 +5,6 @@
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=5]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 11
-asteroids_offset = 0
 
 [node name="Moon" parent="." index="3"]
 position = Vector2( 88, 0 )
@@ -18,8 +16,8 @@ impulse0 = Vector2( 0, 800 )
 texture = ExtResource( 5 )
 moons_count = 1
 
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
+[node name="HUD" parent="." index="8"]
+opening = "
 We are aware that our
 mini-moon generator
 can't generate enough

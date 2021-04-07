@@ -189,7 +189,8 @@ func _process(delta):
 		$SpriteMoon.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
 		$Shadow.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
 		$SpriteNozzle.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
-
+	#print(position)
+	#print(linear_velocity)
 
 func _on_Death_timeout():
 	emit_signal("destroyed", swallowed)

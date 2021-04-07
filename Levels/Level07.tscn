@@ -7,7 +7,6 @@
 [ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 7
 
 [node name="Moon" parent="." index="3"]
 position = Vector2( 64, 64 )
@@ -35,8 +34,8 @@ position = Vector2( 128, 128 )
 impulse0 = Vector2( 400, -400 )
 texture = ExtResource( 4 )
 
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
+[node name="HUD" parent="." index="8"]
+opening = "
 Those planets are orbiting
 crazily fast, but you are
 the best shooter there is!

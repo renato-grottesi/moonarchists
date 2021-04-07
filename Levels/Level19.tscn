@@ -17,9 +17,4 @@ texture = ExtResource( 4 )
 
 [node name="HUD" parent="." index="8"]
 opening = "
-It looks like you'll have
-to slingshoot your moon
-in this planetary system.
-
-I'm sure that someone with 
 your fame can hit it blindfolded."

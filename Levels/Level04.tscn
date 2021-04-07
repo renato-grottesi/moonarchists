@@ -6,7 +6,6 @@
 [ext_resource path="res://Sprites/mars.png" type="Texture" id=5]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 4
 
 [node name="Moon" parent="." index="3"]
 position = Vector2( -128, 0 )
@@ -26,8 +25,8 @@ texture = ExtResource( 5 )
 moons_count = 2
 moons_max_offset = 0
 
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
+[node name="HUD" parent="." index="8"]
+opening = "
 Those planets are surrounded
 by asteroids.
 

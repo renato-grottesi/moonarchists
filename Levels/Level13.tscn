@@ -6,7 +6,6 @@
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=5]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 13
 asteroids_count = 6
 asteroids_offset = 150
 
@@ -26,8 +25,8 @@ position = Vector2( -192, 192 )
 impulse0 = Vector2( 600, 600 )
 texture = ExtResource( 3 )
 
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
+[node name="HUD" parent="." index="8"]
+opening = "
 Maybe you can kill a few
 pigeons with one stone?
 

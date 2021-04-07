@@ -5,8 +5,6 @@
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=5]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 1
-asteroids_offset = 0
 
 [node name="Moon" parent="." index="3"]
 position = Vector2( 192, 0 )
@@ -17,8 +15,8 @@ position = Vector2( 96, 0 )
 impulse0 = Vector2( 0, 300 )
 texture = ExtResource( 5 )
 
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
+[node name="HUD" parent="." index="8"]
+opening = "
 We installed a mini-moon
 generator in this moon.
 Use it to shoot at enemy planets

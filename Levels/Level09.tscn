@@ -6,7 +6,6 @@
 [ext_resource path="res://Sprites/efisto.png" type="Texture" id=6]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 9
 asteroids_count = 12
 asteroids_offset = 180
 
@@ -25,8 +24,8 @@ position = Vector2( -288, 0 )
 impulse0 = Vector2( 0, -700 )
 texture = ExtResource( 6 )
 
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
+[node name="HUD" parent="." index="8"]
+opening = "
 You are trapped inside
 an asteroid belt!
 

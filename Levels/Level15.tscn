@@ -7,8 +7,6 @@
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=5]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 15
-asteroids_offset = 150
 
 [node name="Moon" parent="." index="3"]
 position = Vector2( 64, 0 )
@@ -33,8 +31,8 @@ impulse0 = Vector2( -500, 0 )
 texture = ExtResource( 4 )
 friendly = true
 
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
+[node name="HUD" parent="." index="8"]
+opening = "
 It looks like different sized
 planetes have different 
 orbital speeds...

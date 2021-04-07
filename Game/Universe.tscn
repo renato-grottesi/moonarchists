@@ -24,8 +24,6 @@ position = Vector2( -400, 0 )
 [node name="Bullets" type="Node" parent="."]
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2( -512, -384 )
-anchor_mode = 0
 current = true
 
 [node name="Shake" type="Timer" parent="Camera"]

@@ -1,7 +1,7 @@
 extends Node
 
-const game_version = 24
-const last_level = 16
+const game_version = 25
+const last_level = 18
 const enable_propulsion = 11
 
 var current_scene = null

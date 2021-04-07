@@ -7,7 +7,6 @@
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=5]
 
 [node name="Level" instance=ExtResource( 1 )]
-current_level = 10
 asteroids_count = 16
 asteroids_offset = 145
 
@@ -32,8 +31,8 @@ impulse0 = Vector2( 800, 0 )
 texture = ExtResource( 5 )
 moons_count = 2
 
-[node name="Label" parent="HUD/Opening" index="0"]
-text = "
+[node name="HUD" parent="." index="8"]
+opening = "
 Be carefull not to hit the
 moon orbiting inside the
 asteroids belt!"

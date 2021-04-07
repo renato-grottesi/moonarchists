@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+export (String, MULTILINE) var opening: String = String("")
+
 const opening_duration = 4
 const input_disable_duration = 0.25
 
@@ -20,20 +22,21 @@ func _ready():
 		$Score.text = Global.ms2str(Global.get_partial_speed_run())
 	var stars = Global.level_status[Global.current_level - 1]
 	if stars > 5:
-		if $Opening/Label.text.length() > 0:
+		if opening.length() > 0:
+			$Opening/Label.text = opening
 			if ! Global.is_speedrunning:
 				if Global.use_joy_pad:
-					$Opening/Label.text = $Opening/Label.text.replace("SHOOT", "Press A")
-					$Opening/Label.text = $Opening/Label.text.replace("PROP", "Press B")
-					$Opening/Label.text = $Opening/Label.text.replace("AIMING", "Move the joystick to aim.")
+					$Opening/Label.text = opening.replace("SHOOT", "Press A")
+					$Opening/Label.text = opening.replace("PROP", "Press B")
+					$Opening/Label.text = opening.replace("AIMING", "Move the joystick to aim.")
 				elif OS.get_name() == "Android":
-					$Opening/Label.text = $Opening/Label.text.replace("SHOOT", "Tap")
-					$Opening/Label.text = $Opening/Label.text.replace("PROP", "Tap with two fingers")
-					$Opening/Label.text = $Opening/Label.text.replace("AIMING", "")
+					$Opening/Label.text = opening.replace("SHOOT", "Tap")
+					$Opening/Label.text = opening.replace("PROP", "Tap with two fingers")
+					$Opening/Label.text = opening.replace("AIMING", "")
 				else:
-					$Opening/Label.text = $Opening/Label.text.replace("SHOOT", "Click or press space")
-					$Opening/Label.text = $Opening/Label.text.replace("PROP", "Right click or press C")
-					$Opening/Label.text = $Opening/Label.text.replace("AIMING", "Move the mouse or \nuse the arrow keys to aim")
+					$Opening/Label.text = opening.replace("SHOOT", "Click or press space")
+					$Opening/Label.text = opening.replace("PROP", "Right click or press C")
+					$Opening/Label.text = opening.replace("AIMING", "Move the mouse or \nuse the arrow keys to aim")
 				$Opening.popup()
 
 
