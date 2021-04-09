@@ -32,6 +32,7 @@ func _ready():
 		B.connect("friendly_destroyed", self, "friendly_destroyed")
 
 
+# warning-ignore:unused_argument
 func _process(delta):
 	var enemies_left = 0
 	for B in $Bodies.get_children():

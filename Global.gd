@@ -1,7 +1,7 @@
 extends Node
 
 const game_version = 25
-const last_level = 18
+const last_level = 19
 const enable_propulsion = 11
 
 var current_scene = null
@@ -36,8 +36,8 @@ var levels = [
 	"res://Levels/Level15.tscn",
 	"res://Levels/Level16.tscn",
 	"res://Levels/Level17.tscn",
-	"res://Levels/Level01.tscn",
-	"res://Levels/Level01.tscn",
+	"res://Levels/Level18.tscn",
+	"res://Levels/Level19.tscn",
 	"res://Levels/Level01.tscn",
 	"res://Levels/Level01.tscn",
 	"res://Levels/Level01.tscn",

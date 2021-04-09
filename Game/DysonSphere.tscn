@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/DysonSphere.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 100.0
+
+[node name="DysonSphere" type="RigidBody2D"]
+contacts_reported = 1000
+contact_monitor = true
+angular_velocity = 5.0
+script = ExtResource( 2 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Blocks" type="Node2D" parent="."]
+[connection signal="body_entered" from="." to="." method="_on_DysonSphere_body_entered"]

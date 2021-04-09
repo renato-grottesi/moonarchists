@@ -5,7 +5,7 @@ const lock_texture = preload("res://Sprites/lock.png")
 
 var click_start
 var levels_page = 0
-const pages_count = 2
+const pages_count = 3
 
 
 func _ready():
@@ -140,6 +140,7 @@ func _on_CloseHelpDialog_pressed():
 	$MainControls.visible = true
 	$MainControls/Help.grab_focus()
 	beep()
+
 
 func _on_Help_pressed():
 	$HelpDialog.popup()

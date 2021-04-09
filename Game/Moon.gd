@@ -32,6 +32,7 @@ func _ready():
 	max_fingers_count = 0
 
 
+# warning-ignore:unused_argument
 func _physics_process(delta):
 	rotation = 0
 
@@ -191,6 +192,7 @@ func _process(delta):
 		$SpriteNozzle.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
 	#print(position)
 	#print(linear_velocity)
+
 
 func _on_Death_timeout():
 	emit_signal("destroyed", swallowed)

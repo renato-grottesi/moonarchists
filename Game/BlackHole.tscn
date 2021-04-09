@@ -15,6 +15,8 @@ offsets = PoolRealArray( 0.583333, 0.925439, 1 )
 colors = PoolColorArray( 0.768627, 0.768627, 0, 1, 0.95332, 0.155074, 0, 1, 1, 0, 0, 1 )
 
 [node name="BlackHole" type="StaticBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Shape" type="CollisionShape2D" parent="."]

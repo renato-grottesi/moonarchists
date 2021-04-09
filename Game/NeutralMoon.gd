@@ -5,8 +5,10 @@ export (Resource) var texture
 export (bool) var friendly: bool = false
 export (int) var moons_count: int = 0
 export (int) var moons_max_offset: int = 20
+export (bool) var explode_on_contact: bool = false
 
 signal damage
+signal absorbed
 signal friendly_destroyed
 
 const asteroid_scene = preload("res://Game/Asteroid.tscn")
@@ -60,13 +62,17 @@ func _on_NeutralMoon_body_entered(body):
 		absorb()
 		body.eat()
 	else:
-		if body != get_script():
-			emit_signal("damage")
-		$Hit.start(0.5)
-		if body is Asteroid:
-			body.hit()
+		if explode_on_contact:
+			queue_free()  #TODO: add explosion
+		else:
+			if body != get_script():
+				emit_signal("damage")
+			$Hit.start(0.5)
+			if body is Asteroid:
+				body.hit()
 
 
+# warning-ignore:unused_argument
 func _process(delta):
 	update_shadow()
 	var childs_scale = mass
@@ -96,4 +102,6 @@ func absorb():
 func _on_Absorb_timeout():
 	if friendly:
 		emit_signal("friendly_destroyed")
+	else:
+		emit_signal("absorbed")
 	queue_free()
