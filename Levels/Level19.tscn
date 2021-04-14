@@ -17,4 +17,4 @@ texture = ExtResource( 3 )
 
 [node name="HUD" parent="." index="8"]
 opening = "
-your fame can hit it blindfolded."
+That's an artificial planet!"
