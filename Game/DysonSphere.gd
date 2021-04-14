@@ -18,8 +18,7 @@ func _ready():
 		B.inertia = 0
 		B.collision_mask = 0
 		B.collision_layer = 0
-
-	var blocks = 8
+	var blocks = 9
 	for i in range(0, blocks):
 		var moon = NeutralMoonScene.instance()
 		var rad = i * (2 * PI / blocks)
@@ -34,7 +33,8 @@ func _ready():
 		$Blocks.add_child(moon)
 
 
-func update_shadow():
+# warning-ignore:unused_argument
+func _process(delta):
 	for B in $Blocks.get_children():
 		B.update_shadow()
 

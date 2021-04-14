@@ -18,9 +18,9 @@ func update_shadow():
 	var shadow_rotation = 0
 	if globpos.y < 0:
 		globpos = globpos.rotated(PI)
-		shadow_rotation = acos(globpos.dot(Vector2(1, 0))) - rotation + PI
+		shadow_rotation = acos(globpos.dot(Vector2(1, 0))) - global_rotation + PI
 	else:
-		shadow_rotation = acos(globpos.dot(Vector2(1, 0))) - rotation
+		shadow_rotation = acos(globpos.dot(Vector2(1, 0))) - global_rotation
 	var shadow_transform = Transform2D.IDENTITY
 	shadow_transform = shadow_transform.translated(Vector2(0, -16.0 * mass))
 	shadow_transform = shadow_transform.scaled(Vector2(1, 2))

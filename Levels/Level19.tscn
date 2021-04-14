@@ -8,10 +8,10 @@
 
 [node name="Moon" parent="." index="4"]
 position = Vector2( 448, 0 )
-impulse0 = Vector2( 0, -500 )
+impulse0 = Vector2( 0, -750 )
 
 [node name="DysonSphere" parent="Bodies" index="0" instance=ExtResource( 2 )]
-position = Vector2( -256, 0 )
+position = Vector2( -224, 0 )
 impulse0 = Vector2( 0, 500 )
 texture = ExtResource( 3 )
 
