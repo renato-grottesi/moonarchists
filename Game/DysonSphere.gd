@@ -33,12 +33,6 @@ func _ready():
 		$Blocks.add_child(moon)
 
 
-# warning-ignore:unused_argument
-func _process(delta):
-	for B in $Blocks.get_children():
-		B.update_shadow()
-
-
 func check_asteroids(bh):
 	for B in $Blocks.get_children():
 		B.check_asteroids(bh)

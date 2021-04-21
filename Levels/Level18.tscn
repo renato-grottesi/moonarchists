@@ -22,11 +22,9 @@ moons_max_offset = 0
 
 [node name="BlackHole" parent="BlackHoles" index="0"]
 position = Vector2( 448, 0 )
-mass = 1.0
 
 [node name="LittleBlackHole" parent="BlackHoles" index="1" instance=ExtResource( 4 )]
 position = Vector2( -384, 0 )
-mass = 1.0
 
 [node name="HUD" parent="." index="8"]
 opening = "

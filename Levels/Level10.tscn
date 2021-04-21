@@ -10,7 +10,7 @@
 asteroids_count = 16
 asteroids_offset = 145
 
-[node name="Moon" parent="." index="3"]
+[node name="Moon" parent="." index="4"]
 position = Vector2( 350, 0 )
 impulse0 = Vector2( 0, -800 )
 

@@ -8,7 +8,7 @@
 
 [node name="Level" instance=ExtResource( 1 )]
 
-[node name="Moon" parent="." index="3"]
+[node name="Moon" parent="." index="4"]
 position = Vector2( 64, 64 )
 impulse0 = Vector2( -200, 200 )
 

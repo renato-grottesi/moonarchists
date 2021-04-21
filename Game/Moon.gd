@@ -177,7 +177,6 @@ func _on_Moon_body_entered(body):
 
 func _process(delta):
 	update_nozzle()
-	update_shadow()
 	$SpriteMoon.set_modulate(Color(1, 1, 1, 1))
 	if ! ($Immunity.is_stopped()):
 		var remaining = $Immunity.time_left

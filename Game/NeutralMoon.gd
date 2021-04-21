@@ -36,6 +36,8 @@ func _ready():
 		asteroid.connect("damage", self, "on_asteroid_damage")
 		$Satellites.add_child(asteroid)
 	$Shape.shape = CircleShape2D.new()
+	#Each sprite gets its own shader since each planet has its own specific rotation
+	$Sprite.set_material($Sprite.get_material().duplicate(true))
 
 
 func check_asteroids(bh):
@@ -74,12 +76,18 @@ func _on_NeutralMoon_body_entered(body):
 
 # warning-ignore:unused_argument
 func _process(delta):
-	update_shadow()
+	var globpos = global_position.normalized()
+	var shadow_rotation = 0
+	if globpos.y < 0:
+		globpos = globpos.rotated(PI)
+		shadow_rotation = acos(globpos.dot(Vector2(1, 0))) + PI
+	else:
+		shadow_rotation = acos(globpos.dot(Vector2(1, 0)))
+	$Sprite.material.set_shader_param("grot", global_rotation - shadow_rotation);
 	var childs_scale = mass
 	if ! ($Absorb.is_stopped()):
 		childs_scale = $Absorb.time_left * absorb_scale
 	$Sprite.scale = Vector2(childs_scale, childs_scale)
-	$Shadow.scale = Vector2(childs_scale, childs_scale)
 	$Shape.shape.radius = 30.0 * childs_scale
 	var modulation = 1 - ($Hit.time_left * 2)
 	$Sprite.set_modulate(Color(1, modulation, modulation, 1))
