@@ -606,6 +606,7 @@ __meta__ = {
 
 [node name="Beep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+
 [connection signal="focus_entered" from="MainControls/Play" to="." method="beep"]
 [connection signal="pressed" from="MainControls/Play" to="." method="_on_play_pressed"]
 [connection signal="focus_entered" from="MainControls/Options" to="." method="beep"]

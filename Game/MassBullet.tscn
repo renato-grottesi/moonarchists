@@ -77,5 +77,6 @@ scale_amount_curve = SubResource( 4 )
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource( 5 )
+
 [connection signal="body_entered" from="." to="." method="_on_MassBullet_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

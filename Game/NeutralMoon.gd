@@ -83,7 +83,6 @@ func _process(delta):
 		shadow_rotation = acos(globpos.dot(Vector2(1, 0))) + PI
 	else:
 		shadow_rotation = acos(globpos.dot(Vector2(1, 0)))
-	$Sprite.material.set_shader_param("grot", global_rotation - shadow_rotation);
 	var childs_scale = mass
 	if ! ($Absorb.is_stopped()):
 		childs_scale = $Absorb.time_left * absorb_scale
@@ -91,6 +90,7 @@ func _process(delta):
 	$Shape.shape.radius = 30.0 * childs_scale
 	var modulation = 1 - ($Hit.time_left * 2)
 	$Sprite.set_modulate(Color(1, modulation, modulation, 1))
+	$Sprite.material.set_shader_param("grot", get_shadow_rotation());
 
 
 func get_radius():

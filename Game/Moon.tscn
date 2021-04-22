@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Game/Moon.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/nozzle.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/moon.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/black.png" type="Texture" id=4]
+[ext_resource path="res://Game/CelestialBody.shader" type="Shader" id=4]
 [ext_resource path="res://Game/MoonOutline.shader" type="Shader" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -14,17 +14,21 @@ radius = 23.0
 shader = ExtResource( 5 )
 shader_param/time = 0.0
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 4 )
+shader_param/grot = 0.0
+
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.354582, 0.886364 ), -0.500887, -0.500887, 0, 0, Vector2( 1, 0 ), -0.0172865, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0.00877193, 0.947368 )
 colors = PoolColorArray( 0, 0, 1, 1, 0, 1, 0, 1 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=6]
 _data = [ Vector2( 0, 0 ), 0.0, 4.73916, 0, 0, Vector2( 0.286853, 0.890909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=7]
 colors = PoolColorArray( 1, 0, 0, 1, 1, 1, 0, 1 )
 
 [node name="Moon" type="RigidBody2D"]
@@ -41,6 +45,7 @@ scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 3 )
 
 [node name="SpriteMoon" type="Sprite" parent="."]
+material = SubResource( 3 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 3 )
 
@@ -48,11 +53,6 @@ texture = ExtResource( 3 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
 offset = Vector2( 25, 0 )
-
-[node name="Shadow" type="Sprite" parent="."]
-scale = Vector2( 0.75, 0.75 )
-texture = ExtResource( 4 )
-centered = false
 
 [node name="Death" type="Timer" parent="."]
 one_shot = true
@@ -80,8 +80,8 @@ damping_random = 1.0
 angle_random = 1.0
 scale_amount = 2.0
 scale_amount_random = 0.8
-scale_amount_curve = SubResource( 3 )
-color_ramp = SubResource( 4 )
+scale_amount_curve = SubResource( 4 )
+color_ramp = SubResource( 5 )
 
 [node name="Push" type="CPUParticles2D" parent="."]
 emitting = false
@@ -99,7 +99,8 @@ initial_velocity_random = 0.75
 angular_velocity = 32.0
 angular_velocity_random = 1.0
 linear_accel = 1.0
-scale_amount_curve = SubResource( 5 )
-color_ramp = SubResource( 6 )
+scale_amount_curve = SubResource( 6 )
+color_ramp = SubResource( 7 )
+
 [connection signal="body_entered" from="." to="." method="_on_Moon_body_entered"]
 [connection signal="timeout" from="Death" to="." method="_on_Death_timeout"]

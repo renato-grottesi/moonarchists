@@ -187,10 +187,8 @@ func _process(delta):
 	if ! ($Death.is_stopped()):
 		scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
 		$SpriteMoon.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
-		$Shadow.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
 		$SpriteNozzle.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
-	#print(position)
-	#print(linear_velocity)
+	$SpriteMoon.material.set_shader_param("grot", get_shadow_rotation());
 
 
 func _on_Death_timeout():
