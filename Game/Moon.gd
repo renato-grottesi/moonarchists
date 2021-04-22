@@ -30,6 +30,8 @@ func _ready():
 	emit_signal("heath", health)
 	$SpriteNozzle.visible = OS.get_name() != "Android" || Global.use_joy_pad
 	max_fingers_count = 0
+	#Each sprite gets its own shader since each planet has its own specific rotation
+	$SpriteMoon.set_material($SpriteMoon.get_material().duplicate(true))
 
 
 # warning-ignore:unused_argument
@@ -188,7 +190,7 @@ func _process(delta):
 		scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
 		$SpriteMoon.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
 		$SpriteNozzle.scale = Vector2($Death.time_left * 2, $Death.time_left * 2)
-	$SpriteMoon.material.set_shader_param("grot", get_shadow_rotation());
+	$SpriteMoon.material.set_shader_param("grot", get_shadow_rotation())
 
 
 func _on_Death_timeout():

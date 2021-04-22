@@ -16,8 +16,6 @@ var game_over = false
 
 func _ready():
 	Global.rng.seed = Global.current_level
-	if ! Global.use_cross_hair:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$CrossHair.visible = Global.use_cross_hair && (OS.get_name() != "Android")
 	for i in range(0, asteroids_count):
 		var asteroid = asteroid_scene.instance()

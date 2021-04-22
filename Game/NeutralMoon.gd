@@ -90,7 +90,7 @@ func _process(delta):
 	$Shape.shape.radius = 30.0 * childs_scale
 	var modulation = 1 - ($Hit.time_left * 2)
 	$Sprite.set_modulate(Color(1, modulation, modulation, 1))
-	$Sprite.material.set_shader_param("grot", get_shadow_rotation());
+	$Sprite.material.set_shader_param("grot", get_shadow_rotation())
 
 
 func get_radius():
