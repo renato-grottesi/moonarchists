@@ -1,26 +1,31 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sprites/blackhole.png" type="Texture" id=1]
 [ext_resource path="res://Game/BlackHole.gd" type="Script" id=2]
 [ext_resource path="res://Sounds/swoosh.wav" type="AudioStream" id=3]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 1.0
+absorbent = true
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 30.0
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0.763636 ), 0.0, 0.0, 0, 0, Vector2( 0.63745, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0.583333, 0.925439, 1 )
 colors = PoolColorArray( 0.768627, 0.768627, 0, 1, 0.95332, 0.155074, 0, 1, 1, 0, 0, 1 )
 
 [node name="BlackHole" type="StaticBody2D"]
 collision_layer = 3
 collision_mask = 3
+physics_material_override = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Shape" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="SpriteBack" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -42,8 +47,8 @@ damping = 20.0
 damping_random = 1.0
 scale_amount = 2.0
 scale_amount_random = 1.0
-scale_amount_curve = SubResource( 2 )
-color_ramp = SubResource( 3 )
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
 
 [node name="ShakeTimer" type="Timer" parent="."]
 one_shot = true

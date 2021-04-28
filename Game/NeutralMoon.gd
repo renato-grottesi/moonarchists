@@ -14,6 +14,7 @@ signal friendly_destroyed
 const asteroid_scene = preload("res://Game/Asteroid.tscn")
 const Asteroid = preload("res://Game/Asteroid.gd")
 const BlackHole = preload("res://Game/BlackHole.gd")
+const MassBullet = preload("res://Game/MassBullet.gd")
 
 var time = 0.0
 var last_pos
@@ -72,6 +73,12 @@ func _on_NeutralMoon_body_entered(body):
 			$Hit.start(0.5)
 			if body is Asteroid:
 				body.hit()
+			else:
+				if ! (body is MassBullet):
+					var impulse
+					impulse = global_position - body.global_position
+					impulse = impulse.normalized() * body.mass * 10.0
+					apply_impulse(Vector2(0, 0), impulse)
 
 
 # warning-ignore:unused_argument

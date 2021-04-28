@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Sprites/earth.png" type="Texture" id=1]
 [ext_resource path="res://Game/NeutralMoon.gd" type="Script" id=2]
 [ext_resource path="res://Game/CelestialBody.shader" type="Shader" id=3]
+
+[sub_resource type="PhysicsMaterial" id=3]
+bounce = 0.2
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -12,6 +15,7 @@ shader_param/grot = 0.0
 radius = 30.0
 
 [node name="NeutralMoon" type="RigidBody2D"]
+physics_material_override = SubResource( 3 )
 contacts_reported = 1000
 contact_monitor = true
 script = ExtResource( 2 )

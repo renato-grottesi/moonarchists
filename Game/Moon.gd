@@ -155,6 +155,10 @@ func _on_Moon_body_entered(body):
 			health -= 30
 			emit_signal("damage")
 			_on_immunity()
+			var impulse
+			impulse = global_position - body.global_position
+			impulse = impulse.normalized() * body.mass * 25.0
+			apply_impulse(Vector2(0, 0), impulse)
 	elif body is Asteroid:
 		if $Immunity.is_stopped():
 			health -= 15
