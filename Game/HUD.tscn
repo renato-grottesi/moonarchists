@@ -71,12 +71,12 @@ focus_neighbour_left = NodePath("../QuitVictory")
 focus_neighbour_right = NodePath("../RetryVictory")
 focus_next = NodePath("../RetryVictory")
 focus_previous = NodePath("../QuitVictory")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/focus = ExtResource( 13 )
 custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 6 )
 text = "Next"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -91,12 +91,12 @@ focus_neighbour_left = NodePath("../NextVictory")
 focus_neighbour_right = NodePath("../QuitVictory")
 focus_next = NodePath("../QuitVictory")
 focus_previous = NodePath("../NextVictory")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/focus = ExtResource( 13 )
 custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 6 )
 text = "Retry"
 
 [node name="QuitVictory" type="Button" parent="Victory"]
@@ -108,12 +108,12 @@ focus_neighbour_left = NodePath("../RetryVictory")
 focus_neighbour_right = NodePath("../NextVictory")
 focus_next = NodePath("../NextVictory")
 focus_previous = NodePath("../RetryVictory")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/focus = ExtResource( 13 )
 custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 6 )
 text = "Quit"
 
 [node name="Star1" type="Sprite" parent="Victory"]
@@ -154,12 +154,12 @@ margin_left = 192.0
 margin_top = 384.0
 margin_right = 320.0
 margin_bottom = 448.0
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/focus = ExtResource( 13 )
 custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 6 )
 text = "Close"
 
 [node name="Timer" type="Timer" parent="Opening"]
@@ -191,12 +191,12 @@ margin_left = 192.0
 margin_top = 384.0
 margin_right = 320.0
 margin_bottom = 448.0
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/focus = ExtResource( 13 )
 custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 6 )
 text = "Close"
 
 [node name="SpeedrunScore" type="Label" parent="LastLevel"]
@@ -250,12 +250,12 @@ focus_neighbour_right = NodePath("../LostQuit")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../LostQuit")
 focus_previous = NodePath("../LostQuit")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/focus = ExtResource( 13 )
 custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 6 )
 text = "Retry"
 
 [node name="LostQuit" type="Button" parent="Lost"]
@@ -269,12 +269,12 @@ focus_neighbour_right = NodePath("../LostRetry")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../LostRetry")
 focus_previous = NodePath("../LostRetry")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/focus = ExtResource( 13 )
 custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = ExtResource( 6 )
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -312,7 +312,7 @@ __meta__ = {
 
 [node name="RestartSprite" type="Sprite" parent="."]
 position = Vector2( 888, 704 )
-texture = ExtResource( 8 )
+texture = ExtResource( 11 )
 
 [node name="RestartLabel" type="Label" parent="."]
 margin_left = 904.0
@@ -321,13 +321,10 @@ margin_right = 1019.0
 margin_bottom = 723.0
 custom_fonts/font = ExtResource( 6 )
 text = "Restart"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MenuSprite" type="Sprite" parent="."]
-position = Vector2( 888, 744 )
-texture = ExtResource( 11 )
+position = Vector2( 888, 742 )
+texture = ExtResource( 8 )
 
 [node name="MenuLabel" type="Label" parent="."]
 margin_left = 904.0
@@ -405,6 +402,7 @@ text = "r"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="about_to_show" from="Victory" to="." method="_on_Victory_about_to_show"]
 [connection signal="focus_entered" from="Victory/NextVictory" to="." method="beep"]
 [connection signal="pressed" from="Victory/NextVictory" to="." method="_on_NextVictory_pressed"]

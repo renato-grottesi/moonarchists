@@ -43,21 +43,21 @@ __meta__ = {
 
 [node name="Play" type="Button" parent="MainControls"]
 margin_left = 384.0
-margin_top = 256.0
+margin_top = 240.0
 margin_right = 640.0
-margin_bottom = 320.0
+margin_bottom = 304.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Exit")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../Options")
 focus_next = NodePath("../Options")
 focus_previous = NodePath("../Exit")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,21 +65,21 @@ __meta__ = {
 
 [node name="Options" type="Button" parent="MainControls"]
 margin_left = 384.0
-margin_top = 352.0
+margin_top = 320.0
 margin_right = 640.0
-margin_bottom = 416.0
+margin_bottom = 384.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Play")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../Help")
 focus_next = NodePath("../Help")
 focus_previous = NodePath("../Play")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -87,21 +87,21 @@ __meta__ = {
 
 [node name="Help" type="Button" parent="MainControls"]
 margin_left = 384.0
-margin_top = 448.0
+margin_top = 400.0
 margin_right = 640.0
-margin_bottom = 512.0
+margin_bottom = 464.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Options")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../Credits")
 focus_next = NodePath("../Credits")
 focus_previous = NodePath("../Options")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Help"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -109,22 +109,44 @@ __meta__ = {
 
 [node name="Credits" type="Button" parent="MainControls"]
 margin_left = 384.0
-margin_top = 544.0
+margin_top = 480.0
 margin_right = 640.0
-margin_bottom = 608.0
+margin_bottom = 544.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Help")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../Exit")
-focus_next = NodePath("../Exit")
+focus_neighbour_bottom = NodePath("../Privacy")
+focus_next = NodePath("../Privacy")
 focus_previous = NodePath("../Help")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Privacy" type="Button" parent="MainControls"]
+margin_left = 384.0
+margin_top = 560.0
+margin_right = 640.0
+margin_bottom = 624.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Credits")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../Credits")
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+text = "Privacy Policy"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -135,17 +157,17 @@ margin_top = 672.0
 margin_right = 640.0
 margin_bottom = 736.0
 focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath("../Credits")
+focus_neighbour_top = NodePath("../Privacy")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../Play")
 focus_next = NodePath("../Play")
-focus_previous = NodePath("../Credits")
+focus_previous = NodePath("../Privacy")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -187,12 +209,56 @@ margin_left = 384.0
 margin_top = 448.0
 margin_right = 512.0
 margin_bottom = 512.0
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
+text = "Close"
+
+[node name="PrivacyDialog" type="PopupDialog" parent="."]
+margin_left = 64.0
+margin_top = 192.0
+margin_right = 960.0
+margin_bottom = 736.0
+custom_styles/panel = ExtResource( 3 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PrivacyDialog"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 517.0
+margin_bottom = 251.0
 custom_fonts/font = ExtResource( 2 )
+text = "Privacy Policy for Moonarchists.
+Last Update: 3 March 2025
+
+Moonarchists only saves the current game progress.
+The game progress is only stored on the device.
+The game does not access, collect or store any 
+personal or sensitive user data.
+By playing, you agree to this.
+
+contact: renato.grottesi@gmail.com"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClosePrivacyDialog" type="Button" parent="PrivacyDialog"]
+margin_left = 384.0
+margin_top = 448.0
+margin_right = 512.0
+margin_bottom = 512.0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
 text = "Close"
 
 [node name="HelpDialog" type="PopupDialog" parent="."]
@@ -231,12 +297,12 @@ margin_left = 384.0
 margin_top = 448.0
 margin_right = 512.0
 margin_bottom = 512.0
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Close"
 
 [node name="StoryIntro" type="PopupDialog" parent="."]
@@ -276,12 +342,12 @@ margin_left = 384.0
 margin_top = 448.0
 margin_right = 512.0
 margin_bottom = 512.0
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Close"
 
 [node name="Timer" type="Timer" parent="StoryIntro"]
@@ -354,12 +420,12 @@ margin_right = 640.0
 margin_bottom = 315.138
 focus_neighbour_top = NodePath("../MusicSlider")
 focus_neighbour_bottom = NodePath("../CloseOptionsDialog")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "OFF"
 
 [node name="SoundSlider" type="HSlider" parent="OptionsDialog"]
@@ -393,12 +459,12 @@ margin_right = 512.0
 margin_bottom = 480.0
 focus_neighbour_top = NodePath("../ToggleFullScreen")
 focus_neighbour_bottom = NodePath("../SoundSlider")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Close"
 
 [node name="Levels" type="PopupDialog" parent="."]
@@ -526,12 +592,12 @@ focus_neighbour_right = NodePath("../SpeedRun")
 focus_neighbour_bottom = NodePath("../Level4")
 focus_next = NodePath("../Level1")
 focus_previous = NodePath("../Level8")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Close"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -548,12 +614,12 @@ focus_neighbour_right = NodePath("../CloseLevelsDialog")
 focus_neighbour_bottom = NodePath("../Level1")
 focus_next = NodePath("../Level1")
 focus_previous = NodePath("../Level8")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 shortcut_in_tooltip = false
 text = "Speedrun ??:??"
 __meta__ = {
@@ -571,12 +637,12 @@ focus_neighbour_right = NodePath("../Previous")
 focus_neighbour_bottom = NodePath("../Level4")
 focus_next = NodePath("../Level1")
 focus_previous = NodePath("../Level8")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 6 )
 text = ">"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -593,12 +659,12 @@ focus_neighbour_right = NodePath("../SpeedRun")
 focus_neighbour_bottom = NodePath("../Level4")
 focus_next = NodePath("../Level1")
 focus_previous = NodePath("../Level8")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 6 )
 text = "<"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -615,10 +681,14 @@ stream = ExtResource( 9 )
 [connection signal="pressed" from="MainControls/Help" to="." method="_on_Help_pressed"]
 [connection signal="focus_entered" from="MainControls/Credits" to="." method="beep"]
 [connection signal="pressed" from="MainControls/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="focus_entered" from="MainControls/Privacy" to="." method="beep"]
+[connection signal="pressed" from="MainControls/Privacy" to="." method="_on_Privacy_pressed"]
 [connection signal="focus_entered" from="MainControls/Exit" to="." method="beep"]
 [connection signal="pressed" from="MainControls/Exit" to="." method="_on_exit_pressed"]
 [connection signal="focus_entered" from="CreditsDialog/CloseCreditsDialog" to="." method="beep"]
 [connection signal="pressed" from="CreditsDialog/CloseCreditsDialog" to="." method="_on_CloseCreditsDialog_pressed"]
+[connection signal="focus_entered" from="PrivacyDialog/ClosePrivacyDialog" to="." method="beep"]
+[connection signal="pressed" from="PrivacyDialog/ClosePrivacyDialog" to="." method="_on_ClosePrivacyDialog_pressed"]
 [connection signal="focus_entered" from="HelpDialog/CloseHelpDialog" to="." method="beep"]
 [connection signal="pressed" from="HelpDialog/CloseHelpDialog" to="." method="_on_CloseHelpDialog_pressed"]
 [connection signal="about_to_show" from="StoryIntro" to="." method="_on_StoryIntro_about_to_show"]

@@ -65,6 +65,18 @@ func _on_Credits_pressed():
 	beep()
 
 
+func _on_Privacy_pressed():
+	$PrivacyDialog.popup()
+	$MainControls.visible = false
+	beep()
+
+
+func _on_ClosePrivacyDialog_pressed():
+	$PrivacyDialog.hide()
+	$MainControls.visible = true
+	$MainControls/Privacy.grab_focus()
+
+
 func _on_CloseOptionsDialog_pressed():
 	$OptionsDialog.hide()
 	$MainControls.visible = true
